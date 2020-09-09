@@ -47,7 +47,7 @@ async def awy(ctx):
     'you always start with beer and league then you finish with rakija save the best for the end',
     'hee did he sad bad things to about ma momma and told me that he is going to stab me in the dark\nso i beat him\nand told him that he\'s gonna be  the one who gets stabbed\nso he shit himself and reported me\nthey even wanted to give me house prison with a fking shit on leg\ni had to go to bank to get credit for a motherfucking lawyer\ndamn pussys',
     'yo know in serbia we have a tradition where when there is female singer you give her monney for song\nbut it\'s like 5 to 10 eruos\nbut i was like pushing 50 euros into her tits',
-    'well yeh but i allready got permad few times and few 6 month bans so i have 2 alts\nHE HE',
+    'well yeh but i allready got permad few times and few 6 month bans so i have 2 alts HE HE',
     'the fking guy could make a movie about teletubbies and super mario and make it to be epic and best out there',
     'tho that system for banning is to retarded\nlike sure i tell ppl to go and buy artifical arms on ebay and brain cells\nsure i tell them that they are grass eating animals and dumb motherfuckers\nbut all the time toxic ppl are like "AA FUCK YOUR MOM,AAA WISH YOU CANCER FOR YOUR FAMILY AAAA KILL YOURSELF"\ni never insulted anyones family or smth i just tell ppl that they are dumb fucks\nand mostly those toxic ppl above get triggered and report me and i get banned they do not\nit\'s stuipid\ni mean telling somone that he is dumb is a fact not so much of an insult like wishing him and his family misfortune',
     'Awy is not savage\ncene we Serbs are maybe poor\nbut we aint no mongoloids',
@@ -66,7 +66,7 @@ async def awy(ctx):
     'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png']
     rolled_quote = random.choice(awyQuotes)
     if rolled_quote.startswith('http'):
-        await ctx.send('rolled_quote')
+        await ctx.send(rolled_quote)
     else:
         await ctx.send('Awy once said: "{}".'.format(rolled_quote))
 
