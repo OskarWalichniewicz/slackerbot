@@ -61,7 +61,7 @@ async def awy(ctx):
     'when you see retarded imbecile you can\'t really try to reason with him',
     'I JUST SAID "fuck off degenerates"\nand bem riot gave me a big NONO for that',
     'this one is just for you,this is how tru serbs looks like,carrying machetes and drinking vodka vodka\nhttps://image.prntscr.com/image/llvyhI-RTXK7aK-HMGVidA.png',
-    'https://image.prntscr.com/image/yOEamt6ZTIypMNXKWQIBHg.png'
+    'https://image.prntscr.com/image/yOEamt6ZTIypMNXKWQIBHg.png',
     'https://media.discordapp.net/attachments/364712407601512450/719636503676059668/Screenshot_1469.png?width=931&height=515',
     'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png']
     rolled_quote = random.choice(awyQuotes)
