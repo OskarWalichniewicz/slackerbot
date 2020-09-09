@@ -164,6 +164,7 @@ async def awy(ctx):
     'i went for a dreds ma man',
     'it is time for some quaility getting nude and begging for gold',
     'seggy can i dance in some town like SW half nude for gold ?',
+    'im good guy',
     'this one is just for you,this is how tru serbs looks like,carrying machetes and drinking vodka vodka\nhttps://image.prntscr.com/image/llvyhI-RTXK7aK-HMGVidA.png ',
     'https://image.prntscr.com/image/yOEamt6ZTIypMNXKWQIBHg.png',
     'https://media.discordapp.net/attachments/364712407601512450/719636503676059668/Screenshot_1469.png?width=931&height=515',
