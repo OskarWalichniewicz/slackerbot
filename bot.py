@@ -82,5 +82,8 @@ async def stonelia(ctx):
 async def pam(ctx):
     await ctx.send('https://media.discordapp.net/attachments/364712407601512450/752975692966264902/Screenshot_797.png?width=684&height=515')
 
-
+member_list = []
+for member in server.members:
+    member_list.append(member)
+print(member)
 client.run(os.environ['DISCORD_TOKEN']) #token
