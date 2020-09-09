@@ -10,10 +10,6 @@ client = commands.Bot(command_prefix = '.')
 async def on_ready():
     print("Bot ready")
 
-# @client.command()
-# async def dran(ctx):
-#     await ctx.send('Dran still does not have mats.')
-
 @client.command()
 async def awy(ctx):
     awyQuotes = ['MONSTRUJM',
