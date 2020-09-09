@@ -38,8 +38,24 @@ async def awy(ctx):
     'did you treshtalck me',
     'you can\'t determine who\'s a selfish scumbag and who\'s selfless good guy if you only try to se good in them',
     'well i always try to see the worst in people first,that way you get much more realistic vision of them and don\'t get hopes up for them to in the end dissapoint you',
-    'seggy is understanding how the world is functioning']
-    await ctx.send('Awy once said: "{}".'.format(random.choice(awyQuotes)))
+    'seggy is understanding how the world is functioning',
+    'poland seems like a rational and family friendly country',
+    'oh in Serbia violence is only way of solving things like gypsy steals your byciyle what would you do ?\nask him to return  it ? FUCK NO\ncall the police ? EVEN MORE FUCK NO\nYou go and get your shit bag',
+    'who\'d have thought that retarded child predator Protein that was fanatic about fking hide n seek on neltharion would become administrator after his daddy doanted big money and he licked the asses of other admins',
+    'mel always comming by when you mention "the betrayer"',
+    'in Serbia we get into psyhical alteracation with peeps like that aka we break their legs',
+    'you always start with beer and league then you finish with rakija save the best for the end',
+    'hee did he sad bad things to about ma momma and told me that he is going to stab me in the dark\nso i beat him\nand told him that he\'s gonna be  the one who gets stabbed\nso he shit himself and reported me\nthey even wanted to give me house prison with a fking shit on leg\ni had to go to bank to get credit for a motherfucking lawyer\ndamn pussys',
+    'https://media.discordapp.net/attachments/364712407601512450/719636503676059668/Screenshot_1469.png?width=931&height=515']
+    rolled_quote = random.choice(awyQuotes)
+    if rolled_quote.startswith('http'):
+        await ctx.send('Awy once said: {}.'.format(random.choice(awyQuotes)))
+    else:
+        await ctx.send('Awy once said: "{}".'.format(random.choice(awyQuotes)))
+
+@client.command()
+async def akcent(ctx):
+    await ctx.send('https://prnt.sc/udv05c')
 
 
 client.run(os.environ['DISCORD_TOKEN']) #token
