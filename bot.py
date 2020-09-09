@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+import os
 import random
 
 
@@ -32,4 +33,4 @@ async def awy(ctx):
     await ctx.send('Awy once said: "{}".'.format(random.choice(awyQuotes)))
 
 
-client.run('NzUzMjA4MDUxMDQ0OTc0NjI0.X1i1qQ.FrPXWaLF9yTygtwskEWdVaqTgJk') #token
+client.run(os.environ['DISCORD_TOKEN']) #token
