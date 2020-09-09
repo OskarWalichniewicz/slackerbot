@@ -91,5 +91,5 @@ async def az(ctx):
                 death = msg.created_at()
     await ctx.send('')
 
-print(server.Server.members)
+print(message.guild.members)
 client.run(os.environ['DISCORD_TOKEN']) #token
