@@ -82,4 +82,14 @@ async def stonelia(ctx):
 async def pam(ctx):
     await ctx.send('https://media.discordapp.net/attachments/364712407601512450/752975692966264902/Screenshot_797.png?width=684&height=515')
 
+@client.command()
+async def az(ctx):
+    found = False
+    while not found:
+        async for msg in client.logs_from(administration.channel):
+            if msg.author == message.author:
+                death = msg.created_at()
+    await ctx.send('')
+
+print(server.Server.members)
 client.run(os.environ['DISCORD_TOKEN']) #token
