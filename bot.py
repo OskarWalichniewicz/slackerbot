@@ -63,7 +63,8 @@ async def awy(ctx):
     'this one is just for you,this is how tru serbs looks like,carrying machetes and drinking vodka vodka\nhttps://image.prntscr.com/image/llvyhI-RTXK7aK-HMGVidA.png ',
     'https://image.prntscr.com/image/yOEamt6ZTIypMNXKWQIBHg.png',
     'https://media.discordapp.net/attachments/364712407601512450/719636503676059668/Screenshot_1469.png?width=931&height=515',
-    'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png']
+    'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png',
+    'https://image.prntscr.com/image/JdO52xtyQy2vyTMXzfAtPA.png']
     rolled_quote = random.choice(awyQuotes)
     if rolled_quote.startswith('http'):
         await ctx.send(rolled_quote)
@@ -82,5 +83,14 @@ async def stonelia(ctx):
 async def pam(ctx):
     await ctx.send('https://media.discordapp.net/attachments/364712407601512450/752975692966264902/Screenshot_797.png?width=684&height=515')
 
+@client.command()
+async def dran(ctx):
+    dran =['Dran is still a betrayer.',
+    'Dran still does not have mats.']
+    await ctx.send(random.choice(dran))
+
+@client.command()
+async def segment(ctx):
+    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/753284032036470824/unknown.png?width=728&height=515')
 
 client.run(os.environ['DISCORD_TOKEN']) #token
