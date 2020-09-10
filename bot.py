@@ -201,7 +201,7 @@ def save_to_github(file_name):
     g = Github("OskarWalichniewicz", "MVhheMVipwAD3r")
     repo = g.get_repo("OskarWalichniewicz/slackerbot")
     contents = repo.get_contents("variables.json")
-    repo.update_file(contents.path, "az wrote something", "dafuq is that", contents.sha, branch="master")
+    repo.update_file(contents.path, "az wrote something", file_name, contents.sha, branch="master")
 
 client = commands.Bot(command_prefix = '.')
 
