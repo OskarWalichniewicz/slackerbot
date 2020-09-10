@@ -245,6 +245,7 @@ async def az(ctx): # az id = 329341017914605569
             if message.author.id == 329341017914605569:
                 sent = message.created_at()
                 print(sent)
+                await ctx.send(sent)
                 az_found = True
 #awys chamber = 364712407601512450
 #bots 1 = 392216967882473473
