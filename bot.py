@@ -268,7 +268,9 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["hour"],
         json_dict["minute"],
         json_dict["second"])
-    print(az_date)
+    current_date = datetime.now()
+    diff = current_date - az_date
+    print(diff)
 
 
 client.run(os.environ['DISCORD_TOKEN']) #token
