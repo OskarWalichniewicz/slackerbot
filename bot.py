@@ -3,6 +3,8 @@ from discord.ext import commands
 import os
 import random
 from datetime import date, datetime
+import json
+
 
 awyQuotes = ['MONSTRUJM',
     'biopolar or smth',
@@ -238,13 +240,15 @@ async def ignios(ctx):
 
 @client.command()
 async def az(ctx): # az id = 329341017914605569
-    user_id = 329341017914605569
-    for channel in ctx.guild.text_channels:
-        async for message in channel.history(limit=None):
-            if message.author.id == user_id:
-                sent = str(message.created_at)
-                await ctx.send('last msg at ' + sent)
-                break
+    with open('variables.json') as json_data:
+        json_dict = json.load(json_data)
+        az_date = datetime(json_dict["az"]["year"],
+        json_dict["az"]["month"],
+        json_dict["az"]["day"],
+        json_dict["az"]["hour"],
+        json_dict["az"]["minute"])
+        print(az_date)
+
 #awys chamber = 364712407601512450
 #bots 1 = 392216967882473473
 #just-a-serbian-things = 400406248341897217
