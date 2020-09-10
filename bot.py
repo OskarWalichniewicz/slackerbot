@@ -416,7 +416,7 @@ async def ignios(ctx):
     await ctx.send('Fuck Ignios')
 
 @client.command()
-async def pupunka(ctx):
+async def pupinka(ctx):
     await ctx.send('https://cdn.discordapp.com/attachments/364712407601512450/399218303739887617/WoWScrnShot_010618_160818.jpg')
 
 @client.command()
