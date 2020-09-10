@@ -198,6 +198,8 @@ client = commands.Bot(command_prefix = '.')
 @client.event
 async def on_ready():
     print("Bot ready")
+    print(client.user.name)
+    print(client.user.id)
 
 @client.command()
 async def awy(ctx):
@@ -232,5 +234,6 @@ async def segment(ctx):
 @client.command()
 async def ignios(ctx):
     await ctx.send('Fuck Ignios')
+
 
 client.run(os.environ['DISCORD_TOKEN']) #token
