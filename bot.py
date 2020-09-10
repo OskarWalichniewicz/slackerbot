@@ -241,10 +241,10 @@ async def az(ctx): # az id = 329341017914605569
     channel_id = 364712407601512450
     channel = client.get_channel(channel_id)
     while True:
-        for message in channel.history(limit=None):
+        async for message in channel.history(limit=None):
             if message.author.id == 329341017914605569:
                 sent = str(message.created_at)
-                print(sent)
+                await ctx.send('last msg at ' + sent)
                 break
 #awys chamber = 364712407601512450
 #bots 1 = 392216967882473473
