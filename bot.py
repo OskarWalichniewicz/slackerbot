@@ -270,15 +270,12 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["second"])
 
     curr_date = datetime.now()
-    diff = str(curr_date - az_date)
-    diff_years = ''
-    for char in diff:
-        if char != ' ':
-            diff_years += char
-        else:
-            break
-    print(diff_years)
+    diff = curr_date - az_date
+    diff_days = diff.days
+    diff_hours, remainder = divmod(diff.seconds, 3600)
+    diff_minutes = divmod(remainder, 60)
 
+    print("days = " + diff_days + " hours = " + diff_hours + " minutes = " + diff_minutes)
 
 
 
