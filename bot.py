@@ -238,14 +238,12 @@ async def ignios(ctx):
 
 @client.command()
 async def az(ctx): # az id = 329341017914605569
-    channel_id = 364712407601512450
-    channel = client.get_channel(channel_id)
-    while True:
-        async for message in channel.history(limit=None):
-            if message.author.id == 329341017914605569:
-                sent = str(message.created_at)
-                await ctx.send('last msg at ' + sent)
-                break
+    user_id = 329341017914605569
+    user = client.get_channel(user_id)
+    async for message in user.history(limit=None):
+            sent = str(message.created_at)
+            await ctx.send('last msg at ' + sent)
+            break
 #awys chamber = 364712407601512450
 #bots 1 = 392216967882473473
 #just-a-serbian-things = 400406248341897217
