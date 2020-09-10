@@ -215,6 +215,7 @@ async def on_message(message):
         'day': day,
         'hour': hour,
         'minute': minute}
+        print(new_time)
         with open('variables.json', 'w') as f:
             f.truncate()
             json.dump(new_time, f)
