@@ -244,7 +244,7 @@ async def az(ctx): # az id = 329341017914605569
     while not az_found:
         async for message in channel.history(limit=None):
             if message.author.id == 329341017914605569:
-                sent = message.created_at()
+                sent = str(message.created_at())
                 print("sent at: " + sent)
                 await ctx.send("i hope this shit works" + sent)
                 az_found = True
