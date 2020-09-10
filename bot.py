@@ -229,7 +229,7 @@ async def on_message(message):
             f.truncate()
             json.dump(new_time, f)
 
-        save_to_github(new_time)
+        save_to_github(str(new_time))
     await client.process_commands(message)
 
 
