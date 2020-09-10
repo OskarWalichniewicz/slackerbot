@@ -5,6 +5,7 @@ import random
 from datetime import date, datetime
 import json
 from github import Github
+import pytz
 
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!']
 awyQuotes = ['MONSTRUJM',
@@ -439,8 +440,12 @@ async def az(ctx):
         json_dict["second"])
 
     curr_date = datetime.now()
+    timezone = pytz.timezone('Europe/Warsaw')
+    curr_date_timezoned = timezone.localize(curr_date)
     print(curr_date)
-    diff = curr_date - az_date
+    print(curr_date_timezoned)
+
+    diff = curr_date_timezoned - az_date
     diff_days = diff.days
     diff_hours = (diff.seconds // 3600)
     diff_minutes = (diff.seconds // 60) % 60
