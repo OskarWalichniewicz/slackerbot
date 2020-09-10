@@ -211,7 +211,7 @@ async def on_message(message):
         day = message.created_at.day
         hour = message.created_at.hour
         minute = message.created_at.minute
-        second = message.created_at.seconds
+        second = message.created_at.second
         new_time = {'year' : year,
         'month': month,
         'day': day,
