@@ -263,7 +263,7 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["day"],
         json_dict["hour"],
         json_dict["minute"])
-        print(az_date)
+    print(az_date)
 
 
 client.run(os.environ['DISCORD_TOKEN']) #token
