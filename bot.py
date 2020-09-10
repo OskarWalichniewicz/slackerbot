@@ -441,9 +441,9 @@ async def az(ctx):
     curr_date = datetime.now()
     diff = curr_date - az_date
     diff_days = diff.days
-    diff_hours, remainder = divmod(diff.seconds, 3600)
-    diff_minutes, diff_seconds = divmod(remainder, 60)
-    diff_seconds += diff.microseconds / 1e6
+    diff_hours = diff.seconds // 3600
+    diff_minutes = (diff.seconds // 60) % 60
+    diff_seconds = diff.seconds - diff_hours * 3600 - diff_minutes * 60
 
     if diff_days > 0:
         outp = "Az died {} days, {} hours, {} minutes, {} seconds ago".format(diff_days, diff_hours, diff_minutes, diff_seconds)
