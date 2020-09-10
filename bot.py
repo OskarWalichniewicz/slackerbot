@@ -3,16 +3,7 @@ from discord.ext import commands
 import os
 import random
 
-
-client = commands.Bot(command_prefix = '.')
-
-@client.event
-async def on_ready():
-    print("Bot ready")
-
-@client.command()
-async def awy(ctx):
-    awyQuotes = ['MONSTRUJM',
+awyQuotes = ['MONSTRUJM',
     'biopolar or smth',
     'im such a god of english language',
     'sign of asking',
@@ -170,12 +161,46 @@ async def awy(ctx):
     '†\nmoment of silence for our fallen brother',
     'DONT LET ONIONS DISTRACT YOU',
     'tits may be small but i can still make some monney wqith \'em',
+    'ye it deffinilty sound retarded as fuck',
+    'i need no book for ma wisdom\ni hgold it all in ma brain',
+    'HA HAH A',
+    'you sucsefuly became a gypsy',
+    'ya can both be betrayers never enough of those in world anyways',
+    'we will lie and say you\'re a good person',
+    'how good of a guy i am i even lie for your benefit',
+    'this is comunism we are all equal i am just a little bit more equal then ya al',
+    'he became a foking nigga',
+    'POLISH LIVES MATTERS',
+    'gladiator idk if i rly weanna play thank',
+    'in kurwaland they say kurwa not sorry',
+    'we did better than your poor ass',
+    'shadap',
+    'i would be the best raid leader of all times if only i didnt hate 90% of the guild the other 10% were you guys',
+    'DANI CMONE BE ON MY SIDE ONCE YOU KNOW I AK RIGHT',
+    'you had autism before you met me\ni could only possibly affect it in possitve way\nlike getting rid of it for ya poor ass',
+    'how autistic can somone get i wonder always',
+    'holy fokin shit',
+    'big dick impaler commin\' through',
+    'FUCK IGNIOS !!!!',
+    'i drink apple juice only',
+    'universe can\'t even comperhand that much of sheer goodness',
+    'im the wisest of us all',
+    'HIT IT VERY HARD AND HIT IT LIKE YOU MEAN IT',
     'this one is just for you,this is how tru serbs looks like,carrying machetes and drinking vodka vodka\nhttps://image.prntscr.com/image/llvyhI-RTXK7aK-HMGVidA.png ',
     'https://image.prntscr.com/image/yOEamt6ZTIypMNXKWQIBHg.png',
     'https://media.discordapp.net/attachments/364712407601512450/753312543488999631/Screenshot_1504.png?width=689&height=515',
     'https://media.discordapp.net/attachments/364712407601512450/719636503676059668/Screenshot_1469.png?width=931&height=515',
     'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png',
     'https://image.prntscr.com/image/JdO52xtyQy2vyTMXzfAtPA.png']
+
+client = commands.Bot(command_prefix = '.')
+
+@client.event
+async def on_ready():
+    print("Bot ready")
+
+@client.command()
+async def awy(ctx):
     rolled_quote = random.choice(awyQuotes)
     if rolled_quote.startswith('http'):
         await ctx.send(rolled_quote)
