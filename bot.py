@@ -201,8 +201,24 @@ client = commands.Bot(command_prefix = '.')
 @client.event
 async def on_ready():
     print("Bot ready")
-    print(client.user.name)
-    print(client.user.id)
+
+@client.event
+async def on_message(message):
+    if message.author.name == "diethylamide":
+        year = message.created_at.year
+        month = message.created_at.month
+        day = message.created_at.day
+        hour = message.created_at.hour
+        minute = message.created_at.hour
+        new_time = {'year' : year,
+        'month': month,
+        'day': day,
+        'hour': hour,
+        'minute': minute}
+        with open('variables.json') as f:
+            f.truncate()
+            json.dump(new_time, f)
+
 
 @client.command()
 async def awy(ctx):
@@ -242,15 +258,12 @@ async def ignios(ctx):
 async def az(ctx): # az id = 329341017914605569
     with open('variables.json') as json_data:
         json_dict = json.load(json_data)
-        az_date = datetime(json_dict["az"]["year"],
-        json_dict["az"]["month"],
-        json_dict["az"]["day"],
-        json_dict["az"]["hour"],
-        json_dict["az"]["minute"])
+        az_date = datetime(json_dict["year"],
+        json_dict["month"],
+        json_dict["day"],
+        json_dict["hour"],
+        json_dict["minute"])
         print(az_date)
 
-#awys chamber = 364712407601512450
-#bots 1 = 392216967882473473
-#just-a-serbian-things = 400406248341897217
 
 client.run(os.environ['DISCORD_TOKEN']) #token
