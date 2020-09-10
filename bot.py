@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import random
 from datetime import date, datetime
-from dateutil.relativedelta import relativedelta
+import dateutil
 import json
 
 
