@@ -439,6 +439,7 @@ async def az(ctx):
         json_dict["second"])
 
     curr_date = datetime.now()
+    print(curr_date)
     diff = curr_date - az_date
     diff_days = diff.days
     diff_hours = (diff.seconds // 3600)
