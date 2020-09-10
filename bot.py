@@ -2,12 +2,11 @@ import discord
 from discord.ext import commands
 import os
 import random
-from datetime import date, datetime
+from datetime import date, datetime, timezone
 import json
 from github import Github
-import pytz
 
-timezone = pytz.timezone('Europe/Warsaw')
+
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!']
 awyQuotes = ['MONSTRUJM',
     'btw srecna nova srpska nova bato sve najlepse :heart: !',
@@ -439,14 +438,11 @@ async def az(ctx):
         json_dict["hour"],
         json_dict["minute"],
         json_dict["second"])
-        az_date_timezoned = timezone.localize(az_date)
 
-    curr_date = datetime.now()
-    curr_date_timezoned = timezone.localize(curr_date)
+    curr_date = datetime.now(timezone.cet)
     print(curr_date)
-    print(curr_date_timezoned)
 
-    diff = curr_date_timezoned - az_date
+    diff = curr_date - az_date
     diff_days = diff.days
     diff_hours = (diff.seconds // 3600)
     diff_minutes = (diff.seconds // 60) % 60
