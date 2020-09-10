@@ -218,6 +218,7 @@ async def on_message(message):
         with open('variables.json') as f:
             f.truncate()
             json.dump(new_time, f)
+    await client.process_commands(message)
 
 
 @client.command()
