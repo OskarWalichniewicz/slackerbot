@@ -271,7 +271,11 @@ async def az(ctx): # az id = 329341017914605569
 
     curr_date = datetime.now()
     diff = curr_date - az_date
-    print(diff)
+    diff_month = diff.month
+    diff_day = diff.day
+    diff_hour = diff.hour
+    diff_minute = diff.minute
+    print("Az died " + + diff_month + " months, " + diff_day + " days, " + diff_hour + " hours, " + diff_minute + " minutes ago.")
 
 
 
