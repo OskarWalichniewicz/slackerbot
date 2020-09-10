@@ -6,7 +6,8 @@ from datetime import date, datetime
 import json
 from github import Github
 
-
+segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
+'https://media.discordapp.net/attachments/364712407601512450/753284032036470824/unknown.png?width=728&height=515']
 awyQuotes = ['MONSTRUJM',
     'btw srecna nova srpska nova bato sve najlepse :heart: !',
     'biopolar or smth',
@@ -383,11 +384,11 @@ async def on_message(message):
 
 @client.command()
 async def awy(ctx):
-    rolled_quote = random.choice(awyQuotes)
+    rolled_quote_awy = random.choice(awyQuotes)
     if rolled_quote.startswith('http'):
-        await ctx.send(rolled_quote)
+        await ctx.send(rolled_quote_awy)
     else:
-        await ctx.send('Awy once said: "{}".'.format(rolled_quote))
+        await ctx.send('Awy once said: "{}".'.format(rolled_quote_awy))
 
 @client.command()
 async def akcent(ctx):
@@ -409,7 +410,11 @@ async def dran(ctx):
 
 @client.command()
 async def segment(ctx):
-    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/753284032036470824/unknown.png?width=728&height=515')
+    rolled_quote_segment = random.choice(segmentQuotes)
+    if rolled_quote.startswith('http'):
+        await ctx.send(rolled_quote_segment)
+    else:
+        await ctx.send('Segment once said: "{}".'.format(rolled_quote_segment))
 
 @client.command()
 async def ignios(ctx):
