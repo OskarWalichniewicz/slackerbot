@@ -212,7 +212,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     # if message.author.id == 329341017914605569:
-    if message.author.display_name == "diethylamide":
+    if message.author.display_name == "abcdef":
         year = message.created_at.year
         month = message.created_at.month
         day = message.created_at.day
@@ -225,7 +225,6 @@ async def on_message(message):
         'hour': hour,
         'minute': minute,
         'second': second}
-        print(new_time)
         with open('variables.json', 'w') as f:
             f.truncate()
             json.dump(new_time, f)
