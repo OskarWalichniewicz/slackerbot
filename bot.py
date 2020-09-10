@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 import random
-from datetime import date, datetime, timezone
+from datetime import date, datetime, timedelta
 import json
 from github import Github
 
@@ -439,7 +439,7 @@ async def az(ctx):
         json_dict["minute"],
         json_dict["second"])
 
-    curr_date = datetime.now()
+    curr_date = datetime.now() + timedelta(hours = 2) # adding 2 hours cuz timezone
     print(curr_date)
 
     diff = curr_date - az_date
