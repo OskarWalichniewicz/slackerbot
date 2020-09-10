@@ -241,9 +241,9 @@ async def az(ctx): # az id = 329341017914605569
     user_id = 329341017914605569
     user = client.get_user(user_id)
     async for message in user.history(limit=None):
-            sent = str(message.created_at)
-            await ctx.send('last msg at ' + sent)
-            break
+        sent = str(message.created_at)
+        await ctx.send('last msg at ' + sent)
+        break
 #awys chamber = 364712407601512450
 #bots 1 = 392216967882473473
 #just-a-serbian-things = 400406248341897217
