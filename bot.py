@@ -204,17 +204,19 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author.name == "Nefil":
+    if message.author.id == 329341017914605569:
         year = message.created_at.year
         month = message.created_at.month
         day = message.created_at.day
         hour = message.created_at.hour
         minute = message.created_at.minute
+        second = message.created_at.seconds
         new_time = {'year' : year,
         'month': month,
         'day': day,
         'hour': hour,
-        'minute': minute}
+        'minute': minute,
+        'second': second}
         print(new_time)
         with open('variables.json', 'w') as f:
             f.truncate()
@@ -264,7 +266,8 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["month"],
         json_dict["day"],
         json_dict["hour"],
-        json_dict["minute"])
+        json_dict["minute"]
+        json_dict["second"])
     print(az_date)
 
 
