@@ -4,6 +4,7 @@ import os
 import random
 from datetime import date, datetime
 import json
+from github import Github
 
 
 awyQuotes = ['MONSTRUJM',
@@ -196,6 +197,11 @@ awyQuotes = ['MONSTRUJM',
     'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png',
     'https://image.prntscr.com/image/JdO52xtyQy2vyTMXzfAtPA.png']
 
+def save_to_github(file_name):
+    g = Github("OskarWalichniewicz", "MVhheMVipwAD3r")
+    repo = g.get_repo("OskarWalichniewicz/slackerbot")
+    repo.create_file(file_name, "az wrote something", "dafuq is that", branch="master")
+
 client = commands.Bot(command_prefix = '.')
 
 @client.event
@@ -204,7 +210,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author.id == 329341017914605569:
+    # if message.author.id == 329341017914605569:
+    if message.author.display_name == "diethylamide":
         year = message.created_at.year
         month = message.created_at.month
         day = message.created_at.day
@@ -221,6 +228,7 @@ async def on_message(message):
         with open('variables.json', 'w') as f:
             f.truncate()
             json.dump(new_time, f)
+        save_to_github('variables.json')
     await client.process_commands(message)
 
 
