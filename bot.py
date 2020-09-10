@@ -205,7 +205,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     # if message.author.id == 329341017914605569:
-    if message.author.name == "diethylamide":
+    if message.author.display_name == "diethylamide":
         year = message.created_at.year
         month = message.created_at.month
         day = message.created_at.day
