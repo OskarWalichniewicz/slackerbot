@@ -198,7 +198,7 @@ awyQuotes = ['MONSTRUJM',
     'https://image.prntscr.com/image/JdO52xtyQy2vyTMXzfAtPA.png']
 
 def save_to_github(file_name):
-    g = Github("OskarWalichniewicz", "MVhheMVipwAD3r")
+    g = Github("OskarWalichniewicz", str(os.environ['GITHUB_PASSWORD']))
     repo = g.get_repo("OskarWalichniewicz/slackerbot")
     contents = repo.get_contents("variables.json")
     repo.update_file(contents.path, "az wrote something", file_name, contents.sha)
@@ -211,7 +211,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author.id == 329341017914605569:
+    if message.author.id == int(os.environ['AZ_DISCORD_ID']):
         year = message.created_at.year
         month = message.created_at.month
         day = message.created_at.day
@@ -267,7 +267,7 @@ async def ignios(ctx):
     await ctx.send('Fuck Ignios')
 
 @client.command()
-async def az(ctx): # az id = 329341017914605569
+async def az(ctx):
     with open('variables.json') as json_data:
         json_dict = json.load(json_data)
         az_date = datetime(json_dict["year"],
@@ -284,18 +284,28 @@ async def az(ctx): # az id = 329341017914605569
     diff_minutes, diff_seconds = divmod(remainder, 60)
 
     if diff_days > 0:
-        await ctx.send("Az died {} days, {} hours, {} minutes, {} seconds ago".format(diff_days, diff_hours, diff_minutes, diff_seconds))
+        outp = "Az died {} days, {} hours, {} minutes, {} seconds ago".format(diff_days, diff_hours, diff_minutes, diff_seconds)
     else:
         if diff_hours > 0:
-            await ctx.send("Az died {} hours, {} minutes, {} seconds ago".format(diff_hours, diff_minutes, diff_seconds))
+            outp = "Az died {} hours, {} minutes, {} seconds ago".format(diff_hours, diff_minutes, diff_seconds)
         else:
             if diff_minutes > 0:
-                await ctx.send("Az died {} minutes, {} seconds ago".format(diff_minutes, diff_seconds))
+                outp = "Az died {} minutes, {} seconds ago".format(diff_minutes, diff_seconds)
             else:
                 if diff_seconds > 0:
-                    await ctx.send("Az died {} seconds ago".format(diff_seconds))
+                    outp = "Az died {} seconds ago".format(diff_seconds)
 
 
+    if diff_days == 1:
+        outp = outp.replace("days", "day")
+    if diff_hours == 1:
+        outp = outp.replace("hours", "hour")
+    if diff_minutes == 1:
+        outp = outp.replace("minutes", "minute")
+    if diff_seconds == 1:
+        outp = outp.replace("seconds", "second")
+
+    await ctx.send(outp)
 
 
 client.run(os.environ['DISCORD_TOKEN']) #token
