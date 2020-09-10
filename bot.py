@@ -199,7 +199,7 @@ awyQuotes = ['MONSTRUJM',
 
 def save_to_github(file_name):
     g = Github("OskarWalichniewicz", "MVhheMVipwAD3r")
-    repo = g.get_repo("slackerbot")
+    repo = g.get_user().get_repo("slackerbot")
     contents = repo.get_contents("/variables.json")
     repo.update_file("/variables.json", "az wrote something", file_name, contents.sha)
 
