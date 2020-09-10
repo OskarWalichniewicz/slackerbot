@@ -200,7 +200,8 @@ awyQuotes = ['MONSTRUJM',
 def save_to_github(file_name):
     g = Github("OskarWalichniewicz", "MVhheMVipwAD3r")
     repo = g.get_repo("OskarWalichniewicz/slackerbot")
-    repo.create_file(file_name, "az wrote something", "dafuq is that", branch="master")
+    contents = repo.get_contents("variables.json")
+    repo.update_file(contents.path, "az wrote something", "dafuq is that", contents.sha, branch="master")
 
 client = commands.Bot(command_prefix = '.')
 
