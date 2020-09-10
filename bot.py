@@ -204,7 +204,8 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author.id == 329341017914605569:
+    # if message.author.id == 329341017914605569:
+    if message.author.name == "diethylamide":
         year = message.created_at.year
         month = message.created_at.month
         day = message.created_at.day
@@ -275,7 +276,18 @@ async def az(ctx): # az id = 329341017914605569
     diff_hours, remainder = divmod(diff.seconds, 3600)
     diff_minutes, diff_seconds = divmod(remainder, 60)
 
-    print("days = " + str(diff_days) + " hours = " + str(diff_hours) + " minutes = " + str(diff_minutes) + " seconds = " + str(diff_seconds))
+    if diff_days > 0:
+        await ctx.send("Az died {} days, {} hours, {} minutes, {} seconds ago".format(diff_days, diff_hours, diff_minutes, diff_seconds))
+    else:
+        if diff_hours > 0:
+            await ctx.send("Az died {} hours, {} minutes, {} seconds ago".format(diff_hours, diff_minutes, diff_seconds))
+        else:
+            if diff_minutes > 0:
+                await ctx.send("Az died {} minutes, {} seconds ago".format(diff_minutes, diff_seconds))
+            else:
+                if diff_seconds > 0:
+                    await ctx.send("Az died {} seconds ago".format(diff_seconds))
+
 
 
 
