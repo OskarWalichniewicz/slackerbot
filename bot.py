@@ -266,7 +266,7 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["month"],
         json_dict["day"],
         json_dict["hour"],
-        json_dict["minute"]
+        json_dict["minute"],
         json_dict["second"])
     print(az_date)
 
