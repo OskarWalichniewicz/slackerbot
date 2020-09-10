@@ -443,6 +443,8 @@ async def az(ctx):
     diff_days = diff.days
     diff_hours, remainder = divmod(diff.seconds, 3600)
     diff_minutes, diff_seconds = divmod(remainder, 60)
+    diff_seconds += diff.microseconds / 1e6
+    diff_hours += diff.days*24
 
     if diff_days > 0:
         outp = "Az died {} days, {} hours, {} minutes, {} seconds ago".format(diff_days, diff_hours, diff_minutes, diff_seconds)
