@@ -268,9 +268,10 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["hour"],
         json_dict["minute"],
         json_dict["second"])
-        curr_date = datetime.now
-        diff = curr_date - az_date
-        print(diff)
+
+    curr_date = datetime.now()
+    diff = curr_date - az_date
+    print(diff)
 
 
 
