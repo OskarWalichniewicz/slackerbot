@@ -273,9 +273,9 @@ async def az(ctx): # az id = 329341017914605569
     diff = curr_date - az_date
     diff_days = diff.days
     diff_hours, remainder = divmod(diff.seconds, 3600)
-    diff_minutes = divmod(remainder, 60)
+    diff_minutes, diff_seconds = divmod(remainder, 60)
 
-    print("days = " + str(diff_days) + " hours = " + str(diff_hours) + " minutes = " + str(diff_minutes))
+    print("days = " + str(diff_days) + " hours = " + str(diff_hours) + " minutes = " + str(diff_minutes) + " seconds = " + str(diff_seconds))
 
 
 
