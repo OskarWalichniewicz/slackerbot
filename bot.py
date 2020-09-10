@@ -7,6 +7,7 @@ import json
 from github import Github
 import pytz
 
+timezone = pytz.timezone('Europe/Warsaw')
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!']
 awyQuotes = ['MONSTRUJM',
     'btw srecna nova srpska nova bato sve najlepse :heart: !',
@@ -438,9 +439,9 @@ async def az(ctx):
         json_dict["hour"],
         json_dict["minute"],
         json_dict["second"])
+        az_date_timezoned = timezone.localize(az_date)
 
     curr_date = datetime.now()
-    timezone = pytz.timezone('Europe/Warsaw')
     curr_date_timezoned = timezone.localize(curr_date)
     print(curr_date)
     print(curr_date_timezoned)
