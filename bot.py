@@ -241,7 +241,7 @@ async def az(ctx): # az id = 329341017914605569
     channel_id = 364712407601512450
     channel = client.get_channel(channel_id)
     while True:
-        async for message in channel.history(limit=None):
+        for message in channel.history(limit=None):
             if message.author.id == 329341017914605569:
                 sent = str(message.created_at)
                 print(sent)
