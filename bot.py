@@ -237,10 +237,8 @@ async def ignios(ctx):
 
 @client.command()
 async def az(ctx): # az id = 329341017914605569
-    async for msg in channel.history(limit = None):
-        if msg.author.id == 753208051044974624:
-            sent = msg.created_at()
-            print(sent)
+    channels = client.get_all_channels()
+    print(channels)
 
 
 
