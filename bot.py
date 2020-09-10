@@ -236,7 +236,12 @@ async def ignios(ctx):
     await ctx.send('Fuck Ignios')
 
 @client.command()
-async def az(ctx):
-    print(discord.utils.get(client.get_all_members(), name="azh", discriminator="2303").id)
+async def az(ctx): # az id = 329341017914605569
+    async for msg in channel.history(limit = None):
+        if msg.author.id == 753208051044974624:
+            sent = msg.created_at()
+            print(sent)
+
+
 
 client.run(os.environ['DISCORD_TOKEN']) #token
