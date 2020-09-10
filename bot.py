@@ -240,7 +240,7 @@ async def ignios(ctx):
 async def az(ctx): # az id = 329341017914605569
     user_id = 329341017914605569
     for channel in ctx.guild.text_channels:
-        fetchMessage = await channel.history().find(lambda m: m.author.id == users_id)
+        fetchMessage = await channel.history().find(lambda m: m.author.id == user_id)
         print(fetchMessage)
         sent = str(fetchMessage.created_at)
         await ctx.send('last msg at ' + sent)
