@@ -269,10 +269,7 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["hour"],
         json_dict["minute"],
         json_dict["second"])
-    start = datetime.strptime(str(datetime.now), '%Y-%m-%d %H:%M:%S')
-    end = datetime.strptime(str(az_date), '%Y-%m-%d %H:%M:%S')
-    diff = relativedelta(start, end)
-    print("The difference is %d months %d days %d hours %d minutes" % (diff.months, diff.days, diff.hours, diff.minutes))
+    print(datetime.now - az_date)
 
 
 client.run(os.environ['DISCORD_TOKEN']) #token
