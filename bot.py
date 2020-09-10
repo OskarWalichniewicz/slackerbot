@@ -3,6 +3,7 @@ from discord.ext import commands
 import os
 import random
 from datetime import date, datetime
+from dateutil.relativedelta import relativedelta
 import json
 
 
@@ -268,9 +269,10 @@ async def az(ctx): # az id = 329341017914605569
         json_dict["hour"],
         json_dict["minute"],
         json_dict["second"])
-    current_date = datetime.now()
-    diff = current_date - az_date
-    print(diff)
+    start = datetime.strptime(datetime.now, '%Y-%m-%d %H:%M:%S')
+    end = datetime.strptime(az_date, '%Y-%m-%d %H:%M:%S')
+    diff = relativedelta(start, end)
+    print("The difference is %d months %d days %d hours %d minutes" % (diff.months, diff.days, diff.hours, diff.minutes))
 
 
 client.run(os.environ['DISCORD_TOKEN']) #token
