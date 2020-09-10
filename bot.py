@@ -441,7 +441,7 @@ async def az(ctx):
     curr_date = datetime.now()
     diff = curr_date - az_date
     diff_days = diff.days
-    diff_hours = diff.seconds // 3600
+    diff_hours = (diff.seconds // 3600) + 2 #because timezone????
     diff_minutes = (diff.seconds // 60) % 60
     diff_seconds = diff.seconds - diff_hours * 3600 - diff_minutes * 60
 
