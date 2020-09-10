@@ -237,9 +237,11 @@ async def ignios(ctx):
 
 @client.command()
 async def az(ctx): # az id = 329341017914605569
-    channels = client.get_all_channels()
-    print(channels)
-
+    channels = []
+    for guild in client.guilds:
+        for channel in guild.channels:
+            channels.append(channel)
+            print(channels)
 
 
 client.run(os.environ['DISCORD_TOKEN']) #token
