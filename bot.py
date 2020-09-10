@@ -6,8 +6,7 @@ from datetime import date, datetime
 import json
 from github import Github
 
-segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
-'https://media.discordapp.net/attachments/364712407601512450/753284032036470824/unknown.png?width=728&height=515']
+segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!']
 awyQuotes = ['MONSTRUJM',
     'btw srecna nova srpska nova bato sve najlepse :heart: !',
     'biopolar or smth',
@@ -397,6 +396,10 @@ async def akcent(ctx):
 @client.command()
 async def stonelia(ctx):
     await ctx.send('https://media.discordapp.net/attachments/364712407601512450/709413405131407380/Screenshot_794.png?width=686&height=515')
+
+@client.command()
+async def stonement(ctx):
+    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/753284032036470824/unknown.png?width=728&height=515')
 
 @client.command()
 async def pam(ctx):
