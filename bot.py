@@ -385,7 +385,7 @@ async def on_message(message):
 @client.command()
 async def awy(ctx):
     rolled_quote_awy = random.choice(awyQuotes)
-    if rolled_quote.startswith('http'):
+    if rolled_quote_awy.startswith('http'):
         await ctx.send(rolled_quote_awy)
     else:
         await ctx.send('Awy once said: "{}".'.format(rolled_quote_awy))
@@ -411,7 +411,7 @@ async def dran(ctx):
 @client.command()
 async def segment(ctx):
     rolled_quote_segment = random.choice(segmentQuotes)
-    if rolled_quote.startswith('http'):
+    if rolled_quote_segment.startswith('http'):
         await ctx.send(rolled_quote_segment)
     else:
         await ctx.send('Segment once said: "{}".'.format(rolled_quote_segment))
