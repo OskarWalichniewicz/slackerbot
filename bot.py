@@ -237,11 +237,16 @@ async def ignios(ctx):
 
 @client.command()
 async def az(ctx): # az id = 329341017914605569
-    channels = []
-    for guild in client.guilds:
-        for channel in guild.channels:
-            channels.append(channel)
-            print(channels)
-
+    channel = discord.utils.get(guild.text_channels, id=364712407601512450)
+    az_found = False
+    while not az_found:
+        async for msg in client.logs_from(message.channel, limit=None):
+            if msg.author.id == 329341017914605569:
+                date = msg.created_at()
+                print(date)
+                az_found = True
+#awys chamber = 364712407601512450
+#bots 1 = 392216967882473473
+#just-a-serbian-things = 400406248341897217
 
 client.run(os.environ['DISCORD_TOKEN']) #token
