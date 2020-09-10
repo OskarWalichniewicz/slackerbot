@@ -275,6 +275,8 @@ async def az(ctx): # az id = 329341017914605569
     for char in diff:
         if char != ' ':
             diff_years += char
+        else:
+            break
     print(diff_years)
 
 
