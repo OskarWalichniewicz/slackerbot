@@ -7,7 +7,8 @@ import json
 from github import Github
 import asyncio
 
-
+ceneQuotes = ['https://media.discordapp.net/attachments/364712407601512450/753321114398097409/Screenshot_20200909_202854.jpg?width=981&height=478',
+    'https://image.prntscr.com/image/iVzFyMEfTwyIGBKCw36ibw.png']
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
     'We fucking invented it you swine!',
     'https://prnt.sc/hvbwb6',
@@ -549,7 +550,11 @@ async def pupinka(ctx):
 
 @client.command()
 async def cene(ctx):
- await ctx.send('https://image.prntscr.com/image/iVzFyMEfTwyIGBKCw36ibw.png')
+    rolled_quote_cene = random.choice(ceneQuotes)
+    if rolled_quote_cene.startswith('http'):
+        await ctx.send(rolled_quote_cene)
+    else:
+        await ctx.send('Cene once said: "{}".'.format(rolled_quote_cene))
 
 @client.command()
 async def az(ctx):
