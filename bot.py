@@ -7,10 +7,22 @@ import json
 from github import Github
 
 
-segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!']
+segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
+    'We fucking invented it you swine!']
 awyQuotes = ['MONSTRUJM',
+    'GOUVERMANT IS LYING TO HER',
     'btw srecna nova srpska nova bato sve najlepse :heart: !',
     'biopolar or smth',
+    'he\'s even civilizaed citizen of UK man\nhe be probably at queen\'s house drinkin\' da tea like a true boss',
+    'bobbsy\'s opinion is much more better than some lame ass test',
+    'SO NOT ALL SERBS ARE MOLESTERS ? lIKE THAT MONSTRUM',
+    'ONLY DELEAR IS DRUG DEALER',
+    'BOBSY I WILL PROTEC YOU',
+    'seggy do you wanna se magic ?',
+    'sorry i aint no gae',
+    'my bad is empty',
+    'when i was in highschool there was this caffe called Omerta i was there 24/7 and there were always chicks calling me psychologist and comming to talk to me about their problems for me to help them',
+    'DONI',
     'PUSTA ULICKA CRNJE S PRAZNICJNJE VECER KURWAAAAA',
     'cunt you are only calling me bcs you need support',
     'my rank 1 supporting skills are not for everyone',
