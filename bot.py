@@ -9,9 +9,91 @@ import asyncio
 
 
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
-    'We fucking invented it you swine!']
+    'We fucking invented it you swine!',
+    'https://prnt.sc/hvbwb6',
+    'https://image.prntscr.com/image/3i1WhiqlQ9ukPa3m0Eb5yQ.png',
+    'https://i.imgur.com/VuNsNyk.png',
+    'Cene: agi/stam or crit/ap is better?\nSegment: https://i.imgur.com/lEUcxtn.png ']
 awyQuotes = ['MONSTRUJM',
     'GOUVERMANT IS LYING TO HER',
+    'kocham cije',
+    '100 bucks she is ilegal',
+    'she has big mountains',
+    'i had half nude photo of divinity\n:/',
+    'HAHAHAHAHA AKCENT THE PEDOPHILE STRIKES AGAIN',
+    'do i look like i care\nwhat she did on a fking toiletseat',
+    'justin bieber is okay ?\nyou gay\nhomo',
+    'i actually wanted to be with her but in reality she is having 10% of that booty and is ugly as fk\ni was scared when i saw her face without make up',
+    'you share the opinion with my gf she tells me that my face is perfect for slaping',
+    'you should send this picture to brazzers',
+    'what ar eyou even talking about',
+    'you should go to mental hospital\nyou are having a big problems\nma friend',
+    'im smoking weed only for medical purposes that don\'t make me a junkie right ! It\'s helping me with my arythmia or how the fk do you spell it',
+    'kohai says that somking weed=junkie',
+    'my doctor said that my EEG is perfect\ni have certificat for you',
+    'what is asperger is it like dangerous or something',
+    'i wanna be autistic as well',
+    'kohai the mighty hater',
+    'rooster egg is most baddas ghround mount after spectral tiger',
+    'mama voli bebu\ntata voli ceneliju',
+    'Plastic hirurzi must lower the priece of getting tits bigger',
+    '"najlepse se mece u dve iljade i trece" -Awy 2016',
+    'i would bite of his neck with my own tooths',
+    'im getting depresive thoughts',
+    '40 days without coal like but if you drink milk water and take this pills you can get clean in like 2 days\nthere is an ancient method hidden in my hood\nhow to get clean within 24 hrs from weed,mdma,pajd,heroin,cocain you name it',
+    'well yeh my dream maybe is like stuipid but i actually want to find Wife and live with her on some quite place like in house where there is none arround you can watch stars and things like that quite life you know but instead i always get some girl with nice booty or something who is a whore',
+    'omg i just realised how much times i mentioned feed and alcoihol',
+    'i eated some spagetis today',
+    'make love not war',
+    'i wonder when will the time come for me to go to like partys weedings and things like that and not only funerals',
+    'im gonna change my counjtry im becoming 100% Yamacian',
+    'i will send cene some whores of serbia with 100% panties drop rate',
+    'you must act cool\nTHIS IS A KEY TO A LONG RELATIONSHIP',
+    'fk pride listen to your heart',
+    'i know how to talk to the person oposite gender tho i must admit i used it for nasty things and im not proud for it',
+    'give me your facebook and she will get wet',
+    'i  have pick up lines for both naughty bitches and cultured civilized goodones',
+    'ye becouse im idiot',
+    'omg i actually like the sensitive side of mine that i show up only when im drunk or high',
+    'i have a girl for 4 months now and i think im close to beign in love for like first time she\'s like good culture even having good grades you know SHE IS NOT DRINKING FFS,i always feel like she is to good for somone like me and then she starts slaping me if i say something like that lol',
+    'i talk only to r1 ones',
+    'dranerys became a man akcent became a girl',
+    'porcentrege',
+    'cene i will invite you to my cabain in woods with stars\nwe can share my wife if you want\nsharing is carring',
+    'bw im tired af pshycialy and mentaly',
+    'nono my atmosphere is gud',
+    'YES BUT HARI POTER WAS RIDING DRAKES',
+    'it\'s like rly importent to me',
+    'im not wise man i just speak my mind',
+    'to reach every point you must past through another bunch of points in order to achive it',
+    'i eat to manny sweet things\n3 double snickers',
+    'we WAS',
+    'there is one even worser scene when an chick put knife on table and then was hiting her head at knife until she impaled her head to the knife',
+    'it\'s onje of  the most sickest things i saw in my entire life',
+    'bunch of cute 10 yo girls slaughtering everything that have 2 legs',
+    'it can always b e beter',
+    'he\'s still our italian bruda\ncold hearted mofo',
+    'no your hgelp was verry much apprieted',
+    'kawasaki brm brm',
+    'i am doing objactives but somone always steal my flag return\n:/',
+    'fk off akcent is my spiritual leader',
+    'Akcent>Neo>everyo other paladin>Kole',
+    'i know im a fking legend !',
+    'akcent i need your profesional thinking about a photo before midnight if i look drunk bcs my mother asked for photos and most of them me lying',
+    'retarded cunts worshiping vanilla\nYOU FKING WALK TILL LEVEL 40 AND THEN YOU DONT HAVE SILVER FOR MOUNT\nso you walk another 20 levels',
+    'i would marry maya\nbig boobs\nbig ass\nnot ugly',
+    'yes but i don\'t rly want to bother anymore she actually thought i would apologise for third time even tho again i did not do anything wrong but instead i was kissing with some ugly but big tited girl',
+    'SHE BRTOKE UP,and she acutally thought i would care lol',
+    'clementine is like the most retarded rogue player of all times',
+    'just when you think kaspi can\'t become bigger retard\nhe becomes',
+    'ah ffs this is so confusing i dont even know what are we talking about we are jumping from theme to theme to much !',
+    'im out im going to take a loooong waaalk smoke few cigars and try to get my mind streight and get sobber',
+    'i swear to god this is the last time i got drunk im to young to act like a 70yo lost hope',
+    'it couldn\'t be worser than current situation right',
+    'azhanim dieded',
+    'but im not judgeing by the looks only IT\'S NOT LIKE HER ACTING WAS POLITE EITHER',
+    'but man poor children from that kindergarden i think she is eating them for launch',
+    'btw cene did segment talked to you about his fights with wolfes in ewelynn forest',
     'btw srecna nova srpska nova bato sve najlepse :heart: !',
     'biopolar or smth',
     'he\'s even civilizaed citizen of UK man\nhe be probably at queen\'s house drinkin\' da tea like a true boss',
@@ -433,7 +515,7 @@ async def akcent(ctx):
 
 @client.command()
 async def stonelia(ctx):
-    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/709413405131407380/Screenshot_794.png?width=686&height=515')
+    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/709413405131407380/Screenshot_794.png?width=686&height=515 \n https://image.prntscr.com/image/pUq5QnZ9Ti_xDzfgi6oRkw.png ')
 
 @client.command()
 async def stonement(ctx):
@@ -464,6 +546,10 @@ async def ignios(ctx):
 @client.command()
 async def pupinka(ctx):
     await ctx.send('https://cdn.discordapp.com/attachments/364712407601512450/399218303739887617/WoWScrnShot_010618_160818.jpg')
+
+@client.command()
+async def cene(ctx):
+ await ctx.send('https://image.prntscr.com/image/iVzFyMEfTwyIGBKCw36ibw.png')
 
 @client.command()
 async def az(ctx):
