@@ -18,7 +18,15 @@ segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
 awyQuotes = ['MONSTRUJM',
     'GOUVERMANT IS LYING TO HER',
     'kocham cije',
+    'ye i tried to appel for ban\nit did not went all well\nso i had to once again say I understand rito',
+    'cows are much more intellegent then polish grass eating peeps',
     '100 bucks she is ilegal',
+    'plot is that there are nude guys getting nude and drinking vodka all day long',
+    'SHE IS MOVING HIS FOKING CORPSE\nTHT IS SOME ANIMAL CRUELITY\nPOOR GUY CANT EVEN REST IN AFTERLIFE',
+    'the most beatufiull love is teh one whe you aint needin no foking hearts or emojis to demonstrate it cuz it is fokin spiritual shit',
+    'awy be like most culutral person of all times',
+    'i be like chillin with dem painters and motivating them FORZA MICHELANGELO FORZA',
+    'you are not molester\nyou are verry intellegent human beign\n300+ iq',
     'she has big mountains',
     'i had half nude photo of divinity\n:/',
     'HAHAHAHAHA AKCENT THE PEDOPHILE STRIKES AGAIN',
@@ -452,26 +460,27 @@ def save_to_github(file_name):
 
 client = commands.Bot(command_prefix = '.')
 
+wait_time = 60 #how many seconds each status change
 async def status_task():
     while True:
         await client.change_presence(activity=discord.Game('Milica is a midget'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Dran doesn\'t have mats'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Az is dead'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Cenelia is handsome'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Bobsy is being molested'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Awy is the wisest'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Akcent hates Cene'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Gazda likes Rasta'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Segment is old'))
-        await asyncio.sleep(60)
+        await asyncio.sleep(wait_time)
 
 @client.event
 async def on_ready():
