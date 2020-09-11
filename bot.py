@@ -5,6 +5,7 @@ import random
 from datetime import date, datetime, timedelta
 import json
 from github import Github
+import asyncio
 
 
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
@@ -359,6 +360,7 @@ awyQuotes = ['MONSTRUJM',
     'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png',
     'https://image.prntscr.com/image/JdO52xtyQy2vyTMXzfAtPA.png']
 
+
 def save_to_github(file_name):
     g = Github("OskarWalichniewicz", str(os.environ['GITHUB_PASSWORD']))
     repo = g.get_repo("OskarWalichniewicz/slackerbot")
@@ -367,9 +369,28 @@ def save_to_github(file_name):
 
 client = commands.Bot(command_prefix = '.')
 
+async def status_task():
+    while True:
+        await client.change_presence(activity=discord.Game('Milica is still a midget.'))
+        await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Dran still does not have mats.'))
+        await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Az is still dead.'))
+        await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Cenelia is still handsome.'))
+        await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Bobsy is still being molested.'))
+        await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Awy is still the wisest.'))
+        await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Akcent still hates Cene.'))
+        await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Gazda still wants to ban Cene.'))
+        await asyncio.sleep(60)
+
 @client.event
 async def on_ready():
-    await client.change_presence(activity=discord.Game('Milica is still a midget.'))
+    client.loop.create_task(status_task())
     print("Bot ready")
 
 @client.event
