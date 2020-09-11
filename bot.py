@@ -387,6 +387,9 @@ async def status_task():
         await asyncio.sleep(60)
         await client.change_presence(activity=discord.Game('Gazda wants to ban Cene'))
         await asyncio.sleep(60)
+        await client.change_presence(activity=discord.Game('Segment is old'))
+        await asyncio.sleep(60)
+
 
 @client.event
 async def on_ready():
