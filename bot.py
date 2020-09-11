@@ -488,12 +488,12 @@ async def on_message(message):
         hour = message.created_at.hour
         minute = message.created_at.minute
         second = message.created_at.second
-        new_time = {'year' : year,
-        'month': month,
-        'day': day,
-        'hour': hour,
-        'minute': minute,
-        'second': second}
+        new_time = {"year" : year,
+        "month": month,
+        "day": day,
+        "hour": hour,
+        "minute": minute,
+        "second": second}
         with open('variables.json', 'w') as f:
             f.truncate()
             json.dump(new_time, f)
