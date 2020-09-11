@@ -12,6 +12,7 @@ ceneQuotes = ['https://media.discordapp.net/attachments/364712407601512450/75332
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
     'We fucking invented it you swine!',
     'https://prnt.sc/hvbwb6',
+    'https://prnt.sc/uflgz2',
     'https://image.prntscr.com/image/3i1WhiqlQ9ukPa3m0Eb5yQ.png',
     'https://i.imgur.com/VuNsNyk.png',
     'Cene: agi/stam or crit/ap is better?\nSegment: https://i.imgur.com/lEUcxtn.png ']
