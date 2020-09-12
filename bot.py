@@ -7,7 +7,7 @@ import json
 from github import Github
 import asyncio
 
-franek = ['https://i.imgur.com/XB6Qptw.jpg',
+franek_pics = ['https://i.imgur.com/XB6Qptw.jpg',
     'https://i.imgur.com/F4GCJWf.jpg',
     'https://i.imgur.com/YoNbgR8.jpeg',
     'https://i.imgur.com/IJTAOJm.jpg',
@@ -552,7 +552,7 @@ async def dran(ctx):
 
 @client.command()
 async def franek(ctx):
-    rolled_franek = random.choice(franek)
+    rolled_franek = random.choice(franek_pics)
     await ctx.send(rolled_franek)
 
 @client.command()
