@@ -525,6 +525,7 @@ async def on_message(message):
         az_file = open("az.txt", "w").close()
         az_file = open("az.txt", "w")
         az_file.write(az_file_input)
+    if message.content == '.azsave' and message.author.id == 247438282424713216: # if Nefil writes .azsave it should save to github
         save_to_github(az_file_input)
 
     await client.process_commands(message)
