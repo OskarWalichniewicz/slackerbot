@@ -7,6 +7,15 @@ import json
 from github import Github
 import asyncio
 
+nika_pics = ['https://cdn.discordapp.com/attachments/364712407601512450/754369363313819760/20200912_175256.jpg',
+    'https://cdn.discordapp.com/attachments/364712407601512450/754369363532054538/20200912_175340.jpg',
+    'https://media.discordapp.net/attachments/364712407601512450/754369363754090616/20200912_175350.jpg',
+    'https://cdn.discordapp.com/attachments/364712407601512450/754369363942834216/20200912_175307.jpg',
+    'https://media.discordapp.net/attachments/364712407601512450/754369364261863544/20200912_175318.jpg',
+    'https://media.discordapp.net/attachments/364712407601512450/754369364496482334/20200912_175329.jpg']
+dran_pets = ['https://media.discordapp.net/attachments/364712407601512450/754368051431866378/image0.jpg',
+    'https://media.discordapp.net/attachments/364712407601512450/754368473903267870/image0.jpg',
+    'https://cdn.discordapp.com/attachments/364712407601512450/754368474792329216/image1.jpg']
 franek_pics = ['https://i.imgur.com/XB6Qptw.jpg',
     'https://i.imgur.com/F4GCJWf.jpg',
     'https://i.imgur.com/YoNbgR8.jpeg',
@@ -546,14 +555,22 @@ async def pam(ctx):
 
 @client.command()
 async def dran(ctx):
-    dran =['Dran is still a betrayer.',
-    'Dran still does not have mats.']
-    await ctx.send(random.choice(dran))
+    rolled_dran_pet = random.choice(dran_pets)
+    await ctx.send(rolled_dran_pet)
 
 @client.command()
 async def franek(ctx):
     rolled_franek = random.choice(franek_pics)
     await ctx.send(rolled_franek)
+
+@client.command()
+async def shiba(ctx):
+    await ctx.send('https://cdn.discordapp.com/attachments/364712407601512450/754369041975476304/IMG_20191225_142058.jpg')
+
+@client.command()
+async def nika(ctx):
+    rolled_nika = random.choice(nika_pics)
+    await ctx.send(rolled_nika)
 
 @client.command()
 async def segment(ctx):
