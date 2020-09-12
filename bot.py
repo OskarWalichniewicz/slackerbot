@@ -570,7 +570,7 @@ async def az(ctx):
         az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
 
     curr_date = datetime.now() # timedelta(hours = 2)
-    print("Current time: " + curr_date)
+    print("Current time: " + str(curr_date))
 
     diff = curr_date - az_date
     diff_days = diff.days
