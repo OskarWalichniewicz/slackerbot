@@ -510,7 +510,6 @@ async def on_message(message):
 
     await client.process_commands(message)
 
-
 @client.command()
 async def awy(ctx):
     rolled_quote_awy = random.choice(awyQuotes)
