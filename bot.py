@@ -503,11 +503,13 @@ async def on_message(message):
         "hour": hour,
         "minute": minute,
         "second": second}
+        new_time_str = str(new_time)
+        new_time_str = new_time_str.replace("'", '"')
         with open('variables.json', 'w') as f:
             f.truncate()
-            json.dump(new_time, f)
+            json.dump(new_time_str, f)
 
-        save_to_github(str(new_time))
+        save_to_github(str(new_time_str))
     await client.process_commands(message)
 
 
