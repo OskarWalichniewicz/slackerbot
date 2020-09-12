@@ -7,6 +7,15 @@ import json
 from github import Github
 import asyncio
 
+franek = ['https://i.imgur.com/XB6Qptw.jpg',
+    'https://i.imgur.com/F4GCJWf.jpg',
+    'https://i.imgur.com/YoNbgR8.jpeg',
+    'https://i.imgur.com/IJTAOJm.jpg',
+    'https://i.imgur.com/CsJ3X2r.jpeg',
+    'https://i.imgur.com/uFy1I1y.jpeg',
+    'https://i.imgur.com/bn5eomm.jpg',
+    'https://i.imgur.com/YQMyBRn.jpeg',
+    'https://i.imgur.com/2dKCJAo.jpeg']
 ceneQuotes = ['https://media.discordapp.net/attachments/364712407601512450/753321114398097409/Screenshot_20200909_202854.jpg?width=981&height=478',
     'https://image.prntscr.com/image/iVzFyMEfTwyIGBKCw36ibw.png']
 segmentQuotes = ['Imma Kamehameha yo ass if you don\'t behave kids!',
@@ -540,6 +549,11 @@ async def dran(ctx):
     dran =['Dran is still a betrayer.',
     'Dran still does not have mats.']
     await ctx.send(random.choice(dran))
+
+@client.command()
+async def franek(ctx):
+    rolled_franek = random.choice(franek)
+    await ctx.send(rolled_franek)
 
 @client.command()
 async def segment(ctx):
