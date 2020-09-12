@@ -482,6 +482,8 @@ async def status_task():
         await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Segment is old'))
         await asyncio.sleep(wait_time)
+        await client.change_presence(activity=discord.Game('Tesla was croatian'))
+        await asyncio.sleep(wait_time)
 
 @client.event
 async def on_ready():
@@ -497,19 +499,12 @@ async def on_message(message):
         hour = message.created_at.hour
         minute = message.created_at.minute
         second = message.created_at.second
-        new_time = {"year" : year,
-        "month": month,
-        "day": day,
-        "hour": hour,
-        "minute": minute,
-        "second": second}
-        new_time_str = str(new_time)
-        new_time_str = new_time_str.replace("'", '"')
-        with open('variables.json', 'w') as f:
-            f.truncate()
-            json.dump(new_time_str, f)
+        az_file_input = year + "\n" + month + "\n"+ day + "\n"+ hour + "\n" +minute + "\n"+ second
+        az_file = open("az.txt", "w").close()
+        az_file = open("az.txt", "w")
+        az_file.write(az_file_input)
+        save_to_github(az_file_input)
 
-        save_to_github(str(new_time_str))
     await client.process_commands(message)
 
 
@@ -569,17 +564,13 @@ async def cene(ctx):
 
 @client.command()
 async def az(ctx):
-    with open('variables.json') as json_data:
-        json_dict = json.load(json_data)
-        az_date = datetime(json_dict["year"],
-        json_dict["month"],
-        json_dict["day"],
-        json_dict["hour"],
-        json_dict["minute"],
-        json_dict["second"])
+    lines = []
+    with open('az.txt') as f:
+        lines = [line.rstrip() for line in f]
+        az_date = datetime(lines[0], lines[1], lines[2], lines[3], lines[4], lines[5])
 
     curr_date = datetime.now() # timedelta(hours = 2)
-    print(curr_date)
+    print("Current time: " + curr_date)
 
     diff = curr_date - az_date
     diff_days = diff.days
