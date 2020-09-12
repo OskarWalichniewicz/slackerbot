@@ -567,7 +567,7 @@ async def az(ctx):
     lines = []
     with open('az.txt') as f:
         lines = [line.rstrip() for line in f]
-        az_date = datetime(lines[0], lines[1], lines[2], lines[3], lines[4], lines[5])
+        az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
 
     curr_date = datetime.now() # timedelta(hours = 2)
     print("Current time: " + curr_date)
