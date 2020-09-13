@@ -35,8 +35,8 @@ async def status_task():
         await client.change_presence(activity=discord.Game('Tesla was croatian'))
         await asyncio.sleep(wait_time)
 
-@client.command
-async def word_of_the_day(ctx):
+@client.command()
+async def word(ctx):
     english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word = get_word_of_the_day()
 
     embed = discord.Embed(
