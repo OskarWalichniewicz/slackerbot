@@ -86,22 +86,6 @@ async def pam(ctx):
     await ctx.send('https://media.discordapp.net/attachments/364712407601512450/752975692966264902/Screenshot_797.png?width=684&height=515')
 
 @client.command()
-async def dran(ctx):
-    await ctx.send(get_quote(dran_list))
-
-@client.command()
-async def franek(ctx):
-    await ctx.send(get_quote(franek_list))
-
-@client.command()
-async def shiba(ctx):
-    await ctx.send('https://cdn.discordapp.com/attachments/364712407601512450/754369041975476304/IMG_20191225_142058.jpg')
-
-@client.command()
-async def nika(ctx):
-    await ctx.send(get_quote(nika_list))
-
-@client.command()
 async def segment(ctx):
     await ctx.send(get_quote(segment_list))
 

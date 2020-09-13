@@ -1,23 +1,5 @@
 import random
 
-nika_list = ['https://cdn.discordapp.com/attachments/364712407601512450/754369363313819760/20200912_175256.jpg',
-    'https://cdn.discordapp.com/attachments/364712407601512450/754369363532054538/20200912_175340.jpg',
-    'https://media.discordapp.net/attachments/364712407601512450/754369363754090616/20200912_175350.jpg',
-    'https://cdn.discordapp.com/attachments/364712407601512450/754369363942834216/20200912_175307.jpg',
-    'https://media.discordapp.net/attachments/364712407601512450/754369364261863544/20200912_175318.jpg',
-    'https://media.discordapp.net/attachments/364712407601512450/754369364496482334/20200912_175329.jpg']
-dran_list = ['https://media.discordapp.net/attachments/364712407601512450/754368051431866378/image0.jpg',
-    'https://media.discordapp.net/attachments/364712407601512450/754368473903267870/image0.jpg',
-    'https://cdn.discordapp.com/attachments/364712407601512450/754368474792329216/image1.jpg']
-franek_list = ['https://i.imgur.com/XB6Qptw.jpg',
-    'https://i.imgur.com/F4GCJWf.jpg',
-    'https://i.imgur.com/YoNbgR8.jpeg',
-    'https://i.imgur.com/IJTAOJm.jpg',
-    'https://i.imgur.com/CsJ3X2r.jpeg',
-    'https://i.imgur.com/uFy1I1y.jpeg',
-    'https://i.imgur.com/bn5eomm.jpg',
-    'https://i.imgur.com/YQMyBRn.jpeg',
-    'https://i.imgur.com/2dKCJAo.jpeg']
 cene_list = ['https://media.discordapp.net/attachments/364712407601512450/753321114398097409/Screenshot_20200909_202854.jpg?width=981&height=478',
     'https://image.prntscr.com/image/iVzFyMEfTwyIGBKCw36ibw.png']
 segment_list = ['Imma Kamehameha yo ass if you don\'t behave kids!',
