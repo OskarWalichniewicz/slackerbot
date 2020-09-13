@@ -39,20 +39,20 @@ async def status_task():
 async def word(ctx):
     english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word = get_word_of_the_day()
 
-    embed = discord.Embed(
+    embed_wotd = discord.Embed(
         title = 'Word of the day',
         description = 'Today\'s word of the day is:',
         colour = discord.Color.orange()
     )
 
-    embed.add_field(name = ':flag_gb: English :flag_gb:', value = english_word, inline = False)
-    embed.add_field(name = ':flag_rs: Serbian :flag_rs:', value = serbian_word, inline = False)
-    embed.add_field(name = ':flag_it: Italian :flag_it:', value = italian_word, inline = False)
-    embed.add_field(name = ':flag_nl: Dutch :flag_nl:', value = dutch_word, inline = False)
-    embed.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
-    embed.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = False)
+    embed_wotd.add_field(name = ':flag_gb: English :flag_gb:', value = english_word, inline = False)
+    embed_wotd.add_field(name = ':flag_rs: Serbian :flag_rs:', value = serbian_word, inline = False)
+    embed_wotd.add_field(name = ':flag_it: Italian :flag_it:', value = italian_word, inline = False)
+    embed_wotd.add_field(name = ':flag_nl: Dutch :flag_nl:', value = dutch_word, inline = False)
+    embed_wotd.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
+    embed_wotd.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = False)
 
-    await ctx.send(embed = embed)
+    await ctx.send(embed=embed_wotd)
 
 # schedule.every().day.at("20:00").do()
 
