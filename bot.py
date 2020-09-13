@@ -38,7 +38,6 @@ async def status_task():
 @client.command()
 async def word(ctx):
     english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word = get_word_of_the_day()
-    print(english_word)
 
     embed_wotd = discord.Embed(
         title = 'Word of the day',
