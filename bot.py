@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands
 import os
 import asyncio
-from github import *
+from github_integration import *
 
 client = commands.Bot(command_prefix = '.')
 
