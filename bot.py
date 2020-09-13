@@ -37,13 +37,22 @@ async def status_task():
 
 @client.command()
 async def word(ctx):
-    english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word = get_word_of_the_day()
+    english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word, def_list = get_word_of_the_day()
 
-    embed_wotd = discord.Embed(
-        title = '{}'.format(english_word.upper()),
-        colour = discord.Color.orange()
-    )
+    if def_list is not None:
+        word_type = def_list[0]
+        definition = def_list[1]
 
+        embed_wotd = discord.Embed(
+            title = '{}'.format(english_word.upper()),
+            description = word_type + ": " + definition,
+            colour = discord.Color.orange()
+        )
+    else:
+        embed_wotd = discord.Embed(
+            title = '{}'.format(english_word.upper()),
+            colour = discord.Color.orange()
+        )
     embed_wotd.add_field(name = ':flag_gb: English :flag_gb:', value = english_word, inline = False)
     embed_wotd.add_field(name = ':flag_rs: Serbian :flag_rs:', value = serbian_word, inline = False)
     embed_wotd.add_field(name = ':flag_it: Italian :flag_it:', value = italian_word, inline = False)
