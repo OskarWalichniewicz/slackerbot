@@ -46,7 +46,7 @@ async def word(ctx):
 
         embed_wotd = discord.Embed(
             title = '{}'.format(english_word.upper()),
-            description = word_type + ": " + definition + "\n" + word_type_2 + ": " + definition_2,
+            description = word_type + ": " + definition,
             colour = discord.Color.orange()
         )
 
