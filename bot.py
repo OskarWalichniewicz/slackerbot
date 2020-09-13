@@ -4,7 +4,6 @@ import os
 from datetime import date, datetime, timedelta
 from github import Github
 import asyncio
-from quotes import *
 
 client = commands.Bot(command_prefix = '.')
 
