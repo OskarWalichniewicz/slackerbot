@@ -3,3 +3,5 @@ pygithub
 asyncio
 googletrans
 cyrtranslit
+schedule
+random-word
