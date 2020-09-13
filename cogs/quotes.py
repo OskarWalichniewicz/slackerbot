@@ -1,4 +1,39 @@
+import discord
+from discord.ext import commands
 import random
+
+class Quotes(commands.Cog):
+
+    def __init__(self, client):
+        self.client = client
+
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print('[COG] Quotes ready.')
+
+    @commands.command()
+    async def awy(self, ctx):
+        await ctx.send(get_quote(awy_list))
+
+    @commands.command()
+    async def segment(self, ctx):
+        await ctx.send(get_quote(segment_list))
+
+    @commands.command()
+    async def cene(self, ctx):
+        await ctx.send(get_quote(cene_list))
+
+def setup(client):
+    client.add_cog(Quotes(client))
+
+def get_quote(quote_list):
+    rolled_quote = random.choice(quote_list)
+    if rolled_quote.startswith('http'):
+        return rolled_quote
+    elif quote_list == awy_list:
+        return 'Awy once said: \"{}\"'.format(str(rolled_quote))
+    elif quote_list == segment_list:
+        return 'Segment once said: \"{}\"'.format(str(rolled_quote))
 
 cene_list = ['https://media.discordapp.net/attachments/364712407601512450/753321114398097409/Screenshot_20200909_202854.jpg?width=981&height=478',
     'https://image.prntscr.com/image/iVzFyMEfTwyIGBKCw36ibw.png']
@@ -448,12 +483,3 @@ awy_list = ['MONSTRUJM',
     'https://media.discordapp.net/attachments/364712407601512450/719636503676059668/Screenshot_1469.png?width=931&height=515',
     'https://media.discordapp.net/attachments/364712407601512450/719636518758777003/Screenshot_1470.png',
     'https://image.prntscr.com/image/JdO52xtyQy2vyTMXzfAtPA.png']
-
-def get_quote(quote_list):
-    rolled_quote = random.choice(quote_list)
-    if rolled_quote.startswith('http'):
-        return rolled_quote
-    elif quote_list == awy_list:
-        return 'Awy once said: \"{}\"'.format(str(rolled_quote))
-    elif quote_list == segment_list:
-        return 'Segment once said: \"{}\"'.format(str(rolled_quote))

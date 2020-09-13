@@ -66,20 +66,8 @@ async def on_message(message):
     await client.process_commands(message)
 
 @client.command()
-async def awy(ctx):
-    await ctx.send(get_quote(awy_list))
-
-@client.command()
-async def segment(ctx):
-    await ctx.send(get_quote(segment_list))
-
-@client.command()
 async def ignios(ctx):
     await ctx.send('Fuck Ignios')
-
-@client.command()
-async def cene(ctx):
-    await ctx.send(get_quote(cene_list))
 
 @client.command()
 async def az(ctx):
