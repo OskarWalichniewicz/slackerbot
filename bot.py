@@ -40,13 +40,25 @@ async def word(ctx):
     english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word, def_list = get_word_of_the_day()
     print(def_list)
 
-    if def_list != "" or def_list is not None:
+    if len(def_list) == 2:
         word_type = def_list[0]
         definition = def_list[1]
 
         embed_wotd = discord.Embed(
             title = '{}'.format(english_word.upper()),
-            description = word_type + ": " + definition,
+            description = word_type + ": " + definition + "\n" + word_type_2 + ": " + definition_2,
+            colour = discord.Color.orange()
+        )
+
+    elif len(def_list) == 4:
+        word_type = def_list[0]
+        definition = def_list[1]
+        word_type_2 = def_list[2]
+        definition_2 = def_list[3]
+
+        embed_wotd = discord.Embed(
+            title = '{}'.format(english_word.upper()),
+            description = word_type + ": " + definition + "\n" + word_type_2 + ": " + definition_2,
             colour = discord.Color.orange()
         )
     else:
@@ -54,6 +66,7 @@ async def word(ctx):
             title = '{}'.format(english_word.upper()),
             colour = discord.Color.orange()
         )
+
     embed_wotd.add_field(name = ':flag_gb: English :flag_gb:', value = english_word, inline = False)
     embed_wotd.add_field(name = ':flag_rs: Serbian :flag_rs:', value = serbian_word, inline = False)
     embed_wotd.add_field(name = ':flag_it: Italian :flag_it:', value = italian_word, inline = False)
