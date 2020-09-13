@@ -70,32 +70,12 @@ async def awy(ctx):
     await ctx.send(get_quote(awy_list))
 
 @client.command()
-async def akcent(ctx):
-    await ctx.send('https://prnt.sc/udv05c')
-
-@client.command()
-async def stonelia(ctx):
-    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/709413405131407380/Screenshot_794.png?width=686&height=515 \n https://image.prntscr.com/image/pUq5QnZ9Ti_xDzfgi6oRkw.png ')
-
-@client.command()
-async def stonement(ctx):
-    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/753284032036470824/unknown.png?width=728&height=515')
-
-@client.command()
-async def pam(ctx):
-    await ctx.send('https://media.discordapp.net/attachments/364712407601512450/752975692966264902/Screenshot_797.png?width=684&height=515')
-
-@client.command()
 async def segment(ctx):
     await ctx.send(get_quote(segment_list))
 
 @client.command()
 async def ignios(ctx):
     await ctx.send('Fuck Ignios')
-
-@client.command()
-async def pupinka(ctx):
-    await ctx.send('https://cdn.discordapp.com/attachments/364712407601512450/399218303739887617/WoWScrnShot_010618_160818.jpg')
 
 @client.command()
 async def cene(ctx):
