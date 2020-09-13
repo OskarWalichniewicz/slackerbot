@@ -472,6 +472,6 @@ def get_quote(quote_list):
     if rolled_quote.startswith('http'):
         return rolled_quote
     elif quote_list == awy_list:
-        return "Awy once said: {}".format(str(rolled_quote))
+        return 'Awy once said: "{}"'.format(str(rolled_quote))
     elif quote_list == segment_list:
-        return "Segment once said: {}".format(str(rolled_quote))
+        return 'Segment once said: "{}"'.format(str(rolled_quote))
