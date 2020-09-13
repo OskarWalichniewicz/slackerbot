@@ -4,7 +4,7 @@ import os
 from datetime import date, datetime, timedelta
 from github import Github
 import asyncio
-from quotes import  get_quote, nika_list, dran_list, franek_list, cene_list, segment_list, awy_list
+from quotes import *
 
 def save_to_github(file_name):
     g = Github("OskarWalichniewicz", str(os.environ['GITHUB_PASSWORD']))
@@ -120,7 +120,7 @@ async def az(ctx):
         lines = [line.rstrip() for line in f]
         az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
 
-    curr_date = datetime.now() # timedelta(hours = 2)
+    curr_date = datetime.now()
     print("Current time: " + str(curr_date))
 
     diff = curr_date - az_date
