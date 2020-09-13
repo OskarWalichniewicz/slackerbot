@@ -38,8 +38,9 @@ async def status_task():
 @client.command()
 async def word(ctx):
     english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word, def_list = get_word_of_the_day()
+    print(def_list)
 
-    if def_list != "":
+    if def_list != "" or def_list is not None:
         word_type = def_list[0]
         definition = def_list[1]
 
