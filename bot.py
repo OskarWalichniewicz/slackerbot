@@ -5,6 +5,7 @@ from datetime import date, datetime, timedelta
 from github import Github
 import asyncio
 from quotes import *
+from translator import *
 
 def save_to_github(file_name):
     g = Github("OskarWalichniewicz", str(os.environ['GITHUB_PASSWORD']))
@@ -104,6 +105,10 @@ async def segment(ctx):
 @client.command()
 async def ignios(ctx):
     await ctx.send('Fuck Ignios')
+
+@client.command()
+async def serbian(ctx, *, translate):
+    await ctx.send(translate_serbian(translate))
 
 @client.command()
 async def pupinka(ctx):
