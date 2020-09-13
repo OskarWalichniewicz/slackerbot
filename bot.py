@@ -1,9 +1,8 @@
 import discord
 from discord.ext import commands
 import os
-from datetime import date, datetime, timedelta
-from github import Github
 import asyncio
+from github import *
 
 client = commands.Bot(command_prefix = '.')
 
@@ -11,13 +10,7 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-def save_to_github(file_name):
-    g = Github("OskarWalichniewicz", str(os.environ['GITHUB_PASSWORD']))
-    repo = g.get_repo("OskarWalichniewicz/slackerbot")
-    contents = repo.get_contents("variables.json")
-    repo.update_file(contents.path, "az wrote something", file_name, contents.sha)
-
-wait_time = 60 #how many seconds each status change
+wait_time = 60
 async def status_task():
     while True:
         await client.change_presence(activity=discord.Game('Milica is a midget'))
@@ -59,54 +52,9 @@ async def on_message(message):
         az_file = open("az.txt", "w").close()
         az_file = open("az.txt", "w")
         az_file.write(az_file_input)
-    if message.content == '.azsave' and message.author.id == 247438282424713216: # if Nefil writes .azsave it should save to github
+    if message.content == '.azsave' and message.author.id == 247438282424713216:
         save_to_github(az_file_input)
 
     await client.process_commands(message)
 
-@client.command()
-async def ignios(ctx):
-    await ctx.send('Fuck Ignios')
-
-@client.command()
-async def az(ctx):
-    lines = []
-    with open('az.txt') as f:
-        lines = [line.rstrip() for line in f]
-        az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
-
-    curr_date = datetime.now()
-    print("Current time: " + str(curr_date))
-
-    diff = curr_date - az_date
-    diff_days = diff.days
-    diff_hours = (diff.seconds // 3600)
-    diff_minutes = (diff.seconds // 60) % 60
-    diff_seconds = diff.seconds - diff_hours * 3600 - diff_minutes * 60
-
-    if diff_days > 0:
-        outp = "Az died {} days, {} hours, {} minutes, {} seconds ago".format(diff_days, diff_hours, diff_minutes, diff_seconds)
-    else:
-        if diff_hours > 0:
-            outp = "Az died {} hours, {} minutes, {} seconds ago".format(diff_hours, diff_minutes, diff_seconds)
-        else:
-            if diff_minutes > 0:
-                outp = "Az died {} minutes, {} seconds ago".format(diff_minutes, diff_seconds)
-            else:
-                if diff_seconds > 0:
-                    outp = "Az died {} seconds ago".format(diff_seconds)
-
-
-    if diff_days == 1:
-        outp = outp.replace("days", "day")
-    if diff_hours == 1:
-        outp = outp.replace("hours", "hour")
-    if diff_minutes == 1:
-        outp = outp.replace("minutes", "minute")
-    if diff_seconds == 1:
-        outp = outp.replace("seconds", "second")
-
-    await ctx.send(outp)
-
-
-client.run(os.environ['DISCORD_TOKEN']) #token
+client.run(os.environ['DISCORD_TOKEN'])
