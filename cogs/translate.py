@@ -13,7 +13,7 @@ class Translate(commands.Cog):
         print('[COG] Translate ready.')
 
     @commands.command()
-    async def serbian(self, ctx, text):
+    async def serbian(self, ctx, *, text):
         outp_cyr = translator.translate(text, dest = 'sr').text
         outp_lat = cyrtranslit.to_latin(outp_cyr)
         await ctx.send(str(outp_cyr + "\n" + outp_lat))
