@@ -5,15 +5,18 @@ from datetime import date, datetime, timedelta
 from github import Github
 import asyncio
 from quotes import *
-from translator import *
+
+client = commands.Bot(command_prefix = '.')
+
+for filename in os.listdir('./cogs'):
+    if filename.endswith('.py'):
+        client.load_extension(f'cogs.{filename[:-3]}')
 
 def save_to_github(file_name):
     g = Github("OskarWalichniewicz", str(os.environ['GITHUB_PASSWORD']))
     repo = g.get_repo("OskarWalichniewicz/slackerbot")
     contents = repo.get_contents("variables.json")
     repo.update_file(contents.path, "az wrote something", file_name, contents.sha)
-
-client = commands.Bot(command_prefix = '.')
 
 wait_time = 60 #how many seconds each status change
 async def status_task():
@@ -124,7 +127,7 @@ async def italian(ctx, *, translate):
 
 @client.command()
 async def polish(ctx, *, translate):
-    await ctx.send(translate_polish(translate))
+    await ctx.send(translate_polish (translate))
 
 @client.command()
 async def pupinka(ctx):
