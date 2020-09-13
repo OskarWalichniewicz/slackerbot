@@ -7,6 +7,10 @@ class Graveyard(commands.Cog):
     def __init__(self, client):
         self.client = client
 
+    @commands.Cog.listener()
+    async def on_ready(self):
+        print('[COG] Graveyard ready.')
+
     @commands.command()
     async def az(self, ctx):
         lines = []
