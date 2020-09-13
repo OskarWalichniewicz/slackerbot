@@ -40,8 +40,7 @@ async def word(ctx):
     english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word = get_word_of_the_day()
 
     embed_wotd = discord.Embed(
-        title = 'Word of the day',
-        description = 'Today\'s word of the day is:',
+        title = '{}'.format(english_word.upper()),
         colour = discord.Color.orange()
     )
 
