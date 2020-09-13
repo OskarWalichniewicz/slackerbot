@@ -4,7 +4,7 @@ import cyrtranslit
 from PyDictionary import PyDictionary
 
 r = RandomWords()
-dictionary=PyDictionary()
+dictionary = PyDictionary()
 translator = Translator()
 
 def get_word_of_the_day():
