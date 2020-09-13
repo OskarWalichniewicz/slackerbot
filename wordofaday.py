@@ -6,7 +6,7 @@ r = RandomWords()
 translator = Translator()
 
 def get_word_of_the_day():
-    english_word = r.get_random_word()
+    english_word = r.get_random_word(hasDictionaryDef = "true")
 
     serbian_word_cyr = translator.translate(english_word, dest = 'sr', src='en').text
     serbian_word_lat = cyrtranslit.to_latin(serbian_word_cyr)
