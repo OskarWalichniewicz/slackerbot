@@ -19,22 +19,22 @@ class Translate(commands.Cog):
         await ctx.send(str(outp_cyr + "\n" + outp_lat))
 
     @commands.command()
-    async def english(self, ctx, text):
+    async def english(self, ctx, *, text):
         outp = translator.translate(text, dest = 'en').text
         await ctx.send(str(outp))
 
     @commands.command()
-    async def dutch(self, ctx, text):
+    async def dutch(self, ctx, *, text):
         outp = translator.translate(text, dest = 'nl').text
         await ctx.send(str(outp))
 
     @commands.command()
-    async def italian(self, ctx, text):
+    async def italian(self, ctx, *, text):
         outp = translator.translate(text, dest = 'it').text
         await ctx.send(str(outp))
 
     @commands.command()
-    async def polish(self, ctx, text):
+    async def polish(self, ctx, *, text):
         outp = translator.translate(text, dest = 'pl').text
         await ctx.send(str(outp))
 
