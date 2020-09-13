@@ -38,6 +38,11 @@ class Translate(commands.Cog):
         outp = translator.translate(text, dest = 'pl').text
         await ctx.send(str(outp))
 
+    @commands.command()
+    async def romanian(self, ctx, *, text):
+        outp = translator.translate(text, dest = 'ro').text
+        await ctx.send(str(outp))
+
 def setup(client):
     client.add_cog(Translate(client))
 
