@@ -111,6 +111,10 @@ async def serbian(ctx, *, translate):
     await ctx.send(translate_serbian(translate))
 
 @client.command()
+async def english(ctx, *, translate):
+    await ctx.send(translate_english(translate))
+
+@client.command()
 async def pupinka(ctx):
     await ctx.send('https://cdn.discordapp.com/attachments/364712407601512450/399218303739887617/WoWScrnShot_010618_160818.jpg')
 
