@@ -35,13 +35,18 @@ def get_synonyms(word):
     syn_list = dictionary.synonym(word)
     if syn_list is not None:
         syn_string = ""
+
         syn_len = len(syn_list)
+
         if syn_len > 5:
             syn_len = 5
+
         syn_list_len = syn_len - 1
+
         for x in range(syn_len):
-            syn_string += x
-            if syn_list.index(x) == syn_list_len:
+            el = syn_list[x]
+            syn_string += el
+            if x == syn_list_len:
                 syn_string += "."
             else:
                 syn_string += ", "
@@ -54,13 +59,22 @@ def get_antonyms(word):
     ant_list = dictionary.antonym(word)
     if ant_list is not None:
         ant_string = ""
-        ant_list_len = len(ant_list) - 1
-        for x in ant_list:
-            ant_string += x
-            if ant_list.index(x) == ant_list_len:
+
+        ant_len = len(ant_list)
+
+        if ant_len > 5:
+            ant_len = 5
+
+        ant_list_len = ant_len - 1
+
+        for x in range(ant_len):
+            el = ant_list[x]
+            ant_string += el
+            if x == ant_list_len:
                 ant_string += "."
             else:
                 ant_string += ", "
     else:
         ant_string = None
+
     return ant_string
