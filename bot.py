@@ -38,7 +38,6 @@ async def status_task():
 @client.command()
 async def word(ctx):
     english_word = get_word_of_the_day()
-    close_tab()
     serbian_word_cyr, serbian_word_lat = translate_wotd(english_word, 'sr')
     serbian_word = str(serbian_word_cyr) + " / " + str(serbian_word_lat)
     italian_word = translate_wotd(english_word, 'it')
