@@ -5,3 +5,4 @@ googletrans
 cyrtranslit
 random-word
 PyDictionary
+selenium
