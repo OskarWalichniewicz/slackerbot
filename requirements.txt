@@ -7,3 +7,4 @@ random-word
 PyDictionary
 selenium
 nltk
+wordnet
