@@ -26,7 +26,7 @@ def translate_wotd(word, lang):
     translated_word = translator.translate(word, dest = lang, src = 'en').text
 
     if lang == 'sr':
-        translated_word_lat = cyrtranslit.to_latin(translate_word)
+        translated_word_lat = cyrtranslit.to_latin(translated_word)
         return translated_word, translated_word_lat
 
     return translated_word
