@@ -13,10 +13,10 @@ def get_word_of_the_day():
 
 def get_definition(word):
     english_word_def = dictionary.meaning(word)
+    print(english_word_def)
     definitions = []
     if english_word_def is not None:
         for pair in english_word_def.items():
-            print(pair)
             definitions.append(pair[0])
             definitions.append(pair[1][0])
     return definitions
