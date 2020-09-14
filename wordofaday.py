@@ -1,9 +1,8 @@
 from googletrans import Translator
 import cyrtranslit
-from PyDictionary import PyDictionary
+from nltk.corpus import wordnet
 from webscraping import *
 
-dictionary = PyDictionary()
 translator = Translator()
 
 def get_word_of_the_day():
@@ -11,15 +10,20 @@ def get_word_of_the_day():
     return english_word
 
 def get_definition(word):
-    english_word_def = dictionary.meaning(word)
-    print(english_word_def)
+    syns = wordnet.synsets(word)
     definitions = []
-    if english_word_def is not None:
-        for pair in english_word_def.items():
-            print(pair)
-            definitions.append(pair[0])
-            definitions.append(pair[1][0])
-    return definitions
+    def_string = ""
+
+    for x in range(len(syns)):
+        definitions.append(syns[x].definition())
+
+    def_len = len(definitions) - 1
+    for i in definitions:
+        def_string += i
+        if not definitions.index(i) == def_len:
+            def_string += "\n"
+
+    return def_string
 
 def translate_wotd(word, lang):
     translated_word = translator.translate(word, dest = lang, src = 'en').text
@@ -30,40 +34,33 @@ def translate_wotd(word, lang):
 
     return translated_word
 
-def get_synonyms(word):
-    syn_list = dictionary.synonym(word)
-    if syn_list is not None:
-        syn_string = ""
-        syn_len = len(syn_list)
-        syn_list_len = syn_len - 1
+def get_syns_ants(word):
+    syns = wordnet.synsets(word)
+    antonyms = []
+    ant_string = ""
+    synonyms = []
+    syn_string = ""
 
-        for x in range(syn_len):
-            el = syn_list[x]
-            syn_string += el
-            if x == syn_list_len:
-                syn_string += "."
-            else:
-                syn_string += ", "
-    else:
-        syn_string = None
+    for syn in wordnet.synsets(word):
+        for l in syn.lemmas():
+            if l not in synonyms:
+                synonyms.append(l.name())
+            if l.antonyms():
+                if l not in antonyms:
+                    antonyms.append(l.antonyms()[0].name())
 
-    return syn_string
+    ant_len = len(antonyms) - 1
+    for i in antonyms:
+        ant_string += i
+        if not antonyms.index(i) == ant_len:
+            ant_string += "."
+        ant_string += ", "
 
-def get_antonyms(word):
-    ant_list = dictionary.antonym(word)
-    if ant_list is not None:
-        ant_string = ""
-        ant_len = len(ant_list)
-        ant_list_len = ant_len - 1
+    syn_len = len(synonyms) - 1
+    for i in synonyms:
+        syn_string += i
+        if not syn.index(i) == syn_len:
+            syn_string += "."
+        syn_string += ", "
 
-        for x in range(ant_len):
-            el = ant_list[x]
-            ant_string += el
-            if x == ant_list_len:
-                ant_string += "."
-            else:
-                ant_string += ", "
-    else:
-        ant_string = None
-
-    return ant_string
+    return syn_string, ant_string

@@ -45,8 +45,7 @@ async def word(ctx):
     polish_word = translate_wotd(english_word, 'pl')
     romanian_word = translate_wotd(english_word, 'ro')
 
-    syns = get_synonyms(english_word)
-    ants = get_antonyms(english_word)
+    syns, ants = get_syns_ants(english_word)
     def_list = get_definition(english_word)
     print(def_list)
 
