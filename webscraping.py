@@ -17,5 +17,5 @@ def get_random_word():
     return str(word.text)
 
 async def close_tab():
-    await time.sleep(5)
+    time.sleep(5)
     driver.close()
