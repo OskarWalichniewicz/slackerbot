@@ -6,3 +6,4 @@ cyrtranslit
 random-word
 PyDictionary
 selenium
+nltk
