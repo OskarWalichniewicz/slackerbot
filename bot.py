@@ -46,7 +46,9 @@ async def word(ctx):
     romanian_word = translate_wotd(english_word, 'ro')
 
     syns = get_synonyms(english_word)
+    print(syns)
     ants = get_antonyms(english_word)
+    print(ants)
     def_list = get_definition(english_word)
     print(def_list)
 
