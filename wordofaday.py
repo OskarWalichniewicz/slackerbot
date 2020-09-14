@@ -8,7 +8,7 @@ dictionary = PyDictionary()
 translator = Translator()
 
 def get_word_of_the_day():
-    english_word = r.get_random_word(hasDictionaryDef = "true")
+    english_word = r.get_random_word(hasDictionaryDef = True)
     return english_word
 
 def get_definition(word):
@@ -24,7 +24,7 @@ def translate_wotd(word, lang):
     translated_word = translator.translate(word, dest = lang, src = 'en').text
 
     if lang == 'sr':
-        translated_word_lat = cyrtranslit.to_latin(word)
+        translated_word_lat = str(cyrtranslit.to_latin(word)
         return translated_word, translated_word_lat
 
     return translated_word
