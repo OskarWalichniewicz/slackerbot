@@ -35,8 +35,11 @@ def get_synonyms(word):
     syn_list = dictionary.synonym(word)
     if syn_list is not None:
         syn_string = ""
-        syn_list_len = len(syn_list) - 1
-        for x in syn_list:
+        syn_len = len(syn_list)
+        if syn_len > 5:
+            syn_len = 5
+        syn_list_len = syn_len - 1
+        for x in range(syn_len):
             syn_string += x
             if syn_list.index(x) == syn_list_len:
                 syn_string += "."
