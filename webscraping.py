@@ -16,6 +16,5 @@ def get_random_word():
     word = driver.find_element_by_id("result")
     return str(word.text)
 
-async def close_tab():
-    time.sleep(5)
+def close_tab():
     driver.close()
