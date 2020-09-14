@@ -37,7 +37,15 @@ async def status_task():
 
 @client.command()
 async def word(ctx):
-    english_word, serbian_word, italian_word, dutch_word, polish_word, romanian_word, def_list = get_word_of_the_day()
+    english_word = get_word_of_the_day()
+    serbian_word_cyr, serbian_word_lat = translate_wotd(english_word, 'sr')
+    serbian_word = serbian_word_cyr + " / " + serbian_word_lat
+    italian_word = translate_wotd(english_word, 'it')
+    dutch_word = translate_wotd(english_word, 'nl')
+    polish_word = translate_wotd(english_word, 'pl')
+    romanian_word = translate_wotd(english_word, 'ro')
+
+    def_list = get_definition(english_word)
     print(def_list)
 
     if len(def_list) == 2:
@@ -50,7 +58,7 @@ async def word(ctx):
             colour = discord.Color.orange()
         )
 
-    elif len(def_list) == 4:
+    elif len(def_list) >= 4:
         word_type = def_list[0]
         definition = def_list[1]
         word_type_2 = def_list[2]
