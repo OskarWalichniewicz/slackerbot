@@ -16,6 +16,7 @@ def get_definition(word):
     definitions = []
     if english_word_def is not None:
         for pair in english_word_def.items():
+            print(pair)
             definitions.append(pair[0])
             definitions.append(pair[1][0])
     return definitions
