@@ -28,3 +28,34 @@ def translate_wotd(word, lang):
         return translated_word, translated_word_lat
 
     return translated_word
+
+def get_synonyms(word):
+    syn_list = dictionary.synonym(word)
+    if syn_list is not None:
+        syn_string = ""
+        syn_list_len = len(syn_list) - 1
+        for x in syn_list:
+            syn_string += x
+            if syn_list.index(x) == syn_list_len:
+                syn_string += "."
+            else:
+                syn_string += ", "
+    else:
+        syn_string = None
+
+    return syn_string
+
+def get_antonyms(word):
+    ant_list = dictionary.antonym(word)
+    if ant_list is not None:
+        ant_string = ""
+        ant_list_len = len(ant_list) - 1
+        for x in ant_list:
+            ant_string += x
+            if ant_list.index(x) == ant_list_len:
+                ant_string += "."
+            else:
+                ant_string += ", "
+    else:
+        ant_string = None
+    return ant_string

@@ -45,6 +45,8 @@ async def word(ctx):
     polish_word = translate_wotd(english_word, 'pl')
     romanian_word = translate_wotd(english_word, 'ro')
 
+    syns = get_synonyms(word)
+    ants = get_antonyms(word)
     def_list = get_definition(english_word)
     print(def_list)
 
@@ -81,6 +83,19 @@ async def word(ctx):
     embed_wotd.add_field(name = ':flag_nl: Dutch :flag_nl:', value = dutch_word, inline = False)
     embed_wotd.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
     embed_wotd.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = False)
+
+    if syns is not None:
+        footer = "Synonyms: " + syns
+        if ants is not None:
+            footer += "\n"
+            footer += "Antonyms: "
+            footer += ants
+    else:
+        if ants is not None:
+            footer = "Antonyms: " + ants
+
+    if footer is not None:
+        embed_wotd.set_footer(text = footer)
 
     await ctx.send(embed=embed_wotd)
 
