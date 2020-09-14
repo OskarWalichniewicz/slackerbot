@@ -1,14 +1,13 @@
-from random_word import RandomWords
 from googletrans import Translator
 import cyrtranslit
 from PyDictionary import PyDictionary
+from webscraping import *
 
-r = RandomWords()
 dictionary = PyDictionary()
 translator = Translator()
 
 def get_word_of_the_day():
-    english_word = r.get_random_word(hasDictionaryDef = True)
+    english_word = get_random_word()
     return english_word
 
 def get_definition(word):
