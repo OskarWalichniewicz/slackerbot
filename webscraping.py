@@ -13,6 +13,4 @@ def get_random_word():
     driver.get('https://randomwordgenerator.com/')
 
     word = driver.find_element_by_id("result")
-    driver.delete_all_cookies()
-    driver.quit()
     return str(word.text)
