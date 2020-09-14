@@ -4,6 +4,7 @@ import os
 import asyncio
 from github_integration import *
 from wordofaday import *
+from webscraping import *
 
 client = commands.Bot(command_prefix = '.')
 
@@ -106,6 +107,7 @@ async def word(ctx):
 async def on_ready():
     client.loop.create_task(status_task())
     print("Bot ready")
+    print("Word : " + get_random_word())
 
 @client.event
 async def on_message(message):
