@@ -12,5 +12,5 @@ def get_random_word():
 
     driver.get('https://randomwordgenerator.com/')
 
-    word = driver.find_element_by_id('support')
+    word = driver.find_element_by_id('result')
     return word
