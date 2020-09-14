@@ -14,6 +14,5 @@ def get_random_word():
     driver.get('https://randomwordgenerator.com/')
 
     word = driver.find_element_by_id("result")
-    time.sleep(5)
     driver.quit()
     return str(word.text)
