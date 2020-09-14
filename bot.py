@@ -97,7 +97,7 @@ async def word(ctx):
         if ants is not None:
             footer = "Antonyms: " + ants
 
-    if footer == "":
+    if footer != "":
         embed_wotd.set_footer(text = footer)
 
     await ctx.send(embed=embed_wotd)
