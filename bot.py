@@ -84,6 +84,7 @@ async def word(ctx):
     embed_wotd.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
     embed_wotd.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = False)
 
+    footer = ""
     if syns is not None:
         footer = "Synonyms: " + syns
         if ants is not None:
@@ -94,7 +95,7 @@ async def word(ctx):
         if ants is not None:
             footer = "Antonyms: " + ants
 
-    if footer is not None:
+    if footer == "":
         embed_wotd.set_footer(text = footer)
 
     await ctx.send(embed=embed_wotd)
