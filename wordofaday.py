@@ -21,10 +21,10 @@ def get_definition(word):
     return definitions
 
 def translate_wotd(word, lang):
-    translated_word = str(translator.translate(word, dest = lang, src = 'en'))
+    translated_word = translator.translate(word, dest = lang, src = 'en').text
 
     if lang == 'sr':
-        translated_word_lat = str(cyrtranslit.to_latin(word))
+        translated_word_lat = cyrtranslit.to_latin(word)
         return translated_word, translated_word_lat
 
     return translated_word
