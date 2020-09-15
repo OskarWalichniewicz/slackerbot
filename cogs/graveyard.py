@@ -18,9 +18,8 @@ class Graveyard(commands.Cog):
     async def az(self, ctx):
         lines = []
         x = read_file()
-        print(x)
-        for line in x:
-            print(line)
+        x_iter = iter(x.splitlines())
+        for line in x_iter:
             lines.append(line.strip())
 
         az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
