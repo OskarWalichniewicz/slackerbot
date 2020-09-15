@@ -75,7 +75,7 @@ on_message is called when message is sent.
 """
 @client.event
 async def on_message(message):
-    if message.author.id == int(os.environ['AZ_DISCORD_ID']): # Checks if message is sent by Azhanim (compares his ID to the from message.)
+    if message.author.id == int(os.environ['AZ_DISCORD_ID']): # Checks if message is sent by Azhanim (compares his ID to the from message).
         year = message.created_at.year # message.created_at returns datetime
         month = message.created_at.month # assigning date elements to correspodning variables
         day = message.created_at.day
