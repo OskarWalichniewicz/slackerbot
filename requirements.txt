@@ -3,6 +3,5 @@ pygithub
 asyncio
 googletrans
 cyrtranslit
-random-word
 selenium
 nltk
