@@ -3,5 +3,6 @@ pygithub
 asyncio
 googletrans
 cyrtranslit
+urllib
 selenium
 nltk
