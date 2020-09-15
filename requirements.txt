@@ -3,6 +3,5 @@ pygithub
 asyncio
 googletrans
 cyrtranslit
-contextlib
 selenium
 nltk
