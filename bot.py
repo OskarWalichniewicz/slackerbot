@@ -97,10 +97,6 @@ async def on_message(message):
         minute = message.created_at.minute
         second = message.created_at.second
         az_file_input = year + "\n" + month + "\n"+ day + "\n"+ hour + "\n" +minute + "\n"+ second
-        az_file = open("az.txt", "w").close()
-        az_file = open("az.txt", "w")
-        az_file.write(az_file_input)
-    if message.content == '.azsave' and message.author.id == 247438282424713216:
         save_to_github(az_file_input)
 
     await client.process_commands(message)
