@@ -19,7 +19,7 @@ class Graveyard(commands.Cog):
         lines = []
         x = read_file()
         for line in x:
-            lines.append(line.decode('utf-8').strip())
+            lines.append(line)
 
         az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
 
