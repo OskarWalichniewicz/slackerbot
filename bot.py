@@ -67,14 +67,14 @@ async def word(ctx):
     embed_word.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = True)
 
     footer = ""
-    if syn_string is not None:
+    if syn_string != "":
         footer = "Synonyms: " + syn_string
-        if ants_string is not None:
+        if ants_string != "":
             footer += "\n"
             footer += "Antonyms: "
             footer += ants_string
     else:
-        if ants_string is not None:
+        if ants_string != "":
             footer = "Antonyms: " + ants_string
 
     if footer != "":
