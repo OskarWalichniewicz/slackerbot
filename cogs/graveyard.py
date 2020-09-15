@@ -17,7 +17,7 @@ class Graveyard(commands.Cog):
     @commands.command()
     async def az(self, ctx):
         lines = []
-        x = read_file()
+        x = read_file("az.txt", "OskarWalichniewicz/slackerbot_misc")
         x_iter = iter(x.splitlines())
         for line in x_iter:
             lines.append(line.strip())

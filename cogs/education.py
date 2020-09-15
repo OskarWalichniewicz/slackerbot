@@ -12,8 +12,16 @@ class Education(commands.Cog):
         print('[COG] Education ready.')
 
     @commands.command()
-    async def word(self, ctx):
-        english_word = get_random_word()
+    async def word(self, ctx, *, text):
+        sent = False
+        if text is None:
+            english_word = get_random_word()
+        else:
+            if len(text.split()) > 1:
+                sent = True
+                await ctx.send("stupid bonobo, the command is called .word (singular) for a reason")
+            else:
+                english_word = text
         serbian_word_cyr, serbian_word_lat = translate_word(english_word, 'sr')
         serbian_word = str(serbian_word_cyr) + " / " + str(serbian_word_lat)
         italian_word = translate_word(english_word, 'it')
@@ -56,7 +64,8 @@ class Education(commands.Cog):
         if footer != "":
             embed_word.set_footer(text = footer)
 
-        await ctx.send(embed=embed_word)
+        if sent is False:
+            await ctx.send(embed=embed_word)
 
 def setup(client):
     client.add_cog(Education(client))
