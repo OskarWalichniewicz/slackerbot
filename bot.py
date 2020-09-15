@@ -3,8 +3,16 @@ from discord.ext import commands
 import os
 import asyncio
 from github_integration import *
+from datetime import datetime, time
 
 client = commands.Bot(command_prefix = '.')
+
+def is_time_between(begin_time, end_time):
+    check_time = datetime.utcnow().time()
+    if begin_time < end_time:
+        return check_time >= begin_time and check_time <= end_time
+    else:                                                           # if crosses midnight
+        return check_time >= begin_time or check_time <= end_time
 
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
@@ -22,16 +30,22 @@ async def status_task(wait_time):
         await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Bobsy is being molested'))
         await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Awy is the wisest'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Akcent hates Cene'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Gazda likes Rasta'))
-        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Segment is old'))
         await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Tesla was croatian'))
         await asyncio.sleep(wait_time)
+        if is_time_between(time(4, 00), time(11, 00)):
+            await client.change_presence(activity=discord.Game('Good Morning!'))
+            await asyncio.sleep(wait_time)
+        elif is_time_between(time(11, 00), time(17, 00)):
+            await client.change_presence(activity=discord.Game('Good Afternoon!'))
+            await asyncio.sleep(wait_time)
+        elif is_time_between(time(17,00), time(22,00)):
+            await client.change_presence(activity=discord.Game('Good Evening!'))
+            await asyncio.sleep(wait_time)
+        else:
+            await client.change_presence(activity=discord.Game('Go to bed! :rage:'))
+            await asyncio.sleep(wait_time)
 
 @client.event
 async def on_ready():
