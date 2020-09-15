@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from datetime import date, datetime, timedelta
+import urllib.request
 
 class Graveyard(commands.Cog):
 
@@ -14,12 +15,12 @@ class Graveyard(commands.Cog):
     @commands.command()
     async def az(self, ctx):
         lines = []
-        with open('az.txt') as f:
-            lines = [line.rstrip() for line in f]
-            az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
+        for line in urllib.request.urlopen('https://raw.githubusercontent.com/OskarWalichniewicz/slackerbot_misc/master/az.txt'):
+            lines.append(line.decode('utf-8').strip())
+
+        az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
 
         curr_date = datetime.now()
-        print("Current time: " + str(curr_date))
 
         diff = curr_date - az_date
         diff_days = diff.days
