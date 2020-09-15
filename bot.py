@@ -37,69 +37,50 @@ async def status_task():
 
 @client.command()
 async def word(ctx):
-    english_word = get_word_of_the_day()
-    serbian_word_cyr, serbian_word_lat = translate_wotd(english_word, 'sr')
+    english_word = get_random_word()
+    serbian_word_cyr, serbian_word_lat = translate_word(english_word, 'sr')
     serbian_word = str(serbian_word_cyr) + " / " + str(serbian_word_lat)
-    italian_word = translate_wotd(english_word, 'it')
-    dutch_word = translate_wotd(english_word, 'nl')
-    polish_word = translate_wotd(english_word, 'pl')
-    romanian_word = translate_wotd(english_word, 'ro')
+    italian_word = translate_word(english_word, 'it')
+    dutch_word = translate_word(english_word, 'nl')
+    polish_word = translate_word(english_word, 'pl')
+    romanian_word = translate_word(english_word, 'ro')
 
-    syns, ants = get_syns_ants(english_word)
-    def_list = get_definition(english_word)
-    print(def_list)
+    def_string, syn_string, ants_string = get_word_info(english_word)
 
-    if len(def_list) == 2:
-        word_type = def_list[0]
-        definition = def_list[1]
-
-        embed_wotd = discord.Embed(
+    if def_string == "":
+        embed_word = discord.Embed(
             title = '{}'.format(english_word.upper()),
-            description = word_type + ": " + definition,
-            colour = discord.Color.orange()
-        )
-
-    elif len(def_list) >= 4:
-        word_type = def_list[0]
-        definition = def_list[1]
-        word_type_2 = def_list[2]
-        definition_2 = def_list[3]
-
-        embed_wotd = discord.Embed(
-            title = '{}'.format(english_word.upper()),
-            description = word_type + ": " + definition + "\n" + word_type_2 + ": " + definition_2,
             colour = discord.Color.orange()
         )
     else:
-        embed_wotd = discord.Embed(
+        embed_word = discord.Embed(
             title = '{}'.format(english_word.upper()),
+            description = def_string,
             colour = discord.Color.orange()
         )
 
-    embed_wotd.add_field(name = ':flag_gb: English :flag_gb:', value = english_word, inline = False)
-    embed_wotd.add_field(name = ':flag_rs: Serbian :flag_rs:', value = serbian_word, inline = False)
-    embed_wotd.add_field(name = ':flag_it: Italian :flag_it:', value = italian_word, inline = False)
-    embed_wotd.add_field(name = ':flag_nl: Dutch :flag_nl:', value = dutch_word, inline = False)
-    embed_wotd.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
-    embed_wotd.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = False)
+    embed_word.add_field(name = ':flag_gb: English :flag_gb:', value = english_word, inline = False)
+    embed_word.add_field(name = ':flag_rs: Serbian :flag_rs:', value = serbian_word, inline = True)
+    embed_word.add_field(name = ':flag_it: Italian :flag_it:', value = italian_word, inline = False)
+    embed_word.add_field(name = ':flag_nl: Dutch :flag_nl:', value = dutch_word, inline = True)
+    embed_word.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
+    embed_word.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = True)
 
     footer = ""
-    if syns is not None:
-        footer = "Synonyms: " + syns
-        if ants is not None:
+    if syn_string is not None:
+        footer = "Synonyms: " + syn_string
+        if ants_string is not None:
             footer += "\n"
             footer += "Antonyms: "
-            footer += ants
+            footer += ants_string
     else:
-        if ants is not None:
-            footer = "Antonyms: " + ants
+        if ants_string is not None:
+            footer = "Antonyms: " + ants_string
 
     if footer != "":
-        embed_wotd.set_footer(text = footer)
+        embed_word.set_footer(text = footer)
 
-    await ctx.send(embed=embed_wotd)
-
-# schedule.every().day.at("20:00").do()
+    await ctx.send(embed=embed_word)
 
 @client.event
 async def on_ready():
