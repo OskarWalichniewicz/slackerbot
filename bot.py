@@ -61,7 +61,7 @@ async def on_message(message):
         hour = message.created_at.hour
         minute = message.created_at.minute
         second = message.created_at.second
-        az_file_input = year + "\n" + month + "\n"+ day + "\n"+ hour + "\n" +minute + "\n"+ second
+        az_file_input = str(year) + "\n" + str(month) + "\n"+ str(day) + "\n"+ str(hour) + "\n" + str(minute) + "\n"+ str(second)
         save_to_github(az_file_input)
 
     await client.process_commands(message)
