@@ -33,7 +33,7 @@ def get_word_info(word):
             if l.name() not in synonyms_list:
                 synonyms_list.append(l.name())
             if l.antonyms():
-                if l not in antonyms_list:
+                if l.antonyms() not in antonyms_list:
                     antonyms_list.append(l.antonyms()[0].name())
 
     ant_len = len(antonyms_list) - 1
