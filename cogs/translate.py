@@ -13,33 +13,33 @@ class Translate(commands.Cog):
         print('[COG] Translate ready.')
 
     @commands.command(aliases = ['serbian', 'rs', 'sr'])
-    async def serbian(self, ctx, *, text):
+    async def _serbian(self, ctx, *, text):
         outp_cyr = translator.translate(text, dest = 'sr').text
         outp_lat = cyrtranslit.to_latin(outp_cyr)
         await ctx.send(str(outp_cyr + "\n" + outp_lat))
 
     @commands.command(aliases = ['english', '.en'])
-    async def english(self, ctx, *, text):
+    async def _english(self, ctx, *, text):
         outp = translator.translate(text, dest = 'en').text
         await ctx.send(str(outp))
 
     @commands.command(aliases = ['dutch', '.nl'])
-    async def dutch(self, ctx, *, text):
+    async def _dutch(self, ctx, *, text):
         outp = translator.translate(text, dest = 'nl').text
         await ctx.send(str(outp))
 
     @commands.command(aliases = ['italian', '.it'])
-    async def italian(self, ctx, *, text):
+    async def _italian(self, ctx, *, text):
         outp = translator.translate(text, dest = 'it').text
         await ctx.send(str(outp))
 
     @commands.command(aliases = ['polish', '.pl'])
-    async def polish(self, ctx, *, text):
+    async def _polish(self, ctx, *, text):
         outp = translator.translate(text, dest = 'pl').text
         await ctx.send(str(outp))
 
     @commands.command(aliases = ['romanian', '.ro'])
-    async def romanian(self, ctx, *, text):
+    async def _romanian(self, ctx, *, text):
         outp = translator.translate(text, dest = 'ro').text
         await ctx.send(str(outp))
 
