@@ -62,7 +62,7 @@ class Education(commands.Cog):
 
             await ctx.send(embed=embed_word)
 
-        except IndexError:
+        except IndexError: # If someone types something after .word
             print("[.WORD] IndexError")
 
     @commands.command()
