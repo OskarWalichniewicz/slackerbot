@@ -82,12 +82,7 @@ async def on_message(message):
         hour = message.created_at.hour
         minute = message.created_at.minute
         second = message.created_at.second
-        az_file_input = str(year) + "\n" +  # creates string, with each variable in new line
-        str(month) + "\n" +
-        str(day) + "\n" +
-        str(hour) + "\n" +
-        str(minute) + "\n"+
-        str(second)
+        az_file_input = str(year) + "\n" + str(month) + "\n" + str(day) + "\n" + str(hour) + "\n" + str(minute) + "\n"+ str(second) # creates string, with each variable in new line
         save_to_github(az_file_input, "az.txt", "OskarWalichniewicz/slackerbot_misc", "Az sent message.") # calls save_to_github method from github_integration.py and passes previously created string; repository name and commit message
 
     await client.process_commands(message) # this is necessary part of on_message().
