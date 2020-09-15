@@ -16,7 +16,7 @@ class Graveyard(commands.Cog):
     @commands.command()
     async def az(self, ctx):
         lines = []
-        with contextlib.closing(urllib.urlopen('https://raw.githubusercontent.com/OskarWalichniewicz/slackerbot_misc/master/az.txt')) as x:
+        with contextlib.closing(urllib.request.urlopen('https://raw.githubusercontent.com/OskarWalichniewicz/slackerbot_misc/master/az.txt')) as x:
             for line in x:
                 lines.append(line.decode('utf-8').strip())
 
