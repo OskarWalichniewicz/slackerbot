@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from datetime import date, datetime, timedelta
 import urllib.request
+import contextlib
 
 class Graveyard(commands.Cog):
 
@@ -15,8 +16,9 @@ class Graveyard(commands.Cog):
     @commands.command()
     async def az(self, ctx):
         lines = []
-        for line in urllib.request.urlopen('https://raw.githubusercontent.com/OskarWalichniewicz/slackerbot_misc/master/az.txt'):
-            lines.append(line.decode('utf-8').strip())
+        with contextlib.closing(urllib.urlopen('https://raw.githubusercontent.com/OskarWalichniewicz/slackerbot_misc/master/az.txt')) as x:
+            for line in x:
+                lines.append(line.decode('utf-8').strip())
 
         az_date = datetime(int(lines[0]), int(lines[1]), int(lines[2]), int(lines[3]), int(lines[4]), int(lines[5]))
 
