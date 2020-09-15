@@ -3,7 +3,7 @@ from discord.ext import commands
 import os
 import asyncio
 from github_integration import *
-from activity import *
+from activity import status_task
 
 client = commands.Bot(command_prefix = '.')
 
