@@ -54,7 +54,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.author.id == int(os.environ['AZ_DISCORD_ID']):
+    if message.author.id == int(os.environ['SEG_DISCORD_ID']):
         year = message.created_at.year
         month = message.created_at.month
         day = message.created_at.day
