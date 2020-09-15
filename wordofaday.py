@@ -21,7 +21,9 @@ def get_word_info(word):
     for i in definitions:
         def_string += i
         if not definitions.index(i) == def_len:
-            def_string += "\n"
+            def_string += ";\n"
+        else:
+            def_string += "."
 
     antonyms_list = []
     ant_string = ""
@@ -30,10 +32,10 @@ def get_word_info(word):
 
     for syn in syns:
         for l in syn.lemmas():
-            if l.name() not in synonyms_list:
+            if l.name() not in synonyms_list and l.name() != word:
                 synonyms_list.append(l.name())
             if l.antonyms():
-                if l.antonyms() not in antonyms_list:
+                if l.antonyms() not in antonyms_list and l.name() != word:
                     antonyms_list.append(l.antonyms()[0].name())
 
     ant_len = len(antonyms_list) - 1
