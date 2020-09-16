@@ -14,10 +14,10 @@ class Education(commands.Cog):
     @commands.command()
     async def word(self, ctx, *text):
         try:
-            english_word = text[0]
             if len(text) > 1:
                 await ctx.send("stupid bonobo, the command is called .word (singular) for a reason.")
                 return None
+            english_word = text[0]
             serbian_word_cyr, serbian_word_lat = translate_word(english_word, 'sr')
             serbian_word = str(serbian_word_cyr) + " / " + str(serbian_word_lat)
             italian_word = translate_word(english_word, 'it')
@@ -112,6 +112,17 @@ class Education(commands.Cog):
 
         await ctx.send(embed=embed_word)
 
+    @commands.command()
+    async def gimage(self, ctx, *text):
+        try:
+            if len(text) > 1:
+                await ctx.send("stupid bonobo, the command is called .gimage (singular) for a reason.")
+                return None
+            word = text[0]
+            img_url = webscrap_google_image(word)
+            await ctx.send()
+        except IndexError: # If someone types something after .gimage
+            print("[.GIMAGE] IndexError")
 
 def setup(client):
     client.add_cog(Education(client))
