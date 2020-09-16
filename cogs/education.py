@@ -5,6 +5,8 @@ from webscraping import *
 from profanityfilter import ProfanityFilter
 
 pf = ProfanityFilter()
+async def is_not_awy(ctx):
+    return ctx.author.id != 245247289935921152
 
 class Education(commands.Cog):
 
@@ -117,6 +119,7 @@ class Education(commands.Cog):
         await ctx.send(embed=embed_word)
 
     @commands.command()
+    @commands.check(is_not_awy)
     async def gimage(self, ctx, *text):
         if pf.censor(str(text)) != str(text):
             await ctx.send('Slacker refuses to search for THAT. Please respect my poor eyes.')
