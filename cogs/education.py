@@ -115,16 +115,10 @@ class Education(commands.Cog):
 
     @commands.command()
     async def gimage(self, ctx, *text):
-        try:
-            if len(text) > 1:
-                await ctx.send("stupid bonobo, the command is called .gimage (singular) for a reason.")
-                return None
-            word = text[0]
-            img_url = webscrap_google_images(word, 1)
+            query = text
+            img_url = webscrap_google_images(query, 1)
             for img in img_url:
                 await ctx.send(img)
-        except IndexError: # If someone types something after .gimage
-            print("[.GIMAGE] IndexError")
 
 def setup(client):
     client.add_cog(Education(client))

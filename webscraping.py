@@ -30,33 +30,28 @@ def webscrap_word():
     word = driver.find_element_by_id("result")
     return str(word.text)
 
-
-def webscrap_google_images(query, max_links_to_fetch, sleep_between_interactions=1):
-    def scroll_to_end():
-        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
-        time.sleep(sleep_between_interactions)
-
+"""
+"""
+def webscrap_google_images(query, number_of_imgs, wait_time=1):
     # build the google query
-    search_url = "https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&q={q}&oq={q}&gs_l=img"
+    search_url = "https://www.google.com/search?tbm=isch&q={}".format(query)
 
     # load the page
-    driver.get(search_url.format(q=query))
+    driver.get(search_url)
 
-    image_urls = set()
+    image_urls = []
     image_count = 0
-    results_start = 0
-    while image_count < max_links_to_fetch:
-        scroll_to_end()
 
+    while image_count < number_of_imgs:
         # get all image thumbnail results
         thumbnail_results = driver.find_elements_by_css_selector("img.Q4LuWd")
         number_results = len(thumbnail_results)
 
-        for img in thumbnail_results[results_start:number_results]:
+        for img in thumbnail_results:
             # try to click every thumbnail such that we can get the real image behind it
             try:
                 img.click()
-                time.sleep(sleep_between_interactions)
+                time.sleep(wait_time)
             except Exception:
                 continue
 
@@ -64,20 +59,10 @@ def webscrap_google_images(query, max_links_to_fetch, sleep_between_interactions
             actual_images = driver.find_elements_by_css_selector('img.n3VNCb')
             for actual_image in actual_images:
                 if actual_image.get_attribute('src') and 'http' in actual_image.get_attribute('src'):
-                    image_urls.add(actual_image.get_attribute('src'))
-
+                    image_urls.append(actual_image.get_attribute('src'))
             image_count = len(image_urls)
 
-            if len(image_urls) >= max_links_to_fetch:
+            if len(image_urls) >= number_of_imgs:
                 break
-        else:
-            time.sleep(30)
-            return
-            load_more_button = driver.find_element_by_css_selector(".mye4qd")
-            if load_more_button:
-                driver.execute_script("document.querySelector('.mye4qd').click();")
-
-        # move the result startpoint further down
-        results_start = len(thumbnail_results)
 
     return image_urls
