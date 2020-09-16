@@ -5,6 +5,7 @@ from webscraping import *
 from profanity_filter import ProfanityFilter
 import spacy
 
+nlp = spacy.load('en')
 pf = ProfanityFilter()
 
 class Education(commands.Cog):
