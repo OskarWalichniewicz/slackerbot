@@ -121,7 +121,8 @@ class Education(commands.Cog):
                 return None
             word = text[0]
             img_url = webscrap_google_images(word, 1)
-            await ctx.send(img_url[0])
+            for img in img_url:
+                await ctx.send(img)
         except IndexError: # If someone types something after .gimage
             print("[.GIMAGE] IndexError")
 
