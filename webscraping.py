@@ -31,15 +31,23 @@ def webscrap_word():
     return str(word.text)
 
 
-def webscrap_google_images(query:str, max_links_to_fetch:int, sleep_between_interactions:int=1):
+def webscrap_google_images(query, max_links_to_fetch, sleep_between_interactions=1):
+    def scroll_to_end():
+        driver.execute_script("window.scrollTo(0, document.body.scrollHeight);")
+        time.sleep(sleep_between_interactions)
+
     # build the google query
-    url = 'http://www.google.com/images?q={}'.format(query)
-    driver.get(url)
+    search_url = "https://www.google.com/search?safe=off&site=&tbm=isch&source=hp&q={q}&oq={q}&gs_l=img"
+
+    # load the page
+    driver.get(search_url.format(q=query))
 
     image_urls = set()
     image_count = 0
     results_start = 0
     while image_count < max_links_to_fetch:
+        scroll_to_end()
+
         # get all image thumbnail results
         thumbnail_results = driver.find_elements_by_css_selector("img.Q4LuWd")
         number_results = len(thumbnail_results)
