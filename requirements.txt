@@ -6,3 +6,4 @@ cyrtranslit
 selenium
 nltk
 profanity_filter
+spacy
