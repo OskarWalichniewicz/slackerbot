@@ -2,11 +2,8 @@ import discord
 from discord.ext import commands
 from word import *
 from webscraping import *
-from profanity_filter import ProfanityFilter
-import spacy
-import en_core_web_sm
+from profanityfilter import ProfanityFilter
 
-nlp = en_core_web_sm.load()
 pf = ProfanityFilter()
 
 class Education(commands.Cog):
@@ -122,7 +119,7 @@ class Education(commands.Cog):
     @commands.command()
     async def gimage(self, ctx, *text):
         if pf.censor(text) != text:
-            await ctx.send("Slacker refuses to search for THAT. Please respect my poor eyes.")
+            await ctx.send('Slacker refuses to search for THAT. Please respect my poor eyes.')
             return None
         query = text
         img_url = webscrap_google_images(query, 1)
