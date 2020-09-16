@@ -57,7 +57,4 @@ def webscrap_google_images(query, number_of_imgs, wait_time=1):
                     image_urls.append(actual_image.get_attribute('src'))
             image_count = len(image_urls)
 
-            if len(image_urls) >= number_of_imgs: # if we get amount of images we asked for while calling function
-                break
-
     return image_urls
