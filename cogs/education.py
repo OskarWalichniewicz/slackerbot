@@ -3,6 +3,7 @@ from discord.ext import commands
 from word import *
 from webscraping import *
 from profanity_filter import ProfanityFilter
+import spacy
 
 pf = ProfanityFilter()
 
