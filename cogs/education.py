@@ -2,6 +2,9 @@ import discord
 from discord.ext import commands
 from word import *
 from webscraping import *
+from profanity_filter import ProfanityFilter
+
+pf = ProfanityFilter()
 
 class Education(commands.Cog):
 
@@ -115,10 +118,13 @@ class Education(commands.Cog):
 
     @commands.command()
     async def gimage(self, ctx, *text):
-            query = text
-            img_url = webscrap_google_images(query, 1)
-            for img in img_url:
-                await ctx.send(img)
+        if pf.censor(text) != text:
+            await ctx.send("Slacker refuses to search for THAT. Please respect my poor eyes.")
+            return None
+        query = text
+        img_url = webscrap_google_images(query, 1)
+        for img in img_url:
+            await ctx.send(img)
 
 def setup(client):
     client.add_cog(Education(client))

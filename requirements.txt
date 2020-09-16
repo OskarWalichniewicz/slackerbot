@@ -5,3 +5,4 @@ googletrans
 cyrtranslit
 selenium
 nltk
+profanity_filter
