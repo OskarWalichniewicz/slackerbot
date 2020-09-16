@@ -118,7 +118,7 @@ class Education(commands.Cog):
 
     @commands.command()
     async def gimage(self, ctx, *text):
-        if pf.censor(text) != text:
+        if pf.censor(str(text)) != str(text):
             await ctx.send('Slacker refuses to search for THAT. Please respect my poor eyes.')
             return None
         query = text
