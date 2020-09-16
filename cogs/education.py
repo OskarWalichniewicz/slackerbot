@@ -4,8 +4,9 @@ from word import *
 from webscraping import *
 from profanity_filter import ProfanityFilter
 import spacy
+import en_core_web_sm
 
-nlp = spacy.load('en')
+nlp = en_core_web_sm.load()
 pf = ProfanityFilter()
 
 class Education(commands.Cog):
