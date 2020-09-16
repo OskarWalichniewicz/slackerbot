@@ -34,10 +34,13 @@ def webscrap_google_image(word):
     url = 'http://www.google.com/images?q={}'.format(word)
     driver.get(url)
 
-    img_thumbnail = driver.find_element_by_css_selector("img.Q4LuWd")
-    img_thumbnail.click()
-    time.sleep(0.5)
-    actual_images = driver.find_elements_by_css_selector('img.n3VNCb')
-    image_url = actual_images[0].get_attribute('src')
+    img_thumbnails = driver.find_element_by_css_selector("img.Q4LuWd")
+    for img in img_thumbnails:
+        img.click()
+        time.sleep(1)
+        actual_image = driver.find_elements_by_css_selector('img.n3VNCb')
+        image_url = actual_image[0].get_attribute('src')
+        if len(image_url) <= 2000: # discord limit
+            break
 
     return image_url
