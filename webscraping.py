@@ -31,7 +31,7 @@ def webscrap_word():
     return str(word.text)
 
 
-def fetch_image_urls(query:str, max_links_to_fetch:int, sleep_between_interactions:int=1):
+def webscrap_google_images(query:str, max_links_to_fetch:int, sleep_between_interactions:int=1):
     # build the google query
     url = 'http://www.google.com/images?q={}'.format(query)
     driver.get(url)

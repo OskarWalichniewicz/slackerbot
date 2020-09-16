@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 from word import *
+from webscraping import *
 
 class Education(commands.Cog):
 
@@ -119,7 +120,7 @@ class Education(commands.Cog):
                 await ctx.send("stupid bonobo, the command is called .gimage (singular) for a reason.")
                 return None
             word = text[0]
-            img_url = webscrap_google_image(word)
+            img_url = webscrap_google_images(word, 1)
             await ctx.send(img_url[0])
         except IndexError: # If someone types something after .gimage
             print("[.GIMAGE] IndexError")
