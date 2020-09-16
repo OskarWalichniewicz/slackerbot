@@ -5,7 +5,8 @@ from webscraping import *
 from profanityfilter import ProfanityFilter
 
 pf = ProfanityFilter()
-async def is_not_awy(ctx):
+
+async def is_not_awy(ctx): # checks if command caller is not Awy.
     return ctx.author.id != 245247289935921152
 
 class Education(commands.Cog):
