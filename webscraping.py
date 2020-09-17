@@ -83,9 +83,11 @@ def webscrap_9gag():
 
     post_link = []
     for child in all_children_by_css:
-        if child.get_attribute('srcset') and 'http' in child.get_attribute('srcset') and 'webp' in child.get_attribute('srcset'):
+        if child.get_attribute('srcset') and 'http' in child.get_attribute('srcset') and 'webp' in child.get_attribute('srcset'): # if an image
             post_link.append(child.get_attribute('srcset'))
-        elif child.get_attribute('src') and 'http' in child.get_attribute('src') and 'webm' in child.get_attribute('src'):
+        elif child.get_attribute('src') and 'http' in child.get_attribute('src') and 'webm' in child.get_attribute('src'): # if a video
+            post_link.append(child.get_attribute('src'))
+        elif child.get_attribute('src') and 'http' in child.get_attribute('src') and 'mp4' in child.get_attribute('src'): # if a gif (?)
             post_link.append(child.get_attribute('src'))
         if len(post_link) > 0:
             break
