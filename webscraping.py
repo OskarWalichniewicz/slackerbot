@@ -68,7 +68,7 @@ def webscrap_9gag():
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--disable-dev-shm-usage")
     chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--user-agent=Chrome/77")
+    chrome_options.add_argument("--user-agent=Chrome/77") # need that cause doesnt redirect from 9gag.com/shuffle in headless mode
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
     url = 'https://9gag.com/shuffle'
