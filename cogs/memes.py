@@ -15,8 +15,8 @@ class Memes(commands.Cog):
     async def _9gag(self, ctx, *text):
         title, post_url, gag_url = webscrap_9gag()
         embed_9gag = discord.Embed(
-                title = title,
-                description = post_url,
+                title = str(title),
+                description = str(post_url),
                 colour = discord.Color.blue()
             )
         embed_9gag.set_footer(text = 'Link to gag: ' + str(gag_url))
