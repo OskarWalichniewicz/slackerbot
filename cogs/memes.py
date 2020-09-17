@@ -14,7 +14,7 @@ class Memes(commands.Cog):
     @commands.command(aliases = ['9gag'])
     async def _9gag(self, ctx, *text):
         title, post_url, gag_url = webscrap_9gag()
-        _9gag_string = "title\n" + str(post_url)
+        _9gag_string = title + "\n" + str(post_url)
         await ctx.send(_9gag_string)
 
 def setup(client):
