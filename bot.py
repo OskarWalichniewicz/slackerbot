@@ -20,6 +20,7 @@ def is_time_between(begin_time, end_time):
         return check_time >= begin_time and check_time <= end_time
     else:                                                           # if crosses midnight
         return check_time >= begin_time or check_time <= end_time
+
 """
 Adds Cogs functionality.
 Loop goes through 'cogs' folder;
@@ -83,6 +84,7 @@ async def status_task(wait_time):
             await asyncio.sleep(wait_time)
             await client.change_presence(activity=discord.Game('Tomorrow will be good day!'))
             await asyncio.sleep(wait_time)
+
 """
 'event' is a decorator that registers an event it listens to.
 on_ready is called when client (bot) is done preparing the data received from Discord.

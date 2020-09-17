@@ -16,6 +16,7 @@ chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
 chrome_options.add_argument("--headless")
 chrome_options.add_argument("--disable-dev-shm-usage")
 chrome_options.add_argument("--no-sandbox")
+chrome_options.add_argument("--user-agent=Chrome/77")
 
 # creates a webdriver with given path to chromedriver and previously set options.
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
@@ -62,35 +63,25 @@ def webscrap_google_images(query, number_of_imgs, wait_time=1):
 
     return image_urls
 
+"""
+"""
 def webscrap_9gag():
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--user-agent=Chrome/77") # need that cause doesnt redirect from 9gag.com/shuffle in headless mode
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    while True:
+        url = 'https://9gag.com/shuffle'
+        driver.get(url)
+        time.sleep(1)
+        gag_id = driver.current_url[21:] # get gag id from url
+        title = driver.find_element_by_tag_name("h1").text
+        link_to_gag = 'https://9gag.com/gag/{}'.format(gag_id)
 
-    url = 'https://9gag.com/shuffle'
-    driver.get(url)
-    time.sleep(1)
-    gag_id = driver.current_url[21:] # get gag id from url
-    title = driver.find_element_by_tag_name("h1").text
+        posts = driver.find_elements_by_class_name("post-container")
+        for post in posts:
+            all_children_by_css = post.find_elements_by_css_selector("*")
 
-    posts = driver.find_elements_by_class_name("post-container")
-    for post in posts:
-        all_children_by_css = post.find_elements_by_css_selector("*")
-
-    post_link = []
-    for child in all_children_by_css:
-        if child.get_attribute('srcset') and 'http' in child.get_attribute('srcset') and 'webp' in child.get_attribute('srcset'): # if an image
-            post_link.append(child.get_attribute('srcset'))
-        elif child.get_attribute('src') and 'http' in child.get_attribute('src') and 'webm' in child.get_attribute('src'): # if a video
-            post_link.append(child.get_attribute('src'))
-        elif child.get_attribute('src') and 'http' in child.get_attribute('src') and 'mp4' in child.get_attribute('src'): # if a gif (?)
-            post_link.append(child.get_attribute('src'))
-        if len(post_link) > 0:
-            break
-
-    link_to_gag = 'https://9gag.com/gag/{}'.format(gag_id)
-    return title, post_link[0], link_to_gag
+        img_link = []
+        for child in all_children_by_css:
+            if child.get_attribute('srcset') and 'http' in child.get_attribute('srcset') and 'webp' in child.get_attribute('srcset'): # if an image
+                img_link.append(child.get_attribute('srcset'))
+                return img_link[0], gag_id, title
+            else:
+                continue
