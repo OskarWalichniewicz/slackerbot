@@ -19,6 +19,7 @@ class Memes(commands.Cog):
                     colour = discord.Color.blue()
                 )
         embed_9gag.set_image(url = post_url)
+        await ctx.send(embed=embed_9gag)
 
 def setup(client):
     client.add_cog(Memes(client))

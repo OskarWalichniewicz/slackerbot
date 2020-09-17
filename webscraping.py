@@ -69,7 +69,6 @@ def webscrap_9gag():
     while True:
         url = 'https://9gag.com/shuffle'
         driver.get(url)
-        time.sleep(1)
         gag_id = driver.current_url[21:] # get gag id from url
         title = driver.find_element_by_tag_name("h1").text
         link_to_gag = 'https://9gag.com/gag/{}'.format(gag_id)
@@ -82,6 +81,6 @@ def webscrap_9gag():
         for child in all_children_by_css:
             if child.get_attribute('srcset') and 'http' in child.get_attribute('srcset') and 'webp' in child.get_attribute('srcset'): # if an image
                 img_link.append(child.get_attribute('srcset'))
-                return img_link[0], gag_id, title
+                return img_link[0], link_to_gag, title
             else:
                 continue
