@@ -11,28 +11,31 @@ Full list: https://peter.sh/experiments/chromium-command-line-switches/
 
 chrome_options.binary_location is a path where google chrome is located.
 """
-# chrome_options = webdriver.ChromeOptions()
-# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-# chrome_options.add_argument("--headless")
-# chrome_options.add_argument("--disable-dev-shm-usage")
-# chrome_options.add_argument("--no-sandbox")
+chrome_options = webdriver.ChromeOptions()
+chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options.add_argument("--headless")
+chrome_options.add_argument("--disable-dev-shm-usage")
+chrome_options.add_argument("--no-sandbox")
 
-# # creates a webdriver with given path to chromedriver and previously set options.
-# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+# creates a webdriver with given path to chromedriver and previously set options.
+driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+
+#=======================================================================================================================
+
+chrome_options2 = webdriver.ChromeOptions()
+chrome_options2.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+chrome_options2.add_argument("--headless")
+chrome_options2.add_argument("--disable-dev-shm-usage")
+chrome_options2.add_argument("--no-sandbox")
+chrome_options2.add_argument("--user-agent=Chrome/77") # Added because webscrap_9gag doesnt work just in headless.
+
+driver2 = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options2)
 
 """
 Driver opens a site and looks for element with id "result".
 returns scrapped word (string)
 """
 def webscrap_word():
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-
-    # creates a webdriver with given path to chromedriver and previously set options.
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get('https://randomwordgenerator.com/') # loads page
 
     word = driver.find_element_by_id("result")
@@ -41,12 +44,6 @@ def webscrap_word():
 """
 """
 def webscrap_google_images(query, number_of_imgs, wait_time=1):
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-
     # creates a webdriver with given path to chromedriver and previously set options.
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     search_url = "https://www.google.com/search?tbm=isch&q={}".format(query) # tbm=isch means image
@@ -81,21 +78,14 @@ def webscrap_google_images(query, number_of_imgs, wait_time=1):
 """
 """
 def webscrap_9gag():
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--user-agent=Chrome/77") # Added because webscrap_9gag doesnt work just in headless.
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     while True:
         url = 'https://9gag.com/shuffle'
-        driver.get(url)
-        gag_id = driver.current_url[21:] # get gag id from url
-        title = driver.find_element_by_tag_name("h1").text
+        driver2.get(url)
+        gag_id = driver2.current_url[21:] # get gag id from url
+        title = driver2.find_element_by_tag_name("h1").text
         link_to_gag = 'https://9gag.com/gag/{}'.format(gag_id)
 
-        posts = driver.find_elements_by_class_name("post-container")
+        posts = driver2.find_elements_by_class_name("post-container")
         for post in posts:
             all_children_by_css = post.find_elements_by_css_selector("*")
 
