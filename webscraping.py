@@ -11,20 +11,28 @@ Full list: https://peter.sh/experiments/chromium-command-line-switches/
 
 chrome_options.binary_location is a path where google chrome is located.
 """
-chrome_options = webdriver.ChromeOptions()
-chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-chrome_options.add_argument("--headless")
-chrome_options.add_argument("--disable-dev-shm-usage")
-chrome_options.add_argument("--no-sandbox")
+# chrome_options = webdriver.ChromeOptions()
+# chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+# chrome_options.add_argument("--headless")
+# chrome_options.add_argument("--disable-dev-shm-usage")
+# chrome_options.add_argument("--no-sandbox")
 
-# creates a webdriver with given path to chromedriver and previously set options.
-driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+# # creates a webdriver with given path to chromedriver and previously set options.
+# driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 """
 Driver opens a site and looks for element with id "result".
 returns scrapped word (string)
 """
 def webscrap_word():
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+
+    # creates a webdriver with given path to chromedriver and previously set options.
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     driver.get('https://randomwordgenerator.com/') # loads page
 
     word = driver.find_element_by_id("result")
@@ -33,6 +41,14 @@ def webscrap_word():
 """
 """
 def webscrap_google_images(query, number_of_imgs, wait_time=1):
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+
+    # creates a webdriver with given path to chromedriver and previously set options.
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     search_url = "https://www.google.com/search?tbm=isch&q={}".format(query) # tbm=isch means image
 
     driver.get(search_url) # loads page
@@ -65,6 +81,11 @@ def webscrap_google_images(query, number_of_imgs, wait_time=1):
 """
 """
 def webscrap_9gag():
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
     chrome_options.add_argument("--user-agent=Chrome/77") # Added because webscrap_9gag doesnt work just in headless.
     driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     while True:
