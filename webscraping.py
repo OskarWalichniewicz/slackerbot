@@ -75,7 +75,7 @@ def webscrap_9gag():
     driver.get(url)
     time.sleep(1)
     gag_id = driver.current_url[21:] # get gag id from url
-    title = driver.find_element_by_tag_name("h1")
+    title = driver.find_element_by_tag_name("h1").text
 
     posts = driver.find_elements_by_class_name("post-container")
     for post in posts:
