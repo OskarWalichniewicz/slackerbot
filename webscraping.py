@@ -45,7 +45,6 @@ def webscrap_word():
 """
 def webscrap_google_images(query, number_of_imgs, wait_time=1):
     # creates a webdriver with given path to chromedriver and previously set options.
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
     search_url = "https://www.google.com/search?tbm=isch&q={}".format(query) # tbm=isch means image
 
     driver.get(search_url) # loads page
