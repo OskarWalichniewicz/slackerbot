@@ -6,3 +6,4 @@ cyrtranslit
 selenium
 nltk
 profanityfilter
+praw

@@ -1,9 +1,10 @@
 import discord
-from discord.ext import commands
+from discord.ext import commands, tasks
 import os
 import asyncio
 from github_integration import *
 from datetime import datetime, time
+from reddit import *
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix = '.')
@@ -93,6 +94,21 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     client.loop.create_task(status_task(60)) # loops status_task in background
     print("[BOT] Client ready.")
+
+"""
+"""
+@tasks.loop(hours = 10)
+async def clean_removed_memes_loop():
+    clean_removed_memes()
+    print("[LOOP] Cleaned removed memes list.")
+
+"""
+"""
+@tasks.loop(hours = 2)
+async def refresh_list_loop():
+    remove_old_memes(10) # removes memes older than 10h from list
+    populate_memes(200) # populates reddit memes list up to len 100
+    print("[LOOP] Removed old memes and repopulated memes list.")
 
 """
 on_message is called when message is sent.

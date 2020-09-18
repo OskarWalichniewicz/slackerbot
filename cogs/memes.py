@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from reddit import *
 # from webscraping import webscrap_9gag
 
 class Memes(commands.Cog):
@@ -11,15 +12,17 @@ class Memes(commands.Cog):
     async def on_ready(self):
         print('[COG] Memes ready.')
 
-    # @commands.command(aliases = ['9gag'])
-    # async def _9gag(self, ctx, *text):
-    #     post_url, gag_url, title = webscrap_9gag()
-    #     embed_9gag = discord.Embed(
-    #                 title = str(title),
-    #                 colour = discord.Color.blue()
-    #             )
-    #     embed_9gag.set_image(url = post_url)
-    #     await ctx.send(embed=embed_9gag)
+
+    @commands.command()
+    async def memes(self, ctx):
+        title, upvotes, img = get_meme()
+        embed_meme = discord.Embed(
+                    title = title,
+                    colour = discord.Color.blurple()
+                )
+        embed_meme.set_image(url = img)
+        embed_meme.set_footer(text = "Upvotes: {}".format(upvotes))
+        await ctx.send(embed=embed_meme)
 
 def setup(client):
     client.add_cog(Memes(client))
