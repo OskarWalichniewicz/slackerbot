@@ -5,6 +5,7 @@ import asyncio
 from github_integration import *
 from datetime import datetime, time
 from reddit import *
+from reddit import memes, memes_removed
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix = '.')

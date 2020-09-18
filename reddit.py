@@ -14,8 +14,8 @@ memes = []
 memes_removed = []
 
 def populate_memes(limit):
-    while len(memes) <= 100:
-        for submission in reddit.subreddit("memes").hot(limit = limit):
+    for submission in reddit.subreddit("memes").hot(limit = limit):
+        if len(memes) <= 100:
             if not submission.stickied: # if not sticked
                 if not submission in memes and not submission in memes_removed: # if not in removed and already in list
                         memes.append(submission)
