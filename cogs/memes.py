@@ -14,7 +14,7 @@ class Memes(commands.Cog):
 
 
     @commands.command()
-    async def memes(self, ctx):
+    async def meme(self, ctx):
         title, upvotes, img = get_meme()
         embed_meme = discord.Embed(
                     title = title,
