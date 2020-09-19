@@ -12,7 +12,8 @@ class Memes(commands.Cog):
     async def on_ready(self):
         print('[COG] Memes ready.')
 
-
+    """
+    """
     @commands.command()
     async def meme(self, ctx):
         title, upvotes, img = get_meme()
