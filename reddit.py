@@ -27,7 +27,10 @@ def remove_old_memes(difference_hours):
             memes.remove(meme)
 
 def clean_removed_memes():
-    memes_removed = []
+    for meme in memes_removed:
+        time_diff = datetime.now() - datetime.utcfromtimestamp(meme.created_utc)
+        if (time_diff.seconds // 3600) > 12:
+            memes_removed.remove(meme)
 
 def get_meme():
     meme = random.choice(memes) # gets meme

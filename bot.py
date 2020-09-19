@@ -94,7 +94,8 @@ on_ready is called when client (bot) is done preparing the data received from Di
 @client.event
 async def on_ready():
     client.loop.create_task(status_task(60)) # loops status_task in background
-    populate_memes(100)
+    clean_removed_memes.start()
+    refresh_list_loop.start()
     print("[BOT] Client ready.")
 
 """

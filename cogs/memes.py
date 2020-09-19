@@ -22,7 +22,7 @@ class Memes(commands.Cog):
                 )
         embed_meme.set_image(url = img)
         embed_meme.set_footer(text = "Upvotes: {}".format(upvotes))
-        print('[COMMAND] {} memes left.'.format(str(len(memes))))
+        print('[COMMAND][MEME] {} memes left.'.format(str(len(memes))))
         await ctx.send(embed=embed_meme)
 
 def setup(client):
