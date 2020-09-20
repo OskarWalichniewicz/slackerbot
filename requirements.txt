@@ -6,4 +6,4 @@ cyrtranslit
 selenium
 profanityfilter
 praw
-wordnik
+wordnik-py3
