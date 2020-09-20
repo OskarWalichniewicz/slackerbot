@@ -2,14 +2,8 @@ from googletrans import Translator
 import cyrtranslit
 from nltk.corpus import wordnet
 from webscraping import *
-from wordnik import *
 
 translator = Translator() # creates googletrans Translator object
-
-apiUrl = 'http://api.wordnik.com/v4'
-apiKey = os.environ.get("WORDNIK_API_KEY")
-client = swagger.ApiClient(apiKey, apiUrl)
-wordApi = WordApi.WordApi(client)
 
 """
 Calls webscrap_word() from webscraping and returns it.
@@ -25,30 +19,55 @@ params: word (string) - a word about which information will be searched
 
 returns 3 strings: definitions, synonyms, antonyms.
 """
-def get_definition(word):
-    def_word = wordApi.getDefinitions(word, sourceDictionaries = 'wiktionary')
-    definitions = {}
+def get_word_info(word):
+    syns = wordnet.synsets(word) # returns list
+    definitions = []
+    def_string = ""
 
-    for definition in def_word:
-        def_text = definition.text
-        if def_text is not None:
-            try:
-                def_text = def_text.replace('<xref>', '')
-                def_text = def_text.replace('</xref>', '')
-            except:
-                pass
+    for x in range(len(syns)):
+        definitions.append(syns[x].definition()) # populates definitions (list) with definitions
 
-            def_part_of_speech = definition.partOfSpeech
-            if def_part_of_speech == 'adjective':
-                def_part_of_speech = 'adj'
+    def_len = len(definitions) - 1
+    for i in definitions:
+        def_string += i # populates definitions (string) from list
+        if not definitions.index(i) == def_len: # Check if element is last in the list; if so it ends with '.', intead of ';\n'
+            def_string += ";\n"
+        else:
+            def_string += "."
 
-            definitions.update({def_text: def_part_of_speech})
+    antonyms_list = []
+    ant_string = ""
+    synonyms_list = []
+    syn_string = ""
 
-    str_def = ""
-    for key in definitions:
-        str_def += definitions[key] + ": " + key + "\n"
+    for syn in syns:
+        for l in syn.lemmas(): # for every synonym
+            if l.name() not in synonyms_list and l.name() != word: #if synonym doesn't already exists in list AND synonym is not the same as word.
+                synonyms_list.append(l.name()) # populates synonyms (list)
+            if l.antonyms(): # if word is antonym
+                if l.antonyms() not in antonyms_list and l.name() != word: #if antonym doesn't already exists in list AND antonym is not the same as word.
+                    antonyms_list.append(l.antonyms()[0].name()) # populates antonyms (list)
 
-    return str_def
+    """
+    Changes antonyms_list and synonyms_list into ant_string and ant_string
+    """
+    ant_len = len(antonyms_list) - 1
+    for i in antonyms_list:
+        ant_string += i # populates antonyms (string) with antonyms from list
+        if antonyms_list.index(i) == ant_len: # Check if element is last in the list; if so it ends with '.', intead of ';\n'
+            ant_string += "."
+        else:
+            ant_string += ", "
+
+    syn_len = len(synonyms_list) - 1
+    for i in synonyms_list:
+        syn_string += i # populates synonyms (string) with synonyms from list
+        if synonyms_list.index(i) == syn_len: # Check if element is last in the list; if so it ends with '.', intead of ';\n'
+            syn_string += "."
+        else:
+            syn_string += ", "
+
+    return def_string, syn_string, ant_string
 
 """
 Translate word to language using googletrans.
