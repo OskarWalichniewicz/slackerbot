@@ -48,7 +48,7 @@ def get_definitions(word):
     def_len = len(definitions) - 1
     last_element_of_dict = list(definitions.keys())[-1]
     for key in definitions:
-        str_def += definitions[key] + ": " + key
+        str_def += definitions[key] + " " + key
         if not key == last_element_of_dict:
             str_def += "\n"
 
