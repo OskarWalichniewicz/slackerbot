@@ -3,6 +3,7 @@ from discord.ext import commands
 from word import *
 from webscraping import *
 from profanityfilter import ProfanityFilter
+import urllib.request
 
 pf = ProfanityFilter()
 
