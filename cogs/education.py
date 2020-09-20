@@ -32,7 +32,7 @@ class Education(commands.Cog):
             polish_word = translate_word(english_word, 'pl')
             romanian_word = translate_word(english_word, 'ro')
 
-            def_string, syn_string, ants_string = get_word_info(english_word)
+            def_string = get_definition(english_word)
 
             if def_string == "":
                 embed_word = discord.Embed(
@@ -53,19 +53,19 @@ class Education(commands.Cog):
             embed_word.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
             embed_word.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = True)
 
-            footer = ""
-            if syn_string != "":
-                footer = "Synonyms: " + syn_string
-                if ants_string != "":
-                    footer += "\n"
-                    footer += "Antonyms: "
-                    footer += ants_string
-            else:
-                if ants_string != "":
-                    footer = "Antonyms: " + ants_string
+            # footer = ""
+            # if syn_string != "":
+            #     footer = "Synonyms: " + syn_string
+            #     if ants_string != "":
+            #         footer += "\n"
+            #         footer += "Antonyms: "
+            #         footer += ants_string
+            # else:
+            #     if ants_string != "":
+            #         footer = "Antonyms: " + ants_string
 
-            if footer != "":
-                embed_word.set_footer(text = footer)
+            # if footer != "":
+            #     embed_word.set_footer(text = footer)
 
             await ctx.send(embed=embed_word)
 
@@ -82,7 +82,7 @@ class Education(commands.Cog):
         polish_word = translate_word(english_word, 'pl')
         romanian_word = translate_word(english_word, 'ro')
 
-        def_string, syn_string, ants_string = get_word_info(english_word)
+        def_string= get_definition(english_word)
 
         if def_string == "":
             embed_word = discord.Embed(
@@ -103,19 +103,19 @@ class Education(commands.Cog):
         embed_word.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
         embed_word.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = True)
 
-        footer = ""
-        if syn_string != "":
-            footer = "Synonyms: " + syn_string
-            if ants_string != "":
-                footer += "\n"
-                footer += "Antonyms: "
-                footer += ants_string
-        else:
-            if ants_string != "":
-                footer = "Antonyms: " + ants_string
+        # footer = ""
+        # if syn_string != "":
+        #     footer = "Synonyms: " + syn_string
+        #     if ants_string != "":
+        #         footer += "\n"
+        #         footer += "Antonyms: "
+        #         footer += ants_string
+        # else:
+        #     if ants_string != "":
+        #         footer = "Antonyms: " + ants_string
 
-        if footer != "":
-            embed_word.set_footer(text = footer)
+        # if footer != "":
+        #     embed_word.set_footer(text = footer)
 
         await ctx.send(embed=embed_word)
 
