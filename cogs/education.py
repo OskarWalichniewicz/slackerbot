@@ -119,9 +119,7 @@ class Education(commands.Cog):
             await ctx.send(img)
 
     @commands.command()
-    async def fact(self, ctx, error):
-        if isinstance(error, commands.CommandInvokeError):
-            await ctx.send('Cene bugged me again :(')
+    async def fact(self, ctx):
         img_url, fact_descr = webscrap_fact()
         fact_descr = str(fact_descr).replace('<em>', '')
         fact_descr = fact_descr.replace('</em>', '')
@@ -131,6 +129,12 @@ class Education(commands.Cog):
             )
         embed_fact.set_image(url = img_url)
         await ctx.send(embed = embed_fact)
+
+    @fact.error
+    async def fact_error(self, ctx, error):
+        if isinstance(error, commands.CommandInvokeError):
+            await ctx.send('Cene bugged me again :(')
+
 
 def setup(client):
     client.add_cog(Education(client))
