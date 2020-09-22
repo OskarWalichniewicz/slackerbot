@@ -121,8 +121,10 @@ class Education(commands.Cog):
     @commands.command()
     async def fact(self, ctx):
         img_url, fact_descr = webscrap_fact()
+        fact_descr = str(fact_descr).replace('<em>', '')
+        fact_descr = fact_descr.replace('</em>', '')
         embed_fact = discord.Embed(
-                title = str(fact_descr),
+                title = fact_descr,
                 colour = discord.Color.orange()
             )
         embed_fact.set_image(url = img_url)
