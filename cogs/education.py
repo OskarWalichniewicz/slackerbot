@@ -119,7 +119,9 @@ class Education(commands.Cog):
             await ctx.send(img)
 
     @commands.command()
-    async def fact(self, ctx):
+    async def fact(self, ctx, error):
+        if isinstance(error, commands.CommandInvokeError):
+            await ctx.send('Cene bugged me again :(')
         img_url, fact_descr = webscrap_fact()
         fact_descr = str(fact_descr).replace('<em>', '')
         fact_descr = fact_descr.replace('</em>', '')
