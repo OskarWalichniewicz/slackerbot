@@ -40,7 +40,7 @@ class Pets(commands.Cog):
 
     @commands.command()
     async def rpanda(self, ctx):
-        rpanda_img = webscrap_random_api('rpanda')
+        rpanda_img = webscrap_random_api('red_panda')
         await ctx.send(rpanda_img)
 
     @commands.command()
