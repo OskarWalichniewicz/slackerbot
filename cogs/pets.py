@@ -30,8 +30,28 @@ class Pets(commands.Cog):
 
     @commands.command()
     async def cat(self, ctx):
-        cat_img = webscrap_cat()
+        cat_img = webscrap_random_api('cat')
         await ctx.send(cat_img)
+
+    @commands.command()
+    async def panda(self, ctx):
+        panda_img = webscrap_random_api('panda')
+        await ctx.send(panda_img)
+
+    @commands.command()
+    async def rpanda(self, ctx):
+        rpanda_img = webscrap_random_api('rpanda')
+        await ctx.send(rpanda_img)
+
+    @commands.command()
+    async def fox(self, ctx):
+        fox_img = webscrap_random_api('fox')
+        await ctx.send(fox_img)
+
+    @commands.command()
+    async def koala(self, ctx):
+        koala_img = webscrap_random_api('koala')
+        await ctx.send(koala_img)
 
     @commands.command()
     async def dog(self, ctx):

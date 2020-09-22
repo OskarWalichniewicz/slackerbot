@@ -77,12 +77,11 @@ def webscrap_fact():
         fact_descr = desc.get_attribute("data-description")
         return img_url, fact_descr
 
-def webscrap_cat():
-    url = 'http://theoldreader.com/kittens/800/600/js'
-    driver.get(url)
-    cat = driver.find_element_by_xpath("/html/body/a/img")
-    cat_img = cat.get_attribute('src')
-    return cat_img
+def webscrap_random_api(thing):
+    url = 'https://some-random-api.ml/img/{}'.format(thing)
+    req = urlrequest.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    load_json = json.loads(urlrequest.urlopen(req).read())
+    return load_json['link']
 
 def webscrap_dog():
     load_json = json.loads(urlrequest.urlopen("https://dog.ceo/api/breeds/image/random").read().decode("utf-8"))
