@@ -69,7 +69,7 @@ def webscrap_fact():
     while True:
         url = 'https://www.mentalfloss.com/amazingfactgenerator'
         driver.get(url)
-        time.sleep(1)
+        time.sleep(2)
         desc = driver.find_element_by_class_name("af-details")
         img_url = desc.get_attribute("data-img-src")
         fact_descr = desc.get_attribute("data-description")
