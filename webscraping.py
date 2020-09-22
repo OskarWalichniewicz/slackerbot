@@ -83,6 +83,12 @@ def webscrap_random_api(thing):
     load_json = json.loads(urlrequest.urlopen(req).read())
     return load_json['link']
 
+def webscrap_duck():
+    url = 'https://random-d.uk/api/v2/random'
+    req = urlrequest.Request(url)
+    load_json = json.loads(urlrequest.urlopen(req).read())
+    return load_json['url']
+
 def webscrap_dog():
     load_json = json.loads(urlrequest.urlopen("https://dog.ceo/api/breeds/image/random").read().decode("utf-8"))
     return load_json['message']

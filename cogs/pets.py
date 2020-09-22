@@ -58,6 +58,11 @@ class Pets(commands.Cog):
         dog_img = webscrap_dog()
         await ctx.send(dog_img)
 
+    @commands.command()
+    async def duck(self, ctx):
+        duck_img = webscrap_duck()
+        await ctx.send(duck_img)
+
 def setup(client):
     client.add_cog(Pets(client))
 
