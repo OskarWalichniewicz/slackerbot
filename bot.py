@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix = '.')
 """
 Checks if current time (UTC) is between given values.
 params: begin_time and end_time are both in datetime format; therefore they should be initiated as ones
-        e.g. is_time_between(time(4, 00), time(10,00))
+        e.g. is_time_between(time(4, 00), time(10,00)) (hh, mm)
 returns: boolean
 """
 def is_time_between(begin_time, end_time):
