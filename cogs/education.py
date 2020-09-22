@@ -118,6 +118,7 @@ class Education(commands.Cog):
         for img in img_url:
             await ctx.send(img)
 
+    @commands.command()
     async def fact(self, ctx):
         img_url, fact_descr = webscrap_fact()
         embed_fact = discord.Embed(
