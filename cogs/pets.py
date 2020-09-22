@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
 import random
+from webscraping import *
 
 class Pets(commands.Cog):
 
@@ -26,6 +27,11 @@ class Pets(commands.Cog):
     @commands.command()
     async def shiba(self, ctx):
         await ctx.send(get_picture(shiba_list))
+
+    @commands.command()
+    async def cat(self, ctx):
+        cat_img = webscrap_cat()
+        await ctx.send(cat_img)
 
 def setup(client):
     client.add_cog(Pets(client))

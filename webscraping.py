@@ -74,3 +74,10 @@ def webscrap_fact():
         img_url = desc.get_attribute("data-img-src")
         fact_descr = desc.get_attribute("data-description")
         return img_url, fact_descr
+
+def webscrap_cat():
+    url = 'http://theoldreader.com/kittens/800/600/js'
+    driver.get(url)
+    cat = driver.find_element_by_xpath("/html/body/a/img")
+    cat_img = cat.get_attribute('src')
+    return cat_img

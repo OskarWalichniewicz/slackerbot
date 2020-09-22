@@ -1,7 +1,6 @@
 import discord
 from discord.ext import commands
 from reddit import *
-# from webscraping import webscrap_9gag
 
 class Memes(commands.Cog):
 
