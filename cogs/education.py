@@ -61,7 +61,7 @@ class Education(commands.Cog):
             if footer != "":
                 embed_word.set_footer(text = footer)
 
-            await ctx.send(embed=embed_word)
+            await ctx.send(embed = embed_word)
 
         except IndexError: # If someone types something after .word
             print("[.WORD] IndexError")
@@ -105,7 +105,7 @@ class Education(commands.Cog):
         if footer != "":
             embed_word.set_footer(text = footer)
 
-        await ctx.send(embed=embed_word)
+        await ctx.send(embed = embed_word)
 
     @commands.command()
     @commands.check(is_not_awy)
@@ -117,6 +117,15 @@ class Education(commands.Cog):
         img_url = webscrap_google_images(query, 1)
         for img in img_url:
             await ctx.send(img)
+
+    async def fact(self, ctx):
+        img_url, fact_descr = webscrap_fact()
+        embed_fact = discord.Embed(
+                title = str(fact_descr),
+                colour = discord.Color.orange()
+            )
+        embed_fact.set_image(url = img_url)
+        await ctx.send(embed = embed_fact)
 
 def setup(client):
     client.add_cog(Education(client))
