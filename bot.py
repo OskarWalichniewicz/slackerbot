@@ -62,9 +62,9 @@ async def status_task(wait_time):
         await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('You can do it!'))
         await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Bobsy is being molested.'))
-        await asyncio.sleep(wait_time)
         await client.change_presence(activity=discord.Game('Be good to others!'))
+        await asyncio.sleep(wait_time)
+        await client.change_presence(activity=discord.Game('Be good to yourself!'))
         await asyncio.sleep(wait_time)
         if is_time_between(time(4, 00), time(11, 00)):
             await client.change_presence(activity=discord.Game('Good Morning!'))
@@ -79,10 +79,8 @@ async def status_task(wait_time):
         elif is_time_between(time(17,00), time(22,00)):
             await client.change_presence(activity=discord.Game('Good Evening!'))
             await asyncio.sleep(wait_time)
-            await client.change_presence(activity=discord.Game('You should bath :worried:'))
-            await asyncio.sleep(wait_time)
         else:
-            await client.change_presence(activity=discord.Game('Go to bed! :rage:'))
+            await client.change_presence(activity=discord.Game('Go to bed!'))
             await asyncio.sleep(wait_time)
             await client.change_presence(activity=discord.Game('Tomorrow will be good day!'))
             await asyncio.sleep(wait_time)
