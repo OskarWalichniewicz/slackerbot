@@ -1,6 +1,8 @@
 from selenium import webdriver
 import time
 import os
+from urllib import request as urlrequest, parse as urlparse
+import json
 
 """
 Creates options object and passes:
@@ -81,3 +83,7 @@ def webscrap_cat():
     cat = driver.find_element_by_xpath("/html/body/a/img")
     cat_img = cat.get_attribute('src')
     return cat_img
+
+def webscrap_dog():
+    load_json = json.loads(urlrequest.urlopen("https://dog.ceo/api/breeds/image/random").read().decode("utf-8"))
+    return load_json['message']
