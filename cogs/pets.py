@@ -65,6 +65,11 @@ class Pets(commands.Cog):
         await ctx.send(koala_img)
 
     @commands.command()
+    async def kangaroo(self, ctx):
+        kangaroo_img = webscrap_random_api('kangaroo')
+        await ctx.send(kangaroo_img)
+
+    @commands.command()
     async def dog(self, ctx):
         dog_img = webscrap_dog()
         await ctx.send(dog_img)

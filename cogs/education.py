@@ -33,7 +33,6 @@ class Education(commands.Cog):
             romanian_word = translate_word(english_word, 'ro')
 
             def_string = get_definitions(english_word)
-            syn_string = get_synonyms(english_word)
 
             if def_string == "":
                 embed_word = discord.Embed(
@@ -54,10 +53,6 @@ class Education(commands.Cog):
             embed_word.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
             embed_word.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = True)
 
-            footer = ""
-            if syn_string != "":
-                footer = "Synonyms: " + syn_string
-
             await ctx.send(embed = embed_word)
 
         except IndexError: # If someone types something after .word
@@ -74,7 +69,6 @@ class Education(commands.Cog):
         romanian_word = translate_word(english_word, 'ro')
 
         def_string = get_definitions(english_word)
-        syn_string = get_synonyms(english_word)
 
         if def_string == "":
             embed_word = discord.Embed(
@@ -94,10 +88,6 @@ class Education(commands.Cog):
         embed_word.add_field(name = ':flag_nl: Dutch :flag_nl:', value = dutch_word, inline = True)
         embed_word.add_field(name = ':flag_pl: Polish :flag_pl:', value = polish_word, inline = False)
         embed_word.add_field(name = ':flag_ro: Romanian :flag_ro:', value = romanian_word, inline = True)
-
-        footer = ""
-        if syn_string != "":
-            footer = "Synonyms: " + syn_string
 
         await ctx.send(embed = embed_word)
 
