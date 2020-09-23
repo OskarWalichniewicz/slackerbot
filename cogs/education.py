@@ -58,9 +58,6 @@ class Education(commands.Cog):
             if syn_string != "":
                 footer = "Synonyms: " + syn_string
 
-            if footer != "":
-                embed_word.set_footer(text = footer)
-
             await ctx.send(embed = embed_word)
 
         except IndexError: # If someone types something after .word
@@ -101,9 +98,6 @@ class Education(commands.Cog):
         footer = ""
         if syn_string != "":
             footer = "Synonyms: " + syn_string
-
-        if footer != "":
-            embed_word.set_footer(text = footer)
 
         await ctx.send(embed = embed_word)
 
