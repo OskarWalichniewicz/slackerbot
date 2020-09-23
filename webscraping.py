@@ -79,7 +79,7 @@ def webscrap_fact():
 
 def webscrap_random_api(thing):
     url = 'https://some-random-api.ml/img/{}'.format(thing)
-    req = urlrequest.Request(url, headers={'User-Agent': 'Mozilla/5.0'})
+    req = urlrequest.Request(url, headers={'User-Agent': 'Mozilla/5.0'}) # doesnt work without it (404 not found request)
     load_json = json.loads(urlrequest.urlopen(req).read())
     return load_json['link']
 
