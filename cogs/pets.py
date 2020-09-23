@@ -42,14 +42,16 @@ class Pets(commands.Cog):
     @commands.command()
     async def cat(self, ctx):
         cat_img = webscrap_random_api('cat')
-        cat_fact = webscrap_random_api_fact('cat')
-        await ctx.send("Did you know that: {}\n {} ".format(cat_fact, cat_img))
+        # cat_fact = webscrap_random_api_fact('cat')
+        # await ctx.send("Did you know that: {}\n {} ".format(cat_fact, cat_img))
+        await ctx.send(cat_img)
 
     @commands.command()
     async def panda(self, ctx):
         panda_img = webscrap_random_api('panda')
-        panda_fact = webscrap_random_api_fact('panda')
-        await ctx.send("Did you know that: {}\n {} ".format(panda_fact, panda_img))
+        # panda_fact = webscrap_random_api_fact('panda')
+        # await ctx.send("Did you know that: {}\n {} ".format(panda_fact, panda_img))
+        await ctx.send(panda_img)
 
     @commands.command()
     async def rpanda(self, ctx):
@@ -59,38 +61,44 @@ class Pets(commands.Cog):
     @commands.command()
     async def fox(self, ctx):
         fox_img = webscrap_random_api('fox')
-        fox_fact = webscrap_random_api_fact('fox')
-        await ctx.send("Did you know that: {}\n {} ".format(fox_fact, fox_img))
+        # fox_fact = webscrap_random_api_fact('fox')
+        # await ctx.send("Did you know that: {}\n {} ".format(fox_fact, fox_img))
+        await ctx.send(fox_img)
 
     @commands.command()
     async def koala(self, ctx):
         koala_img = webscrap_random_api('koala')
-        koala_fact = webscrap_random_api_fact('koala')
-        await ctx.send("Did you know that: {}\n {} ".format(koala_fact, koala_img))
+        # koala_fact = webscrap_random_api_fact('koala')
+        # await ctx.send("Did you know that: {}\n {} ".format(koala_fact, koala_img))
+        await ctx.send(koala_img)
 
     @commands.command()
     async def kangaroo(self, ctx):
         kangaroo_img = webscrap_random_api('kangaroo')
-        kangaroo_fact = webscrap_random_api_fact('kangaroo')
-        await ctx.send("Did you know that: {}\n {} ".format(kangaroo_fact, kangaroo_img))
+        # kangaroo_fact = webscrap_random_api_fact('kangaroo')
+        # await ctx.send("Did you know that: {}\n {} ".format(kangaroo_fact, kangaroo_img))
+        await ctx.send(kangaroo_img)
 
     @commands.command()
     async def whale(self, ctx):
         whale_img = webscrap_random_api('whale')
-        whale_fact = webscrap_random_api_fact('whale')
-        await ctx.send("Did you know that: {}\n {} ".format(whale_fact, whale_img))
+        # whale_fact = webscrap_random_api_fact('whale')
+        # await ctx.send("Did you know that: {}\n {} ".format(whale_fact, whale_img))
+        await ctx.send(whale_img)
 
     @commands.command()
     async def racoon(self, ctx):
         racoon_img = webscrap_random_api('racoon')
-        racoon_fact = webscrap_random_api_fact('racoon')
-        await ctx.send("Did you know that: {}\n {} ".format(racoon_fact, racoon_img))
+        # racoon_fact = webscrap_random_api_fact('racoon')
+        # await ctx.send("Did you know that: {}\n {} ".format(racoon_fact, racoon_img))
+        await ctx.send(racoon_img)
 
     @commands.command()
     async def dog(self, ctx):
         dog_img = webscrap_dog()
-        dog_fact = webscrap_random_api_fact('dog')
-        await ctx.send("Did you know that: {}\n {} ".format(dog_fact, dog_img))
+        # dog_fact = webscrap_random_api_fact('dog')
+        # await ctx.send("Did you know that: {}\n {} ".format(dog_fact, dog_img))
+        await ctx.send(dog_img)
 
     @commands.command()
     async def duck(self, ctx):
