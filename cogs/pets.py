@@ -4,6 +4,14 @@ import random
 from webscraping import *
 import os
 
+def read_capybaras():
+    path = "/app/misc/capybaras.txt"
+    with open(path) as f:
+        content = f.readlines()
+    capybaras_list = [x.strip() for x in content]
+    print("[COG][PETS][READ_CAPYBARAS] Capybaras list ready.")
+    return capybaras_list
+
 capybaras_list = read_capybaras()
 
 class Pets(commands.Cog):
@@ -76,14 +84,6 @@ def setup(client):
 def get_picture(pic_list):
     rolled_picture = random.choice(pic_list)
     return rolled_picture
-
-def read_capybaras():
-    path = "/app/misc/capybaras.txt"
-    with open(path) as f:
-        content = f.readlines()
-    capybaras_list = [x.strip() for x in content]
-    print("[COG][PETS][READ_CAPYBARAS] Capybaras list ready.")
-    return capybaras_list
 
 nika_list = ['https://cdn.discordapp.com/attachments/364712407601512450/754369363313819760/20200912_175256.jpg',
     'https://cdn.discordapp.com/attachments/364712407601512450/754369363532054538/20200912_175340.jpg',
