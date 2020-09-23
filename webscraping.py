@@ -83,6 +83,12 @@ def webscrap_random_api(thing):
     load_json = json.loads(urlrequest.urlopen(req).read())
     return load_json['link']
 
+def webscrap_random_api_fact(thing):
+    url = 'https://some-random-api.ml/facts/{}'.format(thing)
+    req = urlrequest.Request(url, headers={'User-Agent': 'Mozilla/5.0'}) # doesnt work without it (404 not found request)
+    load_json = json.loads(urlrequest.urlopen(req).read())
+    return load_json['fact']
+
 def webscrap_duck():
     url = 'https://random-d.uk/api/v2/random'
     req = urlrequest.Request(url)
