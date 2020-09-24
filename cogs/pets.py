@@ -124,7 +124,8 @@ nika_list = ['https://cdn.discordapp.com/attachments/364712407601512450/75436936
     'https://media.discordapp.net/attachments/364712407601512450/754369364496482334/20200912_175329.jpg']
 dran_list = ['https://media.discordapp.net/attachments/364712407601512450/754368051431866378/image0.jpg',
     'https://media.discordapp.net/attachments/364712407601512450/754368473903267870/image0.jpg',
-    'https://cdn.discordapp.com/attachments/364712407601512450/754368474792329216/image1.jpg']
+    'https://cdn.discordapp.com/attachments/364712407601512450/754368474792329216/image1.jpg',
+    'https://media.discordapp.net/attachments/364712407601512450/758643317620604948/image0.jpg']
 franek_list = ['https://i.imgur.com/XB6Qptw.jpg',
     'https://i.imgur.com/F4GCJWf.jpg',
     'https://i.imgur.com/YoNbgR8.jpeg',
