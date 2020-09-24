@@ -7,6 +7,7 @@ params: cont (string) is a string we want to put in a file.
         file_name (string) is name of a file we want to update.
         repo (string) is repository in which the file exists ("username/rep_name")
         commit_message (string) is a commit message that is sent to github.
+returns nothing
 """
 def save_to_github(cont, file_name, repo, commit_message):
     g = Github("OskarWalichniewicz", str(os.environ['GITHUB_PASSWORD'])) # creates Github object with username and password.

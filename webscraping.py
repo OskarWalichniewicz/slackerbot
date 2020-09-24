@@ -23,29 +23,29 @@ chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
 """
-Driver opens a site and looks for element with id "result".
+Opens randomwordgenerator.com site and gets the word from there.
 returns scrapped word (string)
 """
 def webscrap_word():
     driver.get('https://randomwordgenerator.com/') # loads page
-
-    word = driver.find_element_by_id("result")
+    word = driver.find_element_by_id("result") # finds result
     return str(word.text)
 
 """
+Opens Google Search (images only) and gets all the images from the first page with given query.
+params: query (str) - query (word, sentence) that we want to search in google image
+        number_of_imgs (int) - how many images do we want to get (maximum being images at first page of google search - next page not implemented)
+        wait_time (int; default = 1) - number of seconds that driver waits before it starts scrapping (needed for site to loads)
+returns scrapped images (list)
 """
 def webscrap_google_images(query, number_of_imgs, wait_time=1):
     # creates a webdriver with given path to chromedriver and previously set options.
     search_url = "https://www.google.com/search?tbm=isch&q={}".format(query) # tbm=isch means image
-
     driver.get(search_url) # loads page
-
     image_urls = []
     image_count = 0
-
-    while image_count < number_of_imgs:
+    while image_count < number_of_imgs: # as long as list is not populated
         thumbnail_results = driver.find_elements_by_css_selector("img.Q4LuWd") # get all image thumbnail results
-        number_results = len(thumbnail_results)
 
         for img in thumbnail_results: # try to click every thumbnail, to show actual image
             try:
@@ -66,6 +66,8 @@ def webscrap_google_images(query, number_of_imgs, wait_time=1):
     return image_urls
 
 """
+Opens mentalfloss.com/amazingfactgenerator and gets facts from there (text and image).
+returns image url (string), fact description (string)
 """
 def webscrap_fact():
     while True:
@@ -77,24 +79,42 @@ def webscrap_fact():
         fact_descr = desc.get_attribute("data-description")
         return img_url, fact_descr
 
+"""
+Using some-random-api (some-random-api.ml) and gets image from there.
+params: thing (string) - query, thing of which we want to get picture. List at (https://docs.some-random-api.ml/json/image)
+returns image url (string)
+"""
 def webscrap_random_api(thing):
     url = 'https://some-random-api.ml/img/{}'.format(thing)
     req = urlrequest.Request(url, headers={'User-Agent': 'Mozilla/5.0'}) # doesnt work without it (404 not found request)
     load_json = json.loads(urlrequest.urlopen(req).read())
     return load_json['link']
 
+"""
+Using some-random-api (some-random-api.ml) and gets fact from there.
+params: thing (string) - query, thing of which we want to get fact. List at (https://docs.some-random-api.ml/json/facts)
+returns fact (string)
+"""
 def webscrap_random_api_fact(thing):
     url = 'https://some-random-api.ml/facts/{}'.format(thing)
     req = urlrequest.Request(url, headers={'User-Agent': 'Mozilla/5.0'}) # doesnt work without it (404 not found request)
     load_json = json.loads(urlrequest.urlopen(req).read())
     return load_json['fact']
 
+"""
+Using random-d.uk API (https://random-d.uk/api) and gets duck picture from there.
+returns image url (string)
+"""
 def webscrap_duck():
     url = 'https://random-d.uk/api/v2/random'
     req = urlrequest.Request(url)
     load_json = json.loads(urlrequest.urlopen(req).read())
     return load_json['url']
 
+"""
+Using dog.ceo API (https://dog.ceo/dog-api/) and gets dog picture from there.
+returns image url (string)
+"""
 def webscrap_dog():
     load_json = json.loads(urlrequest.urlopen("https://dog.ceo/api/breeds/image/random").read().decode("utf-8"))
     return load_json['message']

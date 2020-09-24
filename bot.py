@@ -96,13 +96,18 @@ async def on_ready():
     print("[BOT] Client ready.")
 
 """
+Every 10 hours calls clean_removed_memes_loop() from reddit.py
+Used so memes_removed list doesn't get too big, affecting performance.
 """
 @tasks.loop(hours = 10)
 async def clean_removed_memes_loop():
-    clean_removed_memes()
+    clean_removed_memes(12)
     print("[LOOP] Cleaned removed memes list.")
 
 """
+Every 2 hours calls remove_old_memes(x) from reddit.py and
+populate_memes(y) from reddit.py
+Used so memes in memes_list are fresh.
 """
 @tasks.loop(hours = 2)
 async def refresh_list_loop():

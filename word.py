@@ -3,12 +3,18 @@ import cyrtranslit
 from webscraping import *
 from wordnik import *
 
+"""
+Initiates Wordnik API
+"""
 apiUrl = 'http://api.wordnik.com/v4'
 apiKey = os.environ.get("WORDNIK_API_KEY")
 client = swagger.ApiClient(apiKey, apiUrl)
 wordApi = WordApi.WordApi(client)
 
-translator = Translator() # creates googletrans Translator object
+"""
+Creates googletrans Translator object
+"""
+translator = Translator()
 
 """
 Calls webscrap_word() from webscraping and returns it.
@@ -19,10 +25,9 @@ def get_random_word():
     return english_word
 
 """
-Gets information (definitions, synonyms, antonyms) about given word from Wordnet (http://wordnetweb.princeton.edu/perl/webwn) using nltk.
-params: word (string) - a word about which information will be searched
-
-returns 3 strings: definitions, synonyms, antonyms.
+Gets definition about given word from wiktionary using wordnikAPI (https://developer.wordnik.com/).
+params: word (string) - a word about which defition will be searched
+returns definition (string)
 """
 def get_definitions(word):
     def_word = wordApi.getDefinitions(word, sourceDictionaries = 'wiktionary')
@@ -54,6 +59,11 @@ def get_definitions(word):
 
     return str_def
 
+"""
+Gets synonyms about given word from wordnik using wordnikAPI (https://developer.wordnik.com/).
+params: word (string) - a word of which synonyms will be searched
+returns synonyms (string)
+"""
 def get_synonyms(word):
     syn_string = ""
 
@@ -77,7 +87,7 @@ params: word (string) - word that is being translated
         lang (string) - code of language to which it should be translated.
 
 returns translated_word (string) or
-        if serbian:
+        if serbian (lang == 'sr'):
             translated_word in cyrillic (string) and translated word in latin (string)
 """
 def translate_word(word, lang):
