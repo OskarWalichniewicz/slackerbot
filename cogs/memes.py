@@ -12,6 +12,9 @@ class Memes(commands.Cog):
         print('[COG] Memes ready.')
 
     """
+    When meme command is called,
+    it calles get_meme command (from reddit.py)
+    returns embed with meme title and an image.
     """
     @commands.command()
     async def meme(self, ctx):

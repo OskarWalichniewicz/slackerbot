@@ -10,6 +10,10 @@ class Hate(commands.Cog):
     async def on_ready(self):
         print('[COG] Hate ready.')
 
+    """
+    When .ignios command is called.
+    returns corresponding message in discord channel.
+    """
     @commands.command()
     async def ignios(self, ctx):
         await ctx.send('Fuck Ignios')

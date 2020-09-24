@@ -1,6 +1,9 @@
 import discord
 from discord.ext import commands
 
+"""
+Sends screenshots to corresponding commands.
+"""
 class Memories(commands.Cog):
 
     def __init__(self, client):

@@ -18,6 +18,7 @@ class Graveyard(commands.Cog):
     When az command is called,
     it opens (calls read_file from github_integration.py) az.txt file from slackerbot_misc repository and read its content line by line,
     creating variables (year, month, day, ...) and calculating difference between current time and time from file and sends it in discord message.
+    returns how much time ago have az died (string)
     """
     @commands.command()
     async def az(self, ctx):
