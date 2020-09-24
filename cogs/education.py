@@ -6,7 +6,11 @@ from profanityfilter import ProfanityFilter
 
 pf = ProfanityFilter()
 
-async def is_not_awy(ctx): # checks if command caller is not Awy.
+"""
+Checks if message author is not Awy by his ID.
+returns boolean
+"""
+async def is_not_awy(ctx):
     return ctx.author.id != 245247289935921152
 
 class Education(commands.Cog):
@@ -18,10 +22,17 @@ class Education(commands.Cog):
     async def on_ready(self):
         print('[COG] Education ready.')
 
+    """
+    When user calls word command with input (word),
+    translates this word to all Slackers' languages (calling translate_word from word.py),
+    searches for definitions (calling get_definitions from word.py)
+    and embeds it.
+    returns embed with searched word, definitions and translations to languages (as fields)
+    """
     @commands.command()
     async def word(self, ctx, *text):
         try:
-            if len(text) > 1:
+            if len(text) > 1: # if more than 1 word was typed after .word (e.g. .word bonobo bonobo)
                 await ctx.send("stupid bonobo, the command is called .word (singular) for a reason.")
                 return None
             english_word = text[0]
@@ -34,7 +45,7 @@ class Education(commands.Cog):
 
             def_string = get_definitions(english_word)
 
-            if def_string == "":
+            if def_string == "": # if there are no definitions to given word
                 embed_word = discord.Embed(
                     title = '{}'.format(english_word.upper()),
                     colour = discord.Color.orange()
@@ -55,9 +66,13 @@ class Education(commands.Cog):
 
             await ctx.send(embed = embed_word)
 
-        except IndexError: # If someone types something after .word
+        except IndexError: # If IndexError occurs
             print("[.WORD] IndexError")
 
+    """
+    Gets random word (calling get_random_word from word.py)
+    rest as in @word command
+    """
     @commands.command()
     async def rword(self, ctx):
         english_word = get_random_word()
@@ -91,6 +106,12 @@ class Education(commands.Cog):
 
         await ctx.send(embed = embed_word)
 
+    """
+    When user calls gimage command with input,
+    it checks if the query is profanity (checked by ProfanityFilter), if its not
+    calls webscrap_google_images (webscraping.py) passing user's query and 1 (so it returns only 1 image).
+    returns image url (string)
+    """
     @commands.command()
     @commands.check(is_not_awy)
     async def gimage(self, ctx, *text):
@@ -99,9 +120,16 @@ class Education(commands.Cog):
             return None
         query = text
         img_url = webscrap_google_images(query, 1)
-        for img in img_url:
+        for img in img_url: #unwraps img_url (because it's a list)
             await ctx.send(img)
 
+    """
+    When user calls fact command,
+    it calls webscrap_fact (webscraping.py),
+    prettifies the output (sometimes it contains <em> </em>)
+    and embeds it
+    returns embed with fact (it's text) and an image.
+    """
     @commands.command()
     async def fact(self, ctx):
         img_url, fact_descr = webscrap_fact()
@@ -109,15 +137,19 @@ class Education(commands.Cog):
         fact_descr = fact_descr.replace('</em>', '')
         embed_fact = discord.Embed(
                 title = fact_descr,
-                colour = discord.Color.orange()
+                colour = discord.Color.greyple()
             )
         embed_fact.set_image(url = img_url)
         await ctx.send(embed = embed_fact)
 
+    """
+    Called if CommandInvokeError occurs while calling fact command. (it sometimes happens, unknown reason)
+    If it happens, it sends a message in the channel.
+    """
     @fact.error
     async def fact_error(self, ctx, error):
         if isinstance(error, commands.CommandInvokeError):
-            await ctx.send('Cene bugged me again :(')
+            await ctx.send('Cene bugged me again, try one more time, please :feelsbadman:')
 
 
 def setup(client):

@@ -117,6 +117,8 @@ async def refresh_list_loop():
 
 """
 on_message is called when message is sent.
+Case 1) If Azhanim wrote something it saves the time at which message was sent to github slackerbot_misc repository
+        (calling save_to_github from github_intergration.py) in format (year\nmonth\nday\nhour\nminute\nsecond)
 """
 @client.event
 async def on_message(message):
