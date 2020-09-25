@@ -11,7 +11,7 @@ class Other(commands.Cog):
         print('[COG] Other ready.')
 
     @commands.command(aliases = ['pp'])
-    async def get_profile_pic(self, ctx, user: discord.User):
+    async def profilepic(self, ctx, user: discord.User):
         await ctx.send(user.avatar_url)
 
 def setup(client):
