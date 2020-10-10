@@ -10,6 +10,10 @@ ANSWERS_TRIVIA = {0: 'a',
 class Question:
     def __init__(self, ctx):
         self.category, self.difficulty, self.question, self.correct_answer, self.answers, self.typ = webscrap_trivia()
+        if "&quot;" in self.question:
+            self.question = self.question.replace("&quot;", '"')
+        if "&#039;" in self.question:
+            self.question = self.question.replace("&#039;", "'")
         self.ctx = ctx
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
@@ -44,6 +48,11 @@ class Question:
             answers_string = "a. {}\nb. {}\nc. {}\nd. {}".format(*self.answers)
         if self.typ == "boolean":
             answers_string = "a. {}\nb. {}".format(*self.answers)
+
+        if "&quot;" in answers_string:
+            answers_string = answers_string.replace("&quot;", '"')
+        if "&#039;" in answers_string:
+            answers_string = answers_string.replace("&#039;", "'")
         embed_trivia = discord.Embed(
             title=self.question,
             description=answers_string,
