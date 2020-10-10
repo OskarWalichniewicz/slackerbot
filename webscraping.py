@@ -159,9 +159,12 @@ def webscrap_didyoumean(query, origin_language='auto', destination_language='en'
     url = 'http://translate.google.com/#{}|{}|{}'.format(
         origin_language, destination_language, query)
     driver.get(url)
-    didyoumean = driver.find_element_by_id("spelling-correction")
-    didyoumean_text = didyoumean.text
-    separator = ':'
-    # seperate text with : (cuz its "Did you mean: [word]") and also removes first character (space)
-    didyoumean_final = didyoumean_text.split(separator, 1)[1][1:]
+    try:
+        didyoumean = driver.find_element_by_id("spelling-correction")
+        didyoumean_text = didyoumean.text
+        separator = ':'
+        # seperate text with : (cuz its "Did you mean: [word]") and also removes first character (space)
+        didyoumean_final = didyoumean_text.split(separator, 1)[1][1:]
+    except IndexError:
+        return ""
     return didyoumean_final

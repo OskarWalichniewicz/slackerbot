@@ -47,10 +47,13 @@ class Translate(commands.Cog):
 
     @commands.command(aliases=['dym'])
     async def didyoumean(self, ctx, *, query):
-        if query.contains(" "):
+        if " " in query:
             query.replace(" ", "+")
         didyoumean = webscrap_didyoumean(origin_language='auto', query=query)
-        await ctx.send("Did you mean: {}".format(didyoumean))
+        if didyoumean != "":
+            await ctx.send("Did you mean: {}".format(didyoumean))
+        else:
+            await ctx.send("Looks fine to me.")
 
 
 def setup(client):
