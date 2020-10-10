@@ -15,7 +15,7 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def trivia(self, ctx):
-        self.question.context = ctx
+        self.question.set_ctx(ctx)
         await self.question.ask_question()
 
     @commands.Cog.listener()

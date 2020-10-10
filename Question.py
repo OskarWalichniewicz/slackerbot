@@ -24,6 +24,9 @@ class Question:
     def get_category(self):
         return self.category
 
+    def set_ctx(self, ctx):
+        self.ctx = ctx
+
     def get_difficulty(self):
         return self.difficulty
 
