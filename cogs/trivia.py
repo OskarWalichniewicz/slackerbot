@@ -13,6 +13,8 @@ class Trivia(commands.Cog):
     async def on_ready(self):
         print('[COG] Trivia ready.')
 
+    """
+    """
     @commands.command()
     async def trivia(self, ctx):
         self.question.set_ctx(ctx)
