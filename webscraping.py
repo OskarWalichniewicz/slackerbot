@@ -167,11 +167,12 @@ def webscrap_didyoumean(query, origin_language='auto', destination_language='en'
         didyoumean_text = didyoumean.text
         if "Showing translation for" in didyoumean_text:
             separator = 'for'
-            didyoumean_final = didyoumean_text.split(separator, 1)[1][1:]
+            first_line = didyoumean_text.split("\n")[0]
+            didyoumean_final = first_line.split(separator, 1)[1][1:]
         elif "Did you mean:" in didyoumean_text:
             separator = ':'
             # seperate text with : (cuz its "Did you mean: [word]") and also removes first character (space)
-            first_line = didyoumean_text.splitlines()[0]
+            first_line = didyoumean_text.split("\n")[0]
             didyoumean_final = first_line.split(separator, 1)[1][1:]
         else:
             didyoumean_final = ""
