@@ -29,7 +29,7 @@ class Trivia(commands.Cog):
         if self.question is not None:
             if self.question.get_awaiting_answer():
                 channel = message.channel
-                if await self.question.check_answer(message, channel, t0):
+                if await self.question.check_answer(message, channel):
                     self.question = Question(None)
                 if message.content == "cene is handsome":
                     self.question.set_awaiting_answer(False)
