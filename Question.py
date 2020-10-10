@@ -39,12 +39,12 @@ class Question:
         if self.typ == "boolean":
             answers_string = "a. {}\nb. {}".format(*self.answers)
         embed_trivia = discord.Embed(
-            title=question,
+            title=self.question,
             description=answers_str,
-            colour=discord.Color.blurple()
+            colour=discord.Color.white()
         )
         embed_trivia.set_footer(
-            text="Category: {} | Difficulty: {} | Time: {}".format(category, difficulty, "30 seconds"))
+            text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
         await self.ctx.send(embed=embed_trivia)
 
     async def check_answer(self, answer):
