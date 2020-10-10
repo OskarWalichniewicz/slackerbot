@@ -55,12 +55,15 @@ class Question:
         self.awaiting_answer = True
 
     async def check_answer(self, message, channel):
-        if message.author not in self.losers:
-            if message.content == self.letter:
-                await channel.send("{} is smartest bonobo!".format(message.author.mention))
-                self.ongoing = False
-            elif message.content != self.letter:
-                await channel.send("{}, WRONG! You are out!".format(message.author.mention))
-                self.losers.append(message.author)
+        if message.content in ANSWERS_TRIVIA:
+            if message.author not in self.losers:
+                if message.content == self.letter:
+                    await channel.send("{} is smartest bonobo!".format(message.author.mention))
+                    self.ongoing = False
+                elif message.content != self.letter:
+                    await channel.send("{}, WRONG! You are out!".format(message.author.mention))
+                    self.losers.append(message.author)
+            else:
+                await channel.send("{}, you already answered!".format(message.author.mention))
         else:
-            await channel.send("{}, you already answered!".format(message.author.mention))
+            pass
