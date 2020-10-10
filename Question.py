@@ -10,7 +10,7 @@ ANSWERS_TRIVIA = {0: 'a',
 class Question:
     def __init__(self, ctx):
         self.category, self.difficulty, self.question, self.correct_answer, self.answers, self.typ = webscrap_trivia()
-        self.client = client
+        self.ctx = ctx
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
         self.ongoing = True
