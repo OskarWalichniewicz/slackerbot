@@ -156,6 +156,7 @@ async def on_message(message):
     if question is not None:
         if question.ongoing == True:
             await question.check_answer(message)
+            print("testing")
 
     # this is necessary part of on_message().
     await client.process_commands(message)
