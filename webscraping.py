@@ -149,9 +149,12 @@ def webscrap_dog():
 
 
 """
+Uses google didyoumean feature from google translate.
 params: origin language (auto or en)
         destination language - can be anything
         query - if spaces, replace them with +
+returns didyoumean text or
+        empty string (if didyoumean was not found)
 """
 
 
