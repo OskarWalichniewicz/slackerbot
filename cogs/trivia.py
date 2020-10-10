@@ -16,12 +16,10 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def trivia(self, ctx):
-        self.question = Question(ctx)
         if self.question.get_awaiting_answer():
             await ctx.send("There is already one question awaiting answer!")
         else:
-            now = time.time()
-            future = now + 30
+
             await self.question.ask_question()
 
     @commands.Cog.listener()
@@ -29,7 +27,7 @@ class Trivia(commands.Cog):
         if self.question is not None:
             if self.question.get_awaiting_answer():
                 channel = message.channel
-                if await self.question.check_answer(message, channel, time.time(), future):
+                if await self.question.check_answer(message, channel):
                     self.question = Question(self.client)
 
 

@@ -54,19 +54,16 @@ class Question:
         await self.ctx.send(embed=embed_trivia)
         self.awaiting_answer = True
 
-    async def check_answer(self, message, channel, start_time, end_time):
-        if start_time < end_time:
-            if message.content in ANSWERS_TRIVIA.values():
-                if message.author not in self.losers:
-                    if message.content == self.letter:
-                        await channel.send("{} is smartest bonobo!".format(message.author.mention))
-                        self.ongoing = False
-                    elif message.content != self.letter:
-                        await channel.send("{}, WRONG! You are out!".format(message.author.mention))
-                        self.losers.append(message.author)
-                else:
-                    await channel.send("{}, you already answered!".format(message.author.mention))
+    async def check_answer(self, message, channel):
+        if message.content in ANSWERS_TRIVIA.values():
+            if message.author not in self.losers:
+                if message.content == self.letter:
+                    await channel.send("{} is smartest bonobo!".format(message.author.mention))
+                    self.ongoing = False
+                elif message.content != self.letter:
+                    await channel.send("{}, WRONG! You are out!".format(message.author.mention))
+                    self.losers.append(message.author)
             else:
-                pass
+                await channel.send("{}, you already answered!".format(message.author.mention))
         else:
-            await channel.send("Time passed!")
+            pass
