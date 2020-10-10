@@ -35,9 +35,9 @@ class Question:
 
     async def ask_question(self):
         if self.typ == "multiple":
-            answers_string = "a. {}\nb. {}\nc. {}\nd. {}".format(*answers)
+            answers_string = "a. {}\nb. {}\nc. {}\nd. {}".format(*self.answers)
         if self.typ == "boolean":
-            answers_string = "a. {}\nb. {}".format(*answers)
+            answers_string = "a. {}\nb. {}".format(*self.answers)
         embed_trivia = discord.Embed(
             title=question,
             description=answers_str,
