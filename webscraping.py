@@ -179,3 +179,29 @@ def webscrap_didyoumean(query, origin_language='auto', destination_language='en'
         return didyoumean_final
     except IndexError:
         return ""
+
+
+"""
+"""
+
+
+def webscrap_trivia():
+    load_json = json.loads(urlrequest.urlopen(
+        "https://opentdb.com/api.php?amount=1").read().decode("utf-8"))
+
+    results = load_json['results'][0]
+
+    correct_answer = []
+    correct_answer.append(results['correct_answer'])
+
+    # answers = results['incorrect_answers'] + results['correct_answer']
+    answers = results['incorrect_answers'] + correct_answer
+    random.shuffle(answers)
+
+    category = results['category']
+    difficulty = results['difficulty']
+    question = results['question']
+    typ = results['type']
+    correct_answer_str = correct_answer[0]
+
+    return category, difficulty, question, correct_answer_str, answers, typ
