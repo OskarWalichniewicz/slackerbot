@@ -49,7 +49,7 @@ class Translate(commands.Cog):
     async def didyoumean(self, ctx, *, query):
         if query.contains(" "):
             query.replace(" ", "+")
-        didyoumean = webscrap_didyoumean(query=query)
+        didyoumean = webscrap_didyoumean(query)
         await ctx.send("Did you mean: {}".format(didyoumean))
 
 
