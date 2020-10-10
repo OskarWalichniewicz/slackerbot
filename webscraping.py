@@ -171,7 +171,10 @@ def webscrap_didyoumean(query, origin_language='auto', destination_language='en'
         elif "Did you mean:" in didyoumean_text:
             separator = ':'
             # seperate text with : (cuz its "Did you mean: [word]") and also removes first character (space)
-            didyoumean_final = didyoumean_text.split(separator, 1)[1][1:]
+            first_line = didyoumean_text.splitlines()[0]
+            didyoumean_final = first_line.split(separator, 1)[1][1:]
+        else:
+            didyoumean_final = ""
+        return didyoumean_final
     except IndexError:
         return ""
-    return didyoumean_final
