@@ -41,7 +41,7 @@ class Question:
         embed_trivia = discord.Embed(
             title=self.question,
             description=answers_string,
-            colour=discord.Color.white()
+            colour=discord.Color.greyple()
         )
         embed_trivia.set_footer(
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
