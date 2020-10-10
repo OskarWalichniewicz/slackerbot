@@ -27,7 +27,7 @@ class Trivia(commands.Cog):
             if self.question.get_awaiting_answer():
                 channel = message.channel
                 if await self.question.check_answer(message, channel):
-                    self.question = Question(self.client)
+                    self.question = Question(None)
 
 
 def setup(client):

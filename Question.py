@@ -60,10 +60,13 @@ class Question:
                 if message.content == self.letter:
                     await channel.send("{} is smartest bonobo!".format(message.author.mention))
                     self.ongoing = False
+                    return True
                 elif message.content != self.letter:
                     await channel.send("{}, WRONG! You are out!".format(message.author.mention))
                     self.losers.append(message.author)
+                    return False
             else:
                 await channel.send("{}, you already answered!".format(message.author.mention))
+                return False
         else:
-            pass
+            return False
