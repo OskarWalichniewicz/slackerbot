@@ -18,10 +18,14 @@ class Question:
         self.ctx = ctx
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
+        self.timer = None
         self.awaiting_answer = False
 
     def get_question(self):
         return self.question
+
+    def set_timer(self, timer):
+        self.timer = timer
 
     def get_awaiting_answer(self):
         return self.awaiting_answer
@@ -64,9 +68,9 @@ class Question:
         await self.ctx.send(embed=embed_trivia)
         self.awaiting_answer = True
 
-    async def check_answer(self, message, channel, timer):
-        end_time = timer + 30
-        if not timer >= end_time:
+    async def check_answer(self, message, channel):
+        end_time = self.timer + 30
+        if not self.timer >= end_time:
             if message.content in ANSWERS_TRIVIA.values():
                 if message.author not in self.losers:
                     if message.content == self.letter:

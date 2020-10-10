@@ -23,6 +23,7 @@ class Trivia(commands.Cog):
             await ctx.send("There is already one question awaiting answer!")
         else:
             t0 = time.time()
+            self.question.set_timer(t0)
             await self.question.ask_question()
 
     @commands.Cog.listener()
