@@ -152,11 +152,6 @@ async def on_message(message):
         save_to_github(az_file_input, "az.txt",
                        "OskarWalichniewicz/slackerbot_misc", "Az sent message.")
 
-    if question is not None:
-        if question.ongoing == True:
-            print("test")
-            await question.check_answer(message)
-
     # this is necessary part of on_message().
     await client.process_commands(message)
 

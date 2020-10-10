@@ -17,6 +17,10 @@ class Trivia(commands.Cog):
         question = Question(ctx)
         await question.ask_question()
 
+    @commands.Cog.listener()
+    async def on_message(self, message):
+        await question.check_answer()
+
 
 def setup(client):
     client.add_cog(Trivia(client))
