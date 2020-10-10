@@ -40,7 +40,7 @@ class Question:
             answers_string = "a. {}\nb. {}".format(*self.answers)
         embed_trivia = discord.Embed(
             title=self.question,
-            description=answers_str,
+            description=answers_string,
             colour=discord.Color.white()
         )
         embed_trivia.set_footer(
