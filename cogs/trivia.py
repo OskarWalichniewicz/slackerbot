@@ -1,7 +1,6 @@
 from Question import Question
 import discord
 from discord.ext import commands
-import time
 
 
 class Trivia(commands.Cog):
@@ -16,10 +15,10 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def trivia(self, ctx):
+        self.question.set_ctx(ctx)
         if self.question.get_awaiting_answer():
             await ctx.send("There is already one question awaiting answer!")
         else:
-
             await self.question.ask_question()
 
     @commands.Cog.listener()
