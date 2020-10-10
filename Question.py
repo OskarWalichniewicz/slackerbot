@@ -47,13 +47,13 @@ class Question:
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
         await self.ctx.send(embed=embed_trivia)
 
-    async def check_answer(self, answer):
-        if answer.author not in self.losers:
-            if answer == self.letter:
-                await self.ctx.send("{} is smartest bonobo!".format(answer.author.mention))
+    async def check_answer(self, message):
+        if message.author not in self.losers:
+            if message.content == self.letter:
+                await self.ctx.send("{} is smartest bonobo!".format(message.author.mention))
                 self.ongoing = False
-            elif answer != self.letter:
-                await self.ctx.send("{}, WRONG! You are out!".format(answer.author.mention))
-                self.losers.append(answer.author)
+            elif message.content != self.letter:
+                await self.ctx.send("{}, WRONG! You are out!".format(message.author.mention))
+                self.losers.append(message.author)
         else:
-            await self.ctx.send("{}, you already answered!".format(answer.author.mention))
+            await self.ctx.send("{}, you already answered!".format(message.author.mention))
