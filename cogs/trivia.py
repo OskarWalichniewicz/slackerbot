@@ -7,7 +7,7 @@ class Trivia(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.question = Question(client)
+        self.question = Question(None)
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -15,6 +15,7 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def trivia(self, ctx):
+        self.question.context = ctx
         await self.question.ask_question()
 
     @commands.Cog.listener()
