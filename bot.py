@@ -132,6 +132,8 @@ Case 1) If Azhanim wrote something it saves the time at which message was sent t
         (calling save_to_github from github_intergration.py) in format (year\nmonth\nday\nhour\nminute\nsecond)
 """
 
+question = None
+
 
 @client.event
 async def on_message(message):
