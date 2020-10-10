@@ -21,7 +21,8 @@ class Trivia(commands.Cog):
     async def on_message(self, message):
         if self.question is not None:
             if self.question.ongoing:
-                await question.check_answer(message)
+                if await question.check_answer(message):
+                    self.question = Question(self.client)
 
 
 def setup(client):
