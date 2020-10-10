@@ -165,9 +165,13 @@ def webscrap_didyoumean(query, origin_language='auto', destination_language='en'
     try:
         didyoumean = driver.find_element_by_id("spelling-correction")
         didyoumean_text = didyoumean.text
-        separator = ':'
-        # seperate text with : (cuz its "Did you mean: [word]") and also removes first character (space)
-        didyoumean_final = didyoumean_text.split(separator, 1)[1][1:]
+        if "Showing translation for" in didyoumean_text:
+            separator = 'for'
+            didyoumean_final = didyoumean_text.split(separator, 1)[1][1:]
+        elif "Did you mean:" in didyoumean_text:
+            separator = ':'
+            # seperate text with : (cuz its "Did you mean: [word]") and also removes first character (space)
+            didyoumean_final = didyoumean_text.split(separator, 1)[1][1:]
     except IndexError:
         return ""
     return didyoumean_final
