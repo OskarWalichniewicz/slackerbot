@@ -1,5 +1,6 @@
 from webscraping import *
 import discord
+import time
 
 ANSWERS_TRIVIA = {0: 'a',
                   1: 'b',
@@ -64,18 +65,24 @@ class Question:
         self.awaiting_answer = True
 
     async def check_answer(self, message, channel):
-        if message.content in ANSWERS_TRIVIA.values():
-            if message.author not in self.losers:
-                if message.content == self.letter:
-                    await channel.send("{} is smartest bonobo!".format(message.author.mention))
-                    self.ongoing = False
-                    return True
-                elif message.content != self.letter:
-                    await channel.send("{}, WRONG! You are out!".format(message.author.mention))
-                    self.losers.append(message.author)
+        t0 = time.time()
+        end_time = t0 + 30
+        if not t0 >= end_time:
+            if message.content in ANSWERS_TRIVIA.values():
+                if message.author not in self.losers:
+                    if message.content == self.letter:
+                        await channel.send("{} is smartest bonobo!".format(message.author.mention))
+                        self.ongoing = False
+                        return True
+                    elif message.content != self.letter:
+                        await channel.send("{}, WRONG! You are out!".format(message.author.mention))
+                        self.losers.append(message.author)
+                        return False
+                else:
+                    await channel.send("{}, you already answered!".format(message.author.mention))
                     return False
             else:
-                await channel.send("{}, you already answered!".format(message.author.mention))
                 return False
         else:
-            return False
+            await channel.send("Time's out!")
+            return True
