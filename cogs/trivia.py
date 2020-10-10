@@ -22,8 +22,6 @@ class Trivia(commands.Cog):
         if self.question.get_awaiting_answer():
             await ctx.send("There is already one question awaiting answer!")
         else:
-            t0 = time.time()
-            self.question.set_timer(t0)
             await self.question.ask_question()
 
     @commands.Cog.listener()
@@ -34,6 +32,7 @@ class Trivia(commands.Cog):
                 if await self.question.check_answer(message, channel, t0):
                     self.question = Question(None)
                 if message.content == "cene is handsome":
+                    self.question.set_awaiting_answer(False)
                     self.question = Question(None)
 
 

@@ -30,6 +30,9 @@ class Question:
     def get_awaiting_answer(self):
         return self.awaiting_answer
 
+    def set_awaiting_answer(self, awaiting_answer):
+        self.awaiting_answer = awaiting_answer
+
     def get_category(self):
         return self.category
 
@@ -69,23 +72,18 @@ class Question:
         self.awaiting_answer = True
 
     async def check_answer(self, message, channel):
-        end_time = self.timer + 30
-        if not self.timer >= end_time:
-            if message.content in ANSWERS_TRIVIA.values():
-                if message.author not in self.losers:
-                    if message.content == self.letter:
-                        await channel.send("{} is smartest bonobo!".format(message.author.mention))
-                        self.ongoing = False
-                        return True
-                    elif message.content != self.letter:
-                        await channel.send("{}, WRONG! You are out!".format(message.author.mention))
-                        self.losers.append(message.author)
-                        return False
-                else:
-                    await channel.send("{}, you already answered!".format(message.author.mention))
+        if message.content in ANSWERS_TRIVIA.values():
+            if message.author not in self.losers:
+                if message.content == self.letter:
+                    await channel.send("{} is smartest bonobo!".format(message.author.mention))
+                    self.ongoing = False
+                    return True
+                elif message.content != self.letter:
+                    await channel.send("{}, WRONG! You are out!".format(message.author.mention))
+                    self.losers.append(message.author)
                     return False
             else:
+                await channel.send("{}, you already answered!".format(message.author.mention))
                 return False
         else:
-            await channel.send("Time's out!")
-            return True
+            return False
