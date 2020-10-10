@@ -64,10 +64,9 @@ class Question:
         await self.ctx.send(embed=embed_trivia)
         self.awaiting_answer = True
 
-    async def check_answer(self, message, channel):
-        t0 = time.time()
-        end_time = t0 + 30
-        if not t0 >= end_time:
+    async def check_answer(self, message, channel, timer):
+        end_time = timer + 30
+        if not timer >= end_time:
             if message.content in ANSWERS_TRIVIA.values():
                 if message.author not in self.losers:
                     if message.content == self.letter:
