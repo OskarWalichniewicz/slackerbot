@@ -5,9 +5,11 @@ import asyncio
 from github_integration import *
 from datetime import datetime, time
 from reddit import *
+from Question import *
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
+question = Question(client)
 
 """
 Checks if current time (UTC) is between given values.
@@ -132,8 +134,6 @@ Case 1) If Azhanim wrote something it saves the time at which message was sent t
         (calling save_to_github from github_intergration.py) in format (year\nmonth\nday\nhour\nminute\nsecond)
 """
 
-question = None
-
 
 @client.event
 async def on_message(message):
@@ -155,8 +155,8 @@ async def on_message(message):
 
     if question is not None:
         if question.ongoing == True:
-            await question.check_answer(message)
-            print("testing")
+            if await question.check_answer(message):
+                question = Question(client)
 
     # this is necessary part of on_message().
     await client.process_commands(message)
