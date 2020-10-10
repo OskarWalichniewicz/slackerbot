@@ -7,6 +7,7 @@ class Trivia(commands.Cog):
 
     def __init__(self, client):
         self.client = client
+        self.question = Question(client)
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -14,13 +15,12 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def trivia(self, ctx):
-        question = Question(ctx)
-        await question.ask_question()
+        await self.question.ask_question()
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        if question is not None:
-            if question.ongoing:
+        if self.question is not None:
+            if self.question.ongoing:
                 await question.check_answer(message)
 
 
