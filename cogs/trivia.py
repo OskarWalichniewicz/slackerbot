@@ -15,7 +15,7 @@ class Trivia(commands.Cog):
     @commands.command()
     async def trivia(self, ctx):
         question = Question(ctx)
-        question.ask_question()
+        await question.ask_question()
 
 
 def setup(client):
