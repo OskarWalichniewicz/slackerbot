@@ -9,7 +9,6 @@ from Question import *
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
-question = Question(client)
 
 """
 Checks if current time (UTC) is between given values.
@@ -155,8 +154,8 @@ async def on_message(message):
 
     if question is not None:
         if question.ongoing == True:
-            if await question.check_answer(message):
-                question = Question(client)
+            print("test")
+            await question.check_answer(message)
 
     # this is necessary part of on_message().
     await client.process_commands(message)
