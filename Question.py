@@ -13,10 +13,13 @@ class Question:
         self.ctx = ctx
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
-        self.ongoing = True
+        self.awaiting_answer = False
 
     def get_question(self):
         return self.question
+
+    def get_awaiting_answer(self):
+        return self.awaiting_answer
 
     def get_category(self):
         return self.category
@@ -46,14 +49,15 @@ class Question:
         embed_trivia.set_footer(
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
         await self.ctx.send(embed=embed_trivia)
+        self.awaiting_answer = True
 
-    async def check_answer(self, message):
+    async def check_answer(self, message, channel):
         if message.author not in self.losers:
             if message.content == self.letter:
-                await self.ctx.send("{} is smartest bonobo!".format(message.author.mention))
+                await channel.send("{} is smartest bonobo!".format(message.author.mention))
                 self.ongoing = False
             elif message.content != self.letter:
-                await self.ctx.send("{}, WRONG! You are out!".format(message.author.mention))
+                await channel.send("{}, WRONG! You are out!".format(message.author.mention))
                 self.losers.append(message.author)
         else:
-            await self.ctx.send("{}, you already answered!".format(message.author.mention))
+            await channel.send("{}, you already answered!".format(message.author.mention))
