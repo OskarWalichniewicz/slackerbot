@@ -16,7 +16,10 @@ class Trivia(commands.Cog):
     @commands.command()
     async def trivia(self, ctx):
         self.question.set_ctx(ctx)
-        await self.question.ask_question()
+        if self.question.get_awaiting_answer():
+            await ctx.send("There is already one question awaitin answer!")
+        else:
+            await self.question.ask_question()
 
     @commands.Cog.listener()
     async def on_message(self, message):
