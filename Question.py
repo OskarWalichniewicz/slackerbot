@@ -1,7 +1,5 @@
 from webscraping import *
 import discord
-from time import *
-import threading
 
 ANSWERS_TRIVIA = {0: 'a',
                   1: 'b',
