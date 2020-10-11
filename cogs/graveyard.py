@@ -5,6 +5,7 @@ import urllib.request
 from github_integration import read_file
 import contextlib
 from mongoDB import MongoDB
+import os
 
 
 class Graveyard(commands.Cog):
@@ -74,8 +75,9 @@ class Graveyard(commands.Cog):
     @commands.command()
     async def az_2(self, ctx):
         self.mongoDB.open_collection('last_message')
+        az_id = str(os.environ['AZ_DISCORD_ID'])
         query = {
-            'discord_id': str(os.environ['AZ_DISCORD_ID'])
+            'discord_id': az_id
         }
         az = self.mongoDB.get_document(query)
         az_date = datetime(
