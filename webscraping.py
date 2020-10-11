@@ -209,10 +209,11 @@ def webscrap_trivia():
 
 
 """
+https://github.com/15Dkatz/official_joke_api
 """
 
 
-def webscap_joke():
+def webscrap_joke():
     url = 'https://official-joke-api.appspot.com/random_joke'
     load_json = json.loads(urlrequest.urlopen(url).read())
     joke = str(load_json['setup']) + "\n.\n.\n.\n" + \
@@ -221,6 +222,7 @@ def webscap_joke():
 
 
 """
+https://api.adviceslip.com/
 """
 
 
