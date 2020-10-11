@@ -9,7 +9,7 @@ class MongoDB():
         self.default_database = 'slacker_db'
 
         mongo_url = "mongodb+srv://{}:{}@slackersdb.nrxyg.mongodb.net/{}?retryWrites=true&w=majority".format(
-            mongo_username, mongo_password, default_database)
+            self.username, self._password, self.default_database)
 
         self.client = MongoClient(mongo_url)
 
