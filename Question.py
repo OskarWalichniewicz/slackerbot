@@ -22,6 +22,9 @@ class Question:
     def get_question(self):
         return self.question
 
+    def get_letter(self):
+        return self.letter
+
     def get_awaiting_answer(self):
         return self.awaiting_answer
 
