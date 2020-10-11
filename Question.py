@@ -10,7 +10,7 @@ ANSWERS_TRIVIA = {0: 'a',
 
 
 class Question:
-    def __init__(self, ctx, timer):
+    def __init__(self, ctx):
         self.category, self.difficulty, self.question, self.correct_answer, self.answers, self.typ = webscrap_trivia()
         if "&quot;" in self.question:
             self.question = self.question.replace("&quot;", '"')
@@ -19,14 +19,10 @@ class Question:
         self.ctx = ctx
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
-        self.timer = timer
         self.awaiting_answer = False
 
     def get_question(self):
         return self.question
-
-    def set_timer(self, timer):
-        self.timer = timer
 
     def get_awaiting_answer(self):
         return self.awaiting_answer
@@ -88,8 +84,3 @@ class Question:
                 return False
         else:
             return False
-
-    async def timer(self):
-        if self.awaiting_answer == True:
-            await asyncio.sleep(self.timer)
-            return True
