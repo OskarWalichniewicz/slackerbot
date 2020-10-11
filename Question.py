@@ -1,7 +1,7 @@
 from webscraping import *
 import discord
 import time
-import asyncio
+import threading
 
 ANSWERS_TRIVIA = {0: 'a',
                   1: 'b',
@@ -67,20 +67,36 @@ class Question:
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
         await self.ctx.send(embed=embed_trivia)
         self.awaiting_answer = True
+        countdown_thread.start()
 
     async def check_answer(self, message, channel):
-        if message.content in ANSWERS_TRIVIA.values():
-            if message.author not in self.losers:
-                if message.content == self.letter:
-                    await channel.send("{} is smartest bonobo!".format(message.author.mention))
-                    self.ongoing = False
-                    return True
-                elif message.content != self.letter:
-                    await channel.send("{}, WRONG! You are out!".format(message.author.mention))
-                    self.losers.append(message.author)
+        while my_timer > 0:
+            if message.content in ANSWERS_TRIVIA.values():
+                if message.author not in self.losers:
+                    if message.content == self.letter:
+                        await channel.send("{} is smartest bonobo!".format(message.author.mention))
+                        self.ongoing = False
+                        return True
+                    elif message.content != self.letter:
+                        await channel.send("{}, WRONG! You are out!".format(message.author.mention))
+                        self.losers.append(message.author)
+                        return False
+                else:
+                    await channel.send("{}, you already answered!".format(message.author.mention))
                     return False
             else:
-                await channel.send("{}, you already answered!".format(message.author.mention))
                 return False
-        else:
-            return False
+        await channel.send("Time's up!")
+        return True
+
+
+def countdown():
+    global my_timer
+    my_timer = 30
+    for x in range(3):
+        my_timer -= 10
+        sleep(10)
+    print("Time's up")
+
+
+countdown_thread = threading.Thread(target=countdown)
