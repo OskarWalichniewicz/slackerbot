@@ -206,3 +206,15 @@ def webscrap_trivia():
     correct_answer_str = correct_answer[0]
 
     return category, difficulty, question, correct_answer_str, answers, typ
+
+
+"""
+"""
+
+
+def webscap_joke():
+    url = 'https://official-joke-api.appspot.com/random_joke'
+    load_json = json.loads(urlrequest.urlopen(url).read())
+    joke = str(load_json['setup']) + "\n.\n.\n.\n" + \
+        str(load_json['punchline'])
+    return joke
