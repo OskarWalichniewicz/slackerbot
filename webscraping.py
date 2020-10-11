@@ -230,3 +230,13 @@ def webscrap_advice():
     url = 'https://api.adviceslip.com/advice'
     load_json = json.loads(urlrequest.urlopen(url).read())
     return load_json['slip']['advice']
+
+
+"""
+"""
+
+
+def webscrap_insult():
+    url = 'https://evilinsult.com/generate_insult.php?lang=en&type=json'
+    load_json = json.loads(urlrequest.urlopen(url).read())
+    return load_json['insult']

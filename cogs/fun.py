@@ -44,6 +44,13 @@ class Fun(commands.Cog):
         advice = webscrap_advice()
         await ctx.send(advice)
 
+    """
+    """
+    @commands.command()
+    async def insult(self, ctx):
+        insult = webscrap_insult()
+        await ctx.send(insult)
+
 
 def setup(client):
     client.add_cog(Fun(client))
