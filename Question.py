@@ -71,7 +71,7 @@ class Question:
             if message.author not in self.losers:
                 if message.content == self.letter:
                     await channel.send("{} is smartest bonobo!".format(message.author.mention))
-                    self.ongoing = False
+                    self.awaiting_answer = False
                     return True
                 elif message.content != self.letter:
                     await channel.send("{}, WRONG! You are out!".format(message.author.mention))
