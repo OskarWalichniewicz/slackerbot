@@ -70,7 +70,6 @@ class Question:
         embed_trivia.set_footer(
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
         await self.ctx.send(embed=embed_trivia)
-        await self.timer(self.curr)
         self.awaiting_answer = True
 
     async def check_answer(self, message, channel):
@@ -90,7 +89,7 @@ class Question:
         else:
             return False
 
-    async def timer(self, self.timer):
+    async def timer(self):
         if self.awaiting_answer == True:
             await asyncio.sleep(self.timer)
             return True

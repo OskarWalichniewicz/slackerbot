@@ -36,6 +36,9 @@ class Trivia(commands.Cog):
                 if message.content == "cene is handsome":
                     self.question.set_awaiting_answer(False)
                     self.question = Question(None, 30)
+                if await self.question.timer():
+                    await ctx.send("Time's up!")
+                    self.question = Question(None, 30)
 
 
 def setup(client):
