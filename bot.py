@@ -156,10 +156,11 @@ async def on_message(message):
                        "OskarWalichniewicz/slackerbot_misc", "Az sent message.")
 
         mongoDB.open_collection('last_message')
-        query = {
-            'discord_id': str(os.environ['AZ_DISCORD_ID'])
+        az_id = str(os.environ['AZ_DISCORD_ID']
+        query={
+            'discord_id': az_id
         }
-        last_message_update = {
+        last_message_update={
             'year': message.created_at.year,
             'month': message.created_at.month,
             'day': message.created_at.day,
