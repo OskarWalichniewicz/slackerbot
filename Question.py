@@ -8,7 +8,7 @@ ANSWERS_TRIVIA = {0: 'a',
 
 
 class Question:
-    def __init__(self, ctx):
+    def __init__(self):
         self.category, self.difficulty, self.question, self.correct_answer, self.answers, self.typ = webscrap_trivia()
         if "&quot;" in self.question:
             self.question = self.question.replace("&quot;", '"')
@@ -42,7 +42,7 @@ class Question:
     def get_typ(self):
         return self.typ
 
-    async def ask_question(self):
+    async def ask_question(self, ctx):
         if self.typ == "multiple":
             answers_string = "a. {}\nb. {}\nc. {}\nd. {}".format(*self.answers)
         if self.typ == "boolean":
@@ -59,7 +59,7 @@ class Question:
         )
         embed_trivia.set_footer(
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
-        await self.ctx.send(embed=embed_trivia)
+        await ctx.send(embed=embed_trivia)
         self.awaiting_answer = True
 
     async def check_answer(self, message, channel):
