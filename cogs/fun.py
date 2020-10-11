@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from reddit import *
-from webscraping import webscrap_joke, webscrap_advice
+from webscraping import *
 
 
 class Fun(commands.Cog):
