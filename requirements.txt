@@ -7,3 +7,4 @@ selenium
 profanityfilter
 praw
 wordnik-py3
+pymongo

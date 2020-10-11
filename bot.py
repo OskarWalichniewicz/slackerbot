@@ -6,9 +6,12 @@ from github_integration import *
 from datetime import datetime, time
 from reddit import *
 from Question import *
+from mongoDB import MongoDB
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
+mongoDB = MongoDB()
+mongoDB.open_database("slacker_db")
 
 """
 Checks if current time (UTC) is between given values.
@@ -151,6 +154,20 @@ async def on_message(message):
         # calls save_to_github method from github_integration.py and passes previously created string; repository name and commit message
         save_to_github(az_file_input, "az.txt",
                        "OskarWalichniewicz/slackerbot_misc", "Az sent message.")
+
+        mongoDB.open_collection('last_message')
+        query = {
+            'discord_id': str(os.environ['AZ_DISCORD_ID'])
+        }
+        last_message_update = {
+            'year': message.created_at.year,
+            'month': message.created_at.month,
+            'day': message.created_at.day,
+            'hour': message.created_at.hour,
+            'minute': message.created_at.minute,
+            'second': message.created_at.second
+        }
+        mongoDB.update(query, last_message_update)
 
     # this is necessary part of on_message().
     await client.process_commands(message)
