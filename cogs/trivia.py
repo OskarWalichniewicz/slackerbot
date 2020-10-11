@@ -23,7 +23,7 @@ class Trivia(commands.Cog):
             await ctx.send("There is already one question awaiting answer!")
         else:
             await self.question.ask_question()
-            self.timer(ctx)
+            await self.timer(ctx)
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -41,6 +41,7 @@ class Trivia(commands.Cog):
         await ctx.send("Time's up!")
         self.question.set_awaiting_answer(False)
         self.question = Question(None)
+        return True
 
 
 def setup(client):
