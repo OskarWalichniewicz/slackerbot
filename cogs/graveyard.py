@@ -80,6 +80,7 @@ class Graveyard(commands.Cog):
             'discord_id': az_id
         }
         az = self.mongoDB.get_document(query)
+        print(az)
         az_date = datetime(
             int(az['year']),
             int(az['month']),
