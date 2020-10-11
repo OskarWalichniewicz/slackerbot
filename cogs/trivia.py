@@ -9,7 +9,7 @@ class Trivia(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.question = Question(None, 30)
-        self.timer = Timer()
+        self.timer = time.perf_counter()
 
     @commands.Cog.listener()
     async def on_ready(self):
