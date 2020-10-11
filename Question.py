@@ -1,5 +1,6 @@
 from webscraping import *
 import discord
+import html
 
 ANSWERS_TRIVIA = {0: 'a',
                   1: 'b',
@@ -10,13 +11,13 @@ ANSWERS_TRIVIA = {0: 'a',
 class Question:
     def __init__(self):
         self.category, self.difficulty, self.question, self.correct_answer, self.answers, self.typ = webscrap_trivia()
-        if "&quot;" in self.question:
-            self.question = self.question.replace("&quot;", '"')
-        if "&#039;" in self.question:
-            self.question = self.question.replace("&#039;", "'")
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
         self.awaiting_answer = False
+        self.question = html.unescape(self.question)
+        for answer in self.answers:
+            answer = html.unescape(answer)
+        self.correct_answer = html.unescape(self.correct_answer)
 
     def get_question(self):
         return self.question
