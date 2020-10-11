@@ -14,7 +14,6 @@ class Question:
             self.question = self.question.replace("&quot;", '"')
         if "&#039;" in self.question:
             self.question = self.question.replace("&#039;", "'")
-        self.ctx = ctx
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
         self.awaiting_answer = False
@@ -30,9 +29,6 @@ class Question:
 
     def get_category(self):
         return self.category
-
-    def set_ctx(self, ctx):
-        self.ctx = ctx
 
     def get_difficulty(self):
         return self.difficulty
