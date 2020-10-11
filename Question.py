@@ -1,6 +1,7 @@
 from webscraping import *
 import discord
 import time
+import asyncio
 
 ANSWERS_TRIVIA = {0: 'a',
                   1: 'b',
@@ -9,7 +10,7 @@ ANSWERS_TRIVIA = {0: 'a',
 
 
 class Question:
-    def __init__(self, ctx):
+    def __init__(self, ctx, timer):
         self.category, self.difficulty, self.question, self.correct_answer, self.answers, self.typ = webscrap_trivia()
         if "&quot;" in self.question:
             self.question = self.question.replace("&quot;", '"')
@@ -18,7 +19,7 @@ class Question:
         self.ctx = ctx
         self.letter = ANSWERS_TRIVIA[self.answers.index(self.correct_answer)]
         self.losers = []
-        self.timer = None
+        self.timer = timer
         self.awaiting_answer = False
 
     def get_question(self):
@@ -69,6 +70,7 @@ class Question:
         embed_trivia.set_footer(
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
         await self.ctx.send(embed=embed_trivia)
+        await self.timer(self.curr)
         self.awaiting_answer = True
 
     async def check_answer(self, message, channel):
@@ -87,3 +89,8 @@ class Question:
                 return False
         else:
             return False
+
+    async def timer(self, self.timer):
+        if self.awaiting_answer == True:
+            await asyncio.sleep(self.timer)
+            return True
