@@ -67,8 +67,6 @@ class Question:
             text="Category: {} | Difficulty: {} | Time: {}".format(self.category, self.difficulty, "30 seconds"))
         await self.ctx.send(embed=embed_trivia)
         self.awaiting_answer = True
-        countdown_thread = threading.Thread(target=countdown)
-        countdown_thread.start()
 
     async def check_answer(self, message, channel):
         if message.content in ANSWERS_TRIVIA.values():
