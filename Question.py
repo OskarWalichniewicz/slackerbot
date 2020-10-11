@@ -71,31 +71,18 @@ class Question:
         countdown_thread.start()
 
     async def check_answer(self, message, channel):
-        while my_timer > 0:
-            if message.content in ANSWERS_TRIVIA.values():
-                if message.author not in self.losers:
-                    if message.content == self.letter:
-                        await channel.send("{} is smartest bonobo!".format(message.author.mention))
-                        self.ongoing = False
-                        return True
-                    elif message.content != self.letter:
-                        await channel.send("{}, WRONG! You are out!".format(message.author.mention))
-                        self.losers.append(message.author)
-                        return False
-                else:
-                    await channel.send("{}, you already answered!".format(message.author.mention))
+        if message.content in ANSWERS_TRIVIA.values():
+            if message.author not in self.losers:
+                if message.content == self.letter:
+                    await channel.send("{} is smartest bonobo!".format(message.author.mention))
+                    self.ongoing = False
+                    return True
+                elif message.content != self.letter:
+                    await channel.send("{}, WRONG! You are out!".format(message.author.mention))
+                    self.losers.append(message.author)
                     return False
             else:
+                await channel.send("{}, you already answered!".format(message.author.mention))
                 return False
-        await channel.send("Time's up!")
-        return True
-
-
-def countdown():
-    global my_timer
-    my_timer = 30
-    for x in range(3):
-        my_timer -= 10
-        sleep(10)
-    print("Time's up")
-    return True
+        else:
+            return False
