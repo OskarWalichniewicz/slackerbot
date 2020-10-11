@@ -218,3 +218,13 @@ def webscap_joke():
     joke = str(load_json['setup']) + "\n.\n.\n.\n" + \
         str(load_json['punchline'])
     return joke
+
+
+"""
+"""
+
+
+def webscrap_advice():
+    url = 'https://api.adviceslip.com/advice'
+    load_json = json.loads(urlrequest.urlopen(url).read())
+    return load_json['slip']['advice']

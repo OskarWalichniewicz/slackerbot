@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 from reddit import *
-from webscraping import webscrap_joke
+from webscraping import webscrap_joke, webscrap_advice
 
 
 class Fun(commands.Cog):
@@ -36,6 +36,13 @@ class Fun(commands.Cog):
     async def joke(self, ctx):
         joke = webscrap_joke()
         await ctx.send(joke)
+
+    """
+    """
+    @commands.command()
+    async def advice(self, ctx):
+        advice = webscrap_advice()
+        await ctx.send(advice)
 
 
 def setup(client):
