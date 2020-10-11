@@ -67,9 +67,9 @@ class Question:
         self.awaiting_answer = True
 
     async def check_answer(self, message, channel):
-        if message.content in ANSWERS_TRIVIA.values():
+        if message.content.lower() in ANSWERS_TRIVIA.values():
             if message.author not in self.losers:
-                if message.content == self.letter:
+                if message.content.lower() == self.letter:
                     await channel.send("{} is smartest bonobo!".format(message.author.mention))
                     self.awaiting_answer = False
                     return True
