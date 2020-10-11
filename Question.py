@@ -97,6 +97,7 @@ def countdown():
         my_timer -= 10
         sleep(10)
     print("Time's up")
+    return True
 
 
 countdown_thread = threading.Thread(target=countdown)
