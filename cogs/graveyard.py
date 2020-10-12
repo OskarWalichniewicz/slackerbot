@@ -81,6 +81,18 @@ class Graveyard(commands.Cog):
             'discord_id': az_id
         }
         az = records_last_msg.find_one(query)
+        """
+        {
+            "_id":{"$oid":"5f8326bc278b5fa87391f0f2"},
+            "discord_id":"329341017914605569",
+            "year":"2020",
+            "month":{"$numberInt":"10"},
+            "day":{"$numberInt":"10"},
+            "hour":{"$numberInt":"19"},
+            "minute":{"$numberInt":"49"},
+            "second":{"$numberInt":"20"}
+        }
+        """
         az_date = datetime(
             int(az['year']),
             int(az['month']),
