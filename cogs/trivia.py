@@ -28,7 +28,7 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def leaderboard(self, ctx):
-        embed_leaderboard = self.client.get_leaderboard()
+        embed_leaderboard = await self.client.get_leaderboard()
         await ctx.send(embed=embed_leaderboard)
 
     @commands.Cog.listener()
