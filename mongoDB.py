@@ -12,7 +12,7 @@ class MongoDB():
             self.username, self._password, self.default_database)
 
         self.client = MongoClient(mongo_url)
-        self.db = mongoDB_client.get_database('slacker_db')
+        self.db = self.client.get_database('slacker_db')
 
     def get_client(self):
         return self.client
