@@ -3,7 +3,7 @@ import discord
 import os
 
 
-def find_user_nickname_by_id(self, user_list, user_id):
+def find_user_nickname_by_id(user_list, user_id):
     for member in USER_LIST:
         if member.id == user_id:
             return member.nick
