@@ -15,8 +15,8 @@ class Question:
         self.losers = []
         self.awaiting_answer = False
         self.question = html.unescape(self.question)
-        for answer in self.answers:
-            answer = html.unescape(answer)
+        for i in range(len(self.answers)):
+            self.answers[i] = html.unescape(self.answers[i])
         self.correct_answer = html.unescape(self.correct_answer)
 
     def get_question(self):
