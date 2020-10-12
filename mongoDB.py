@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import discord
 import os
-from bot import USER_LIST
 
 
 def find_user_nickname_by_id(self, user_id):
