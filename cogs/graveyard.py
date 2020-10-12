@@ -14,7 +14,7 @@ class Graveyard(commands.Cog):
         self.client = client
         mongoDB = MongoDB()
         mongoDB_client = mongoDB.get_client()
-        db = mongoDB_client.get_database('slacker_db')
+        self.db = mongoDB_client.get_database('slacker_db')
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -75,7 +75,7 @@ class Graveyard(commands.Cog):
 
     @commands.command()
     async def az_2(self, ctx):
-        records_last_msg = db.last_message
+        records_last_msg = self.db.last_message
         print(records_last_msg.count_documents({}))
         az_id = str(os.environ['AZ_DISCORD_ID'])
         query = {
