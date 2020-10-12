@@ -178,4 +178,4 @@ class MongoDB():
         records.update_one(query, {'$set': update})
 
     async def open_last_message(self):
-        return records = self.db.last_message
+        return self.db.last_message
