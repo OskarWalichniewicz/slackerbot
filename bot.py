@@ -11,8 +11,6 @@ from mongoDB import MongoDB
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
-mongoDB_client = mongoDB.get_client()
-db = mongoDB_client.get_database('slacker_db')
 
 """
 Checks if current time (UTC) is between given values.
@@ -144,20 +142,6 @@ Case 1) If Azhanim wrote something it saves the time at which message was sent t
 async def on_message(message):
     # Checks if message is sent by Azhanim (compares his ID to the from message).
     if message.author.id == int(os.environ['AZ_DISCORD_ID']):
-        year = message.created_at.year  # message.created_at returns datetime
-        # assigning date elements to correspodning variables
-        month = message.created_at.month
-        day = message.created_at.day
-        hour = message.created_at.hour
-        minute = message.created_at.minute
-        second = message.created_at.second
-        az_file_input = str(year) + "\n" + str(month) + "\n" + str(day) + "\n" + str(hour) + \
-            "\n" + str(minute) + "\n" + \
-            str(second)  # creates string, with each variable in new line
-        # calls save_to_github method from github_integration.py and passes previously created string; repository name and commit message
-        save_to_github(az_file_input, "az.txt",
-                       "OskarWalichniewicz/slackerbot_misc", "Az sent message.")
-
         records_last_message = db.last_message
         az_id = str(os.environ['AZ_DISCORD_ID'])
         query = {

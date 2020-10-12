@@ -20,9 +20,7 @@ class Question:
         for i in range(len(self.answers)):
             self.answers[i] = html.unescape(self.answers[i])
         self.correct_answer = html.unescape(self.correct_answer)
-        mongoDB = MongoDB()
-        mongoDB_client = mongoDB.get_client()
-        self.db = mongoDB_client.get_database('slacker_db')
+        self.mongoDB = MongoDB()
 
     def get_question(self):
         return self.question
@@ -80,7 +78,7 @@ class Question:
                     return True
                 elif message.content != self.letter:
                     await channel.send("{}, WRONG! You are out!".format(message.author.mention))
-                    await .enter_to_mongo(
+                    await self.mongoDB.enter_trivia_data(
                         message.guild.id, message.author.id, self.question.get_difficulty(), False)
                     self.losers.append(message.author)
                     return False
