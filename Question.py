@@ -54,10 +54,6 @@ class Question:
         if self.typ == "boolean":
             answers_string = "a. {}\nb. {}".format(*self.answers)
 
-        if "&quot;" in answers_string:
-            answers_string = answers_string.replace("&quot;", '"')
-        if "&#039;" in answers_string:
-            answers_string = answers_string.replace("&#039;", "'")
         embed_trivia = discord.Embed(
             title=self.question,
             description=answers_string,
@@ -73,6 +69,8 @@ class Question:
             if message.author not in self.losers:
                 if message.content.lower() == self.letter:
                     await channel.send("{} is smartest bonobo!".format(message.author.mention))
+                    await self.mongoDB.enter_trivia_data(
+                        message.guild.id, message.author.id, self.difficulty, True)
                     self.awaiting_answer = False
                     return True
                 elif message.content != self.letter:

@@ -2,7 +2,6 @@ from Question import Question
 import discord
 from discord.ext import commands
 import asyncio
-from mongoDB import MongoDB
 
 
 class Trivia(commands.Cog):
@@ -10,7 +9,6 @@ class Trivia(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.question = Question()
-        self.mongoDB = MongoDB()
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -32,9 +30,7 @@ class Trivia(commands.Cog):
             if self.question.get_awaiting_answer():
                 channel = message.channel
                 if await self.question.check_answer(message, channel):
-                    await self.mongoDB.enter_trivia_data(
-                        message.guild.id, message.author.id, self.question.get_difficulty(), True)
-                    self.question = Question()
+                    self.question = Question()  # resets
 
     async def timer(self, ctx, question):
         await asyncio.sleep(30)

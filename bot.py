@@ -153,7 +153,7 @@ async def on_message(message):
             'minute': message.created_at.minute,
             'second': message.created_at.second
         }
-        await mongoDB.update_data(last_message, query, last_message_update)
+        await mongoDB.update_data(await mongoDB.open_last_message(), query, last_message_update)
 
     # this is necessary part of on_message().
     await client.process_commands(message)
