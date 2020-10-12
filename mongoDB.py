@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import discord
 import os
+from bot import get_user
 
 
 class MongoDB():
@@ -170,7 +171,7 @@ class MongoDB():
                     }
             records_trivia.insert_one(new_user)
 
-    async def get_leaderboard(self, discord_client):
+    async def get_leaderboard(self):
         records_trivia = self.db.trivia_data
         by_server_id = {
             'server_id': 245250774861479936
@@ -188,7 +189,7 @@ class MongoDB():
 
         def get_leaderboard_blueprint(index):
             return "{}: {}% winrate! ({} correct out of {} asked)".format(
-                discord_client.get_user(
+                get_user(
                     sorted_leaderboard[index]['discord_id']).display_name,
                 (sorted_leaderboard[index]['all_correct'] /
                  sorted_leaderboard[index]['all_answered']) * 100,
