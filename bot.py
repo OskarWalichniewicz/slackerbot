@@ -11,12 +11,6 @@ from mongoDB import MongoDB
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
 
-global USER_LIST = []
-for guild in client.guilds:
-    for member in guild.members:
-        if not member in USER_LIST:
-            USER_LIST.append(member)
-
 """
 Checks if current time (UTC) is between given values.
 params: begin_time and end_time are both in datetime format; therefore they should be initiated as ones

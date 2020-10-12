@@ -28,7 +28,7 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def leaderboard(self, ctx):
-        embed_leaderboard = await self.mongo_client.get_leaderboard()
+        embed_leaderboard = await self.mongo_client.get_leaderboard(await get_all_users())
         await ctx.send(embed=embed_leaderboard)
 
     @commands.Cog.listener()
@@ -47,6 +47,14 @@ class Trivia(commands.Cog):
             return True
         else:
             return False
+
+    async def get_all_users(self):
+        user_list = []
+        for guild in self.client.guilds:
+            for member in guild.members:
+                if not member in user_list:
+                    user_list.append(member)
+        return user_list
 
 
 def setup(client):

@@ -3,7 +3,7 @@ import discord
 import os
 
 
-def find_user_nickname_by_id(self, user_id):
+def find_user_nickname_by_id(self, user_list, user_id):
     for member in USER_LIST:
         if member.id == user_id:
             return member.nick
@@ -178,7 +178,7 @@ class MongoDB():
 
     """
     """
-    async def get_leaderboard(self):
+    async def get_leaderboard(self, user_list):
         records_trivia = self.db.trivia_data
         by_server_id = {
             'server_id': 245250774861479936
@@ -197,7 +197,7 @@ class MongoDB():
         def get_leaderboard_blueprint(index):
             return "{}: {}% winrate! ({} correct out of {} asked)".format(
                 find_user_nickname_by_id(
-                    sorted_leaderboard[index]['discord_id']),
+                    user_list, sorted_leaderboard[index]['discord_id']),
                 (sorted_leaderboard[index]['all_correct'] /
                  sorted_leaderboard[index]['all_answered']) * 100,
                 sorted_leaderboard[index]['all_correct'],
