@@ -171,7 +171,7 @@ class MongoDB():
             records_trivia.insert_one(new_user)
 
     async def get_leaderboard(self):
-        records_trivia = db.trivia_data
+        records_trivia = self.db.trivia_data
         by_server_id = {
             'server_id': 245250774861479936
         }
