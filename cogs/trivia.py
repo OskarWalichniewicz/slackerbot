@@ -37,8 +37,6 @@ class Trivia(commands.Cog):
                     await self.enter_to_mongo(
                         message.guild.id, message.author.id, self.question.get_difficulty(), True)
                     self.question = Question()
-                else:
-                    await self.enter_to_mongo(message.guild.id, message.author.id, self.question.get_difficulty(), False)
 
     async def timer(self, ctx, question):
         await asyncio.sleep(30)
