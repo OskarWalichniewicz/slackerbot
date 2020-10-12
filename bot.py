@@ -12,10 +12,6 @@ client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
 
 
-def get_user_by_ID(userID):
-    return client.get_user(userID)
-
-
 """
 Checks if current time (UTC) is between given values.
 params: begin_time and end_time are both in datetime format; therefore they should be initiated as ones
