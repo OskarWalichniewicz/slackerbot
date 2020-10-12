@@ -195,13 +195,13 @@ class MongoDB():
             )
 
         embed_leaderboard = discord.Embed(
-            title='Trivia leaderboard'
-            description=self.get_leaderboard_blueprint(0),
+            title='Trivia leaderboard',
+            description=get_leaderboard_blueprint(0),
             colour=discord.Color.green()
         )
         for x in range(1, len(sorted_leaderboard)):
             embed_leaderboard.add_field(
-                name='', value=self.get_leaderboard_blueprint(x))
+                name='', value=get_leaderboard_blueprint(x))
 
         return embed_leaderboard
 
