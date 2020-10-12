@@ -1,6 +1,7 @@
 from pymongo import MongoClient
 import discord
 import os
+from trivia import find_user_nickname_by_id
 
 
 class MongoDB():
@@ -190,8 +191,8 @@ class MongoDB():
 
         def get_leaderboard_blueprint(index):
             return "{}: {}% winrate! ({} correct out of {} asked)".format(
-                ctx.message.server.get_member(
-                    sorted_leaderboard[index]['discord_id']).display_name,
+                find_user_nickname_by_id(
+                    sorted_leaderboard[index]['discord_id']),
                 (sorted_leaderboard[index]['all_correct'] /
                  sorted_leaderboard[index]['all_answered']) * 100,
                 sorted_leaderboard[index]['all_correct'],

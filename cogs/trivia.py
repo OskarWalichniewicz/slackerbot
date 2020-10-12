@@ -3,6 +3,7 @@ import discord
 from discord.ext import commands
 import asyncio
 from mongoDB import MongoDB
+from bot import USER_LIST
 
 
 class Trivia(commands.Cog):
@@ -47,6 +48,11 @@ class Trivia(commands.Cog):
             return True
         else:
             return False
+
+    async def find_user_nickname_by_id(self, user_id):
+        for member in USER_LIST:
+            if member.id == user_id:
+                return member.nick
 
 
 def setup(client):
