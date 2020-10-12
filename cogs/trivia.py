@@ -2,6 +2,7 @@ from Question import Question
 import discord
 from discord.ext import commands
 import asyncio
+from mongoDB import MongoDB
 
 
 class Trivia(commands.Cog):
