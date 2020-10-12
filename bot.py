@@ -35,6 +35,8 @@ Adds Cogs functionality.
 Loop goes through 'cogs' folder;
 If file is in .py format it loads it, naming it same as file's name.
 """
+
+
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
