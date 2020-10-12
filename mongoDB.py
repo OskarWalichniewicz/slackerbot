@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import discord
 import os
 
 
@@ -169,7 +170,42 @@ class MongoDB():
                     }
             records_trivia.insert_one(new_user)
 
-    async def get_data(self, collection, query):
+    async def get_leaderboard(self):
+        records_trivia = db.trivia_data
+        by_server_id = {
+            'server_id': 245250774861479936
+        }
+
+        records_list = list(records_trivia.find(by_server_id))  # query list
+        for x in range(len(records_list)):
+            leaderboard.append({'discord_id': records_list[x]['discord_id'],
+                                'all_correct': records_list[x]['easy_correct'] + records_list[x]['medium_correct'] + records_list[x]['hard_correct'],
+                                'all_answered': records_list[x]['easy_answered'] + records_list[x]['medium_answered'] + records_list[x]['hard_answered']})  # creates list of dictionaries
+        print(leaderboard)
+
+        sorted_leaderboard = sorted(
+            leaderboard, key=lambda k: k['all_correct'] / k['all_answered'], reverse=True)  # calculates winrate and sort (highest 1st)
+
+        def get_leaderboard_blueprint(self, index):
+            return "{}: {}% winrate! ({} correct out of {} asked)".format(
+                (get_user(sorted_leaderboard[index]['discord_id']).display_name,
+                sorted_leaderboard[index]['all_correct'] / sorted_leaderboard[index]['all_answered']) * 100,
+                sorted_leaderboard[index]['all_correct'],
+                sorted_leaderboard[index]['all_answered']
+            )
+
+        embed_leaderboard = discord.Embed(
+            title='Trivia leaderboard'
+            description=get_leaderboard_blueprint(0),
+            colour=discord.Color.green()
+        )
+        for x in range(1, len(sorted_leaderboard)):
+            embed_leaderboard.add_field(
+                name='', value=get_leaderboard_blueprint(x))
+
+        return embed_leaderboard
+
+   async def get_data(self, collection, query):
         return collection.find_one(query)
 
     async def update_data(self, records, query, update):
@@ -177,3 +213,6 @@ class MongoDB():
 
     async def open_last_message(self):
         return self.db.last_message
+
+    async def open_trivia_data(self):
+        return self.db.trivia_data

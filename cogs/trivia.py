@@ -24,6 +24,11 @@ class Trivia(commands.Cog):
             await self.question.ask_question(ctx)
             await self.timer(ctx, self.question)
 
+    @commands.command()
+    async def leaderboard(self, ctx):
+        embed_leaderboard = get_leaderboard()
+        await ctx.send(embed=embed_leaderboard)
+
     @commands.Cog.listener()
     async def on_message(self, message):
         if self.question is not None:
