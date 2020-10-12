@@ -174,6 +174,8 @@ class MongoDB():
 
         return records.find_one(query)
 
-    async def update_data(self, collection, query, update):
-        records = db.collection
+    async def update_data(self, records, query, update):
         records.update_one(query, {'$set': update})
+
+    async def open_last_message(self):
+        return records = self.db.last_message
