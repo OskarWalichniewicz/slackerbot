@@ -11,7 +11,8 @@ from mongoDB import MongoDB
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
-mongoDB.open_database("slacker_db")
+mongoDB_client = mongoDB.get_client()
+db = mongoDB_client.get_database('slacker_db')
 
 """
 Checks if current time (UTC) is between given values.
@@ -155,20 +156,20 @@ async def on_message(message):
         save_to_github(az_file_input, "az.txt",
                        "OskarWalichniewicz/slackerbot_misc", "Az sent message.")
 
-        mongoDB.open_collection('last_message')
-        az_id = str(os.environ['AZ_DISCORD_ID'])
-        query = {
-            'discord_id': az_id
-        }
-        last_message_update = {
-            'year': message.created_at.year,
-            'month': message.created_at.month,
-            'day': message.created_at.day,
-            'hour': message.created_at.hour,
-            'minute': message.created_at.minute,
-            'second': message.created_at.second
-        }
-        mongoDB.update(query, last_message_update)
+        # mongoDB.open_collection('last_message')
+        # az_id = str(os.environ['AZ_DISCORD_ID'])
+        # query = {
+        #     'discord_id': az_id
+        # }
+        # last_message_update = {
+        #     'year': message.created_at.year,
+        #     'month': message.created_at.month,
+        #     'day': message.created_at.day,
+        #     'hour': message.created_at.hour,
+        #     'minute': message.created_at.minute,
+        #     'second': message.created_at.second
+        # }
+        # mongoDB.update(query, last_message_update)
 
     # this is necessary part of on_message().
     await client.process_commands(message)
