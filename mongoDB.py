@@ -1,7 +1,13 @@
 from pymongo import MongoClient
 import discord
 import os
-from cogs.trivia import find_user_nickname_by_id
+from bot import USER_LIST
+
+
+def find_user_nickname_by_id(self, user_id):
+    for member in USER_LIST:
+        if member.id == user_id:
+            return member.nick
 
 
 class MongoDB():
@@ -173,7 +179,7 @@ class MongoDB():
 
     """
     """
-    async def get_leaderboard(self, ctx):
+    async def get_leaderboard(self):
         records_trivia = self.db.trivia_data
         by_server_id = {
             'server_id': 245250774861479936
