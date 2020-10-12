@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import discord
 import os
-from bot import get_user_by_ID
+from bot import *
 
 
 class MongoDB():
