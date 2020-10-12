@@ -34,7 +34,7 @@ class Trivia(commands.Cog):
 
     async def timer(self, ctx, question):
         await asyncio.sleep(30)
-        if question and question.get_awaiting_answer():
+        if question is not None and question.get_awaiting_answer():
             await ctx.send("Time's up!\nCorrect answer was: {}. {}".format(question.get_letter(), question.get_correct_answer()))
             self.question = Question()
             return True
