@@ -34,7 +34,7 @@ class Trivia(commands.Cog):
             if self.question.get_awaiting_answer():
                 channel = message.channel
                 if await self.question.check_answer(message, channel):
-                    self.enter_to_mongo(
+                    await self.enter_to_mongo(
                         message, message.author.id, self.question.get_difficulty())
                     self.question = Question()
 
