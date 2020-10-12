@@ -177,11 +177,11 @@ class MongoDB():
         }
 
         records_list = list(records_trivia.find(by_server_id))  # query list
+        leaderboard = []
         for x in range(len(records_list)):
             leaderboard.append({'discord_id': records_list[x]['discord_id'],
                                 'all_correct': records_list[x]['easy_correct'] + records_list[x]['medium_correct'] + records_list[x]['hard_correct'],
                                 'all_answered': records_list[x]['easy_answered'] + records_list[x]['medium_answered'] + records_list[x]['hard_answered']})  # creates list of dictionaries
-        print(leaderboard)
 
         sorted_leaderboard = sorted(
             leaderboard, key=lambda k: k['all_correct'] / k['all_answered'], reverse=True)  # calculates winrate and sort (highest 1st)
