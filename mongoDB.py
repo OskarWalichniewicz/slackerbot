@@ -4,7 +4,7 @@ import os
 
 
 def find_user_nickname_by_id(user_list, user_id):
-    for member in USER_LIST:
+    for member in user_list:
         if member.id == user_id:
             return member.nick
 
