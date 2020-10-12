@@ -12,7 +12,7 @@ client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
 
 
-def get_user(userID):
+def get_user_by_ID(userID):
     return user = client.get_user(userID)
 
 

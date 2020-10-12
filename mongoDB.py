@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import discord
 import os
-from bot import get_user
+from bot import get_user_by_ID
 
 
 class MongoDB():
@@ -189,7 +189,7 @@ class MongoDB():
 
         def get_leaderboard_blueprint(index):
             return "{}: {}% winrate! ({} correct out of {} asked)".format(
-                get_user(
+                get_user_by_ID(
                     sorted_leaderboard[index]['discord_id']).display_name,
                 (sorted_leaderboard[index]['all_correct'] /
                  sorted_leaderboard[index]['all_answered']) * 100,
