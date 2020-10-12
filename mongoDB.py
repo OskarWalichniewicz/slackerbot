@@ -190,8 +190,8 @@ class MongoDB():
 
         def get_leaderboard_blueprint(index):
             return "{}: {}% winrate! ({} correct out of {} asked)".format(
-                ctx.message.server.get_member(id
-                                              sorted_leaderboard[index]['discord_id']).display_name,
+                ctx.message.server.get_member(
+                    sorted_leaderboard[index]['discord_id']).display_name,
                 (sorted_leaderboard[index]['all_correct'] /
                  sorted_leaderboard[index]['all_answered']) * 100,
                 sorted_leaderboard[index]['all_correct'],
