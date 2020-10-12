@@ -156,20 +156,21 @@ async def on_message(message):
         save_to_github(az_file_input, "az.txt",
                        "OskarWalichniewicz/slackerbot_misc", "Az sent message.")
 
-        # mongoDB.open_collection('last_message')
-        # az_id = str(os.environ['AZ_DISCORD_ID'])
-        # query = {
-        #     'discord_id': az_id
-        # }
-        # last_message_update = {
-        #     'year': message.created_at.year,
-        #     'month': message.created_at.month,
-        #     'day': message.created_at.day,
-        #     'hour': message.created_at.hour,
-        #     'minute': message.created_at.minute,
-        #     'second': message.created_at.second
-        # }
-        # mongoDB.update(query, last_message_update)
+        records_last_message = db.last_message
+        az_id = str(os.environ['AZ_DISCORD_ID'])
+        query = {
+            'discord_id': az_id
+        }
+        last_message_update = {
+            'year': message.created_at.year,
+            'month': message.created_at.month,
+            'day': message.created_at.day,
+            'hour': message.created_at.hour,
+            'minute': message.created_at.minute,
+            'second': message.created_at.second
+        }
+        records_last_msg.update_one(query, {
+            '$set':  last_msg_updates})
 
     # this is necessary part of on_message().
     await client.process_commands(message)

@@ -76,13 +76,11 @@ class Graveyard(commands.Cog):
     @commands.command()
     async def az_2(self, ctx):
         records_last_msg = self.db.last_message
-        print(records_last_msg.count_documents({}))
         az_id = str(os.environ['AZ_DISCORD_ID'])
         query = {
             'discord_id': az_id
         }
         az = records_last_msg.find_one(query)
-        print(az)
         az_date = datetime(
             int(az['year']),
             int(az['month']),
