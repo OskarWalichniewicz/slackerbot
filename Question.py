@@ -78,7 +78,7 @@ class Question:
                 elif message.content != self.letter:
                     await channel.send("{}, WRONG! You are out!".format(message.author.mention))
                     await self.mongoDB.enter_trivia_data(
-                        message.guild.id, message.author.id, self.question.get_difficulty(), False)
+                        message.guild.id, message.author.id, self.difficulty, False)
                     self.losers.append(message.author)
                     return False
             else:
