@@ -12,6 +12,8 @@ class Trivia(commands.Cog):
         self.question = Question()
         self.mongo_client = MongoDB()
 
+    def get_all_users(self):
+
     @commands.Cog.listener()
     async def on_ready(self):
         print('[COG] Trivia ready.')
