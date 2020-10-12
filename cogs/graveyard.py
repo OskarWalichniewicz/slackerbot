@@ -12,8 +12,9 @@ class Graveyard(commands.Cog):
 
     def __init__(self, client):
         self.client = client
-        self.mongoDB = MongoDB()
-        self.mongoDB.open_database("slacker_db")
+        mongoDB = MongoDB()
+        mongoDB_client = mongoDB.get_client()
+        db = mongoDB_client.get_database('slacker_db')
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -74,12 +75,13 @@ class Graveyard(commands.Cog):
 
     @commands.command()
     async def az_2(self, ctx):
-        self.mongoDB.open_collection('last_message')
+        records_last_msg = db.last_message
+        print(records_last_msg.count_documents({}))
         az_id = str(os.environ['AZ_DISCORD_ID'])
         query = {
             'discord_id': az_id
         }
-        az = self.mongoDB.get_document(query)
+        az = records_last_msg.find_one(query)
         print(az)
         az_date = datetime(
             int(az['year']),

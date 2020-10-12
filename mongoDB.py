@@ -13,14 +13,5 @@ class MongoDB():
 
         self.client = MongoClient(mongo_url)
 
-    def open_database(self, database_name):
-        self.current_database = self.client.get_database(database_name)
-
-    def open_collection(self, collection_name):
-        self.records = self.current_database.collection_name
-
-    def get_document(self, query):
-        return self.records.find_one(query)
-
-    def update_document(self, query, update):
-        self.records.update_one(query, {'$set': update})
+    def get_client(self):
+        return self.client
