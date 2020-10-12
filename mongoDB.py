@@ -189,7 +189,7 @@ class MongoDB():
         def get_leaderboard_blueprint(self, index):
             return "{}: {}% winrate! ({} correct out of {} asked)".format(
                 (get_user(sorted_leaderboard[index]['discord_id']).display_name,
-                sorted_leaderboard[index]['all_correct'] / sorted_leaderboard[index]['all_answered']) * 100,
+                 sorted_leaderboard[index]['all_correct'] / sorted_leaderboard[index]['all_answered']) * 100,
                 sorted_leaderboard[index]['all_correct'],
                 sorted_leaderboard[index]['all_answered']
             )
@@ -205,7 +205,7 @@ class MongoDB():
 
         return embed_leaderboard
 
-   async def get_data(self, collection, query):
+    async def get_data(self, collection, query):
         return collection.find_one(query)
 
     async def update_data(self, records, query, update):
