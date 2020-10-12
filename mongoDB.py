@@ -1,7 +1,6 @@
 from pymongo import MongoClient
 import discord
 import os
-from bot import *
 
 
 class MongoDB():
