@@ -2,7 +2,6 @@ from webscraping import *
 import discord
 import html
 from mongoDB import MongoDB
-from trivia import *
 
 ANSWERS_TRIVIA = {0: 'a',
                   1: 'b',
