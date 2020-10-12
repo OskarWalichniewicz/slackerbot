@@ -10,7 +10,7 @@ class Trivia(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.question = Question()
-        self.client = MongoDB()
+        self.mongo_client = MongoDB()
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -28,7 +28,7 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def leaderboard(self, ctx):
-        embed_leaderboard = await self.client.get_leaderboard(self.client)
+        embed_leaderboard = await self.mongo_client.get_leaderboard(self.mongo_client)
         await ctx.send(embed=embed_leaderboard)
 
     @commands.Cog.listener()
