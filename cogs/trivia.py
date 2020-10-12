@@ -35,7 +35,7 @@ class Trivia(commands.Cog):
                 channel = message.channel
                 if await self.question.check_answer(message, channel):
                     await self.enter_to_mongo(
-                        message, message.author.id, self.question.get_difficulty())
+                        message.guild.id, message.author.id, self.question.get_difficulty())
                     self.question = Question()
 
     async def timer(self, ctx, question):
@@ -57,7 +57,7 @@ class Trivia(commands.Cog):
         "hard_answered":{"$numberInt":"0"}
     }
     """
-    async def enter_to_mongo(self, message, user_id, difficulty):
+    async def enter_to_mongo(self, server_id, user_id, difficulty):
         records_trivia = self.db.trivia_data
         query = {
             'discord_id': user_id
@@ -90,7 +90,6 @@ class Trivia(commands.Cog):
                 records_trivia.update_one(query, {'$set':  update})
         # \/ if document doesn't exist
         else:
-            server_id = message.guild.id
             if difficulty == 'easy':
                 new_user = {
                     "server_id": server_id,
