@@ -22,7 +22,7 @@ class Trivia(commands.Cog):
             await ctx.send("There is already one question awaiting answer!")
         else:
             await self.question.ask_question(ctx)
-            await self.timer(ctx)
+            await self.timer(ctx, self.question)
 
     @commands.Cog.listener()
     async def on_message(self, message):
@@ -32,10 +32,10 @@ class Trivia(commands.Cog):
                 if await self.question.check_answer(message, channel):
                     self.question = Question()
 
-    async def timer(self, ctx):
+    async def timer(self, ctx, question):
         await asyncio.sleep(30)
-        if self.question.get_awaiting_answer():
-            await ctx.send("Time's up!\nCorrect answer was: {}. {}".format(self.question.get_letter(), self.question.get_correct_answer()))
+        if question and question.get_awaiting_answer():
+            await ctx.send("Time's up!\nCorrect answer was: {}. {}".format(question.get_letter(), question.get_correct_answer()))
             self.question = Question()
             return True
         else:
