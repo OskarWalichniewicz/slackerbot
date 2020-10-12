@@ -2,6 +2,7 @@ from Question import Question
 import discord
 from discord.ext import commands
 import asyncio
+from mongoDB import MongoDB
 
 
 class Trivia(commands.Cog):
@@ -9,6 +10,7 @@ class Trivia(commands.Cog):
     def __init__(self, client):
         self.client = client
         self.question = Question()
+        self.client = MongoDB()
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -26,7 +28,7 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def leaderboard(self, ctx):
-        embed_leaderboard = get_leaderboard()
+        embed_leaderboard = self.client.get_leaderboard()
         await ctx.send(embed=embed_leaderboard)
 
     @commands.Cog.listener()
