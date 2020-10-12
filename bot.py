@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands, tasks
 import os
 import asyncio
-from github_integration import *
 from datetime import datetime, time
 from reddit import *
 from Question import *
@@ -142,7 +141,6 @@ Case 1) If Azhanim wrote something it saves the time at which message was sent t
 async def on_message(message):
     # Checks if message is sent by Azhanim (compares his ID to the from message).
     if message.author.id == int(os.environ['AZ_DISCORD_ID']):
-        records_last_message = db.last_message
         az_id = str(os.environ['AZ_DISCORD_ID'])
         query = {
             'discord_id': az_id
@@ -155,8 +153,7 @@ async def on_message(message):
             'minute': message.created_at.minute,
             'second': message.created_at.second
         }
-        records_last_msg.update_one(query, {
-            '$set':  last_msg_updates})
+        mongoDB.update_data(last_message, query, last_message_update)
 
     # this is necessary part of on_message().
     await client.process_commands(message)

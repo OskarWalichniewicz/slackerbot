@@ -2,7 +2,6 @@ import discord
 from discord.ext import commands
 from datetime import date, datetime, timedelta
 import urllib.request
-from github_integration import read_file
 import contextlib
 from mongoDB import MongoDB
 import os

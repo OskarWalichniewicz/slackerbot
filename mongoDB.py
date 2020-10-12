@@ -173,3 +173,7 @@ class MongoDB():
         records = self.db.collection
 
         return records.find_one(query)
+
+    async def update_data(self, collection, query, update):
+        records = db.collection
+        records.update_one(query, {'$set': update})
