@@ -1,7 +1,7 @@
 from pymongo import MongoClient
 import discord
 import os
-from trivia import find_user_nickname_by_id
+from cogs.trivia import find_user_nickname_by_id
 
 
 class MongoDB():
