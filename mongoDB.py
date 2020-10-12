@@ -170,7 +170,7 @@ class MongoDB():
                     }
             records_trivia.insert_one(new_user)
 
-    async def get_leaderboard(self, client):
+    async def get_leaderboard(self, discord_client):
         records_trivia = self.db.trivia_data
         by_server_id = {
             'server_id': 245250774861479936
@@ -188,7 +188,7 @@ class MongoDB():
 
         def get_leaderboard_blueprint(index):
             return "{}: {}% winrate! ({} correct out of {} asked)".format(
-                client.get_user(
+                discord_client.get_user(
                     sorted_leaderboard[index]['discord_id']).display_name,
                 (sorted_leaderboard[index]['all_correct'] /
                  sorted_leaderboard[index]['all_answered']) * 100,
