@@ -170,9 +170,7 @@ class MongoDB():
             records_trivia.insert_one(new_user)
 
     async def get_data(self, collection, query):
-        records = self.db.collection
-
-        return records.find_one(query)
+        return collection.find_one(query)
 
     async def update_data(self, records, query, update):
         records.update_one(query, {'$set': update})
