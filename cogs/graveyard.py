@@ -29,7 +29,7 @@ class Graveyard(commands.Cog):
         query = {
             'discord_id': az_id
         }
-        az = self.mongoDB.get_data(self.mongoDB.open_last_message(), query)
+        az = await self.mongoDB.get_data(await self.mongoDB.open_last_message(), query)
         """
         {
             "_id":{"$oid":"5f8326bc278b5fa87391f0f2"},
