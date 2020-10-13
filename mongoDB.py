@@ -201,6 +201,7 @@ class MongoDB():
         leaderboard = []
         for x in range(len(records_list)):
             leaderboard.append({'discord_id': records_list[x]['discord_id'],
+                                'display_name': records_list[x]['display_name'],
                                 'all_correct': records_list[x]['easy_correct'] + records_list[x]['medium_correct'] + records_list[x]['hard_correct'],
                                 'all_answered': records_list[x]['easy_answered'] + records_list[x]['medium_answered'] + records_list[x]['hard_answered']})  # creates list of dictionaries
 
@@ -212,8 +213,8 @@ class MongoDB():
 
         def get_leaderboard_blueprint(index):
             return "{}% winrate! ({} correct out of {} asked)".format(
-                (sorted_leaderboard[index]['all_correct'] /
-                 sorted_leaderboard[index]['all_answered']) * 100,
+                round(((sorted_leaderboard[index]['all_correct'] /
+                        sorted_leaderboard[index]['all_answered']) * 100), 2),
                 sorted_leaderboard[index]['all_correct'],
                 sorted_leaderboard[index]['all_answered']
             )
