@@ -3,19 +3,6 @@ import discord
 import os
 
 
-def find_user_nickname_by_id(user_list, user_id):
-    for member in user_list:
-        if member.id == user_id:
-            return member.nick
-
-
-PLACE_DICT: {
-    0: '🏅',
-    1: '🥈',
-    2: '🥉'
-}
-
-
 class MongoDB():
     def __init__(self):
         self.username = str(os.environ['MONGO_USERNAME'])
@@ -199,6 +186,12 @@ class MongoDB():
     """
     """
     async def get_leaderboard(self, user_list):
+        PLACE_DICT: {
+            0: '🏅',
+            1: '🥈',
+            2: '🥉'
+        }
+
         records_trivia = self.db.trivia_data
         by_server_id = {
             'server_id': 245250774861479936
