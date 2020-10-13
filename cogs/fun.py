@@ -51,6 +51,14 @@ class Fun(commands.Cog):
         insult = webscrap_insult()
         await ctx.send(insult)
 
+    @commands.command()
+    async def horoscope(self, ctx, *, sign):
+        horoscope = webscrap_horoscope(sign)
+        if horoscope == "":
+            await ctx.send("Woops, something went wrong.")
+        else:
+            await ctx.send(horoscope)
+
 
 def setup(client):
     client.add_cog(Fun(client))

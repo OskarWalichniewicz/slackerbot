@@ -240,3 +240,19 @@ def webscrap_insult():
     url = 'https://evilinsult.com/generate_insult.php?lang=en&type=json'
     load_json = json.loads(urlrequest.urlopen(url).read())
     return load_json['insult']
+
+
+"""
+"""
+
+
+def webscrap_horoscope(sign):
+    url = 'https://www.astrology.com/horoscope/daily/{}.html'.format(sign)
+    driver.get(url)
+    try:
+        horoscope = driver.find_element_by_xpath(
+            "/html/body/section/section/div[2]/main/p[1]")
+        horoscope_text = horoscope.text
+        return horoscope_text.split(":")[1][1:]  # removes date and whitespace
+    except:
+        return ""
