@@ -29,6 +29,7 @@ class MongoDB():
         "_id":{"$oid":"5f841b92fb86ace89a83afaf"},
         "server_id": "",
         "discord_id":"247438282424713216",
+        "display_name":"",
         "easy_correct":{"$numberInt":"0"},
         "easy_answered":{"$numberInt":"0"},
         "medium_correct":{"$numberInt":"0"},
@@ -37,7 +38,7 @@ class MongoDB():
         "hard_answered":{"$numberInt":"0"}
     }
     """
-    async def enter_trivia_data(self, server_id, user_id, difficulty, correct):
+    async def enter_trivia_data(self, server_id, user_id, user_display_name, difficulty, correct):
         records_trivia = self.db.trivia_data
         query = {
             'discord_id': user_id
@@ -54,12 +55,14 @@ class MongoDB():
                     questions_correct = questions_correct + 1
                     update = {
                         'easy_answered': questions_answered,
-                        'easy_correct': questions_correct
+                        'easy_correct': questions_correct,
+                        'display_name': user_display_name
                     }
 
                 else:
                     update = {
                         'easy_answered': questions_answered,
+                        'display_name': user_display_name,
                     }
 
                 records_trivia.update_one(query, {'$set':  update})
@@ -73,12 +76,14 @@ class MongoDB():
                     questions_correct = questions_correct + 1
                     update = {
                         'medium_answered': questions_answered,
-                        'medium_correct': questions_correct
+                        'medium_correct': questions_correct,
+                        'display_name': user_display_name
                     }
 
                 else:
                     update = {
                         'medium_answered': questions_answered,
+                        'display_name': user_display_name
                     }
 
                 records_trivia.update_one(query, {'$set':  update})
@@ -92,12 +97,14 @@ class MongoDB():
                     questions_correct = questions_correct + 1
                     update = {
                         'hard_answered': questions_answered,
-                        'hard_correct': questions_correct
+                        'hard_correct': questions_correct,
+                        'display_name': user_display_name
                     }
 
                 else:
                     update = {
                         'hard_answered': questions_answered,
+                        'display_name': user_display_name
                     }
 
                 records_trivia.update_one(query, {'$set':  update})
@@ -108,6 +115,7 @@ class MongoDB():
                     new_user = {
                         "server_id": server_id,
                         "discord_id": user_id,
+                        "display_name": user_display_name,
                         "easy_correct": 1,
                         "easy_answered": 1,
                         "medium_correct": 0,
@@ -119,6 +127,7 @@ class MongoDB():
                     new_user = {
                         "server_id": server_id,
                         "discord_id": user_id,
+                        "display_name": user_display_name,
                         "easy_correct": 0,
                         "easy_answered": 1,
                         "medium_correct": 0,
@@ -132,6 +141,7 @@ class MongoDB():
                     new_user = {
                         "server_id": server_id,
                         "discord_id": user_id,
+                        "display_name": user_display_name,
                         "easy_correct": 0,
                         "easy_answered": 0,
                         "medium_correct": 1,
@@ -143,6 +153,7 @@ class MongoDB():
                     new_user = {
                         "server_id": server_id,
                         "discord_id": user_id,
+                        "display_name": user_display_name,
                         "easy_correct": 0,
                         "easy_answered": 0,
                         "medium_correct": 0,
@@ -156,6 +167,7 @@ class MongoDB():
                     new_user = {
                         "server_id": server_id,
                         "discord_id": user_id,
+                        "display_name": user_display_name,
                         "easy_correct": 0,
                         "easy_answered": 0,
                         "medium_correct": 0,
@@ -167,6 +179,7 @@ class MongoDB():
                     new_user = {
                         "server_id": server_id,
                         "discord_id": user_id,
+                        "display_name": user_display_name,
                         "easy_correct": 0,
                         "easy_answered": 0,
                         "medium_correct": 0,
@@ -195,8 +208,7 @@ class MongoDB():
             leaderboard, key=lambda k: k['all_correct'] / k['all_answered'], reverse=True)  # calculates winrate and sort (highest 1st)
 
         def get_leaderboard_blueprint_name(index):
-            print(user_list)
-            return "{}".format(find_user_nickname_by_id(user_list, sorted_leaderboard[index]['discord_id']))
+            return "{}".format(sorted_leaderboard[index]['display_name'])
 
         def get_leaderboard_blueprint(index):
             return "{}% winrate! ({} correct out of {} asked)".format(

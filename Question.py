@@ -70,13 +70,13 @@ class Question:
                 if message.content.lower() == self.letter:
                     await channel.send("{} is smartest bonobo!".format(message.author.mention))
                     await self.mongoDB.enter_trivia_data(
-                        message.guild.id, message.author.id, self.difficulty, True)
+                        message.guild.id, message.author.id, message.author.display_name, self.difficulty, True)
                     self.awaiting_answer = False
                     return True
                 elif message.content != self.letter:
                     await channel.send("{}, WRONG! You are out!".format(message.author.mention))
                     await self.mongoDB.enter_trivia_data(
-                        message.guild.id, message.author.id, self.difficulty, False)
+                        message.guild.id, message.author.id, message.author.display_name, self.difficulty, False)
                     self.losers.append(message.author)
                     return False
             else:
