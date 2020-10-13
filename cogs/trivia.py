@@ -5,22 +5,12 @@ import asyncio
 from mongoDB import MongoDB
 
 
-def get_all_users(client):
-    user_list = []
-    for guild in client.guilds:
-        for member in guild.members:
-            if not member in user_list:
-                user_list.append(member)
-    return user_list
-
-
 class Trivia(commands.Cog):
 
     def __init__(self, client):
         self.client = client
         self.question = Question()
         self.mongo_client = MongoDB()
-        self.user_list = get_all_users(self.client)
 
     @commands.Cog.listener()
     async def on_ready(self):
@@ -38,7 +28,7 @@ class Trivia(commands.Cog):
 
     @commands.command()
     async def leaderboard(self, ctx):
-        embed_leaderboard = await self.mongo_client.get_leaderboard(self.user_list)
+        embed_leaderboard = await self.mongo_client.get_leaderboard()
         await ctx.send(embed=embed_leaderboard)
 
     @commands.Cog.listener()

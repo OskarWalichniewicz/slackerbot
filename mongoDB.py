@@ -185,7 +185,7 @@ class MongoDB():
 
     """
     """
-    async def get_leaderboard(self, user_list):
+    async def get_leaderboard(self):
         PLACE_DICT: {
             0: '🏅',
             1: '🥈',
