@@ -195,6 +195,7 @@ class MongoDB():
             leaderboard, key=lambda k: k['all_correct'] / k['all_answered'], reverse=True)  # calculates winrate and sort (highest 1st)
 
         def get_leaderboard_blueprint_name(index):
+            print(user_list)
             return "{}".format(find_user_nickname_by_id(user_list, sorted_leaderboard[index]['discord_id']))
 
         def get_leaderboard_blueprint(index):
