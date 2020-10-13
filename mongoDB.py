@@ -185,13 +185,7 @@ class MongoDB():
 
     """
     """
-    async def get_leaderboard(self):
-        PLACE_DICT: {
-            0: '🏅',
-            1: '🥈',
-            2: '🥉'
-        }
-
+    async def get_leaderboard(self, dict_visualisation):
         records_trivia = self.db.trivia_data
         by_server_id = {
             'server_id': 245250774861479936
@@ -226,9 +220,9 @@ class MongoDB():
             colour=discord.Color.green()
         )
         for x in range(0, len(sorted_leaderboard)):
-            if x in PLACE_DICT:
+            if x in dict_visualisation:
                 name = "{} {}".format(
-                    PLACE_DICT[x], get_leaderboard_blueprint_name(x))
+                    dict_visualisation[x], get_leaderboard_blueprint_name(x))
             else:
                 name = "{}".format(get_leaderboard_blueprint_name(x))
             embed_leaderboard.add_field(
