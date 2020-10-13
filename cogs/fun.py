@@ -55,7 +55,7 @@ class Fun(commands.Cog):
     async def horoscope(self, ctx, *, sign):
         horoscope = webscrap_horoscope(sign)
         if horoscope == "":
-            await ctx.send("Woops, something went wrong.")
+            await ctx.send("Woops, something went wrong. Try .horoscope [sign]")
         else:
             await ctx.send(horoscope)
 
