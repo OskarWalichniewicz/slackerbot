@@ -194,10 +194,11 @@ class MongoDB():
         sorted_leaderboard = sorted(
             leaderboard, key=lambda k: k['all_correct'] / k['all_answered'], reverse=True)  # calculates winrate and sort (highest 1st)
 
+        def get_leaderboard_blueprint_name(index):
+            return "{}".format(find_user_nickname_by_id(user_list, sorted_leaderboard[index]['discord_id']))
+
         def get_leaderboard_blueprint(index):
-            return "{}: {}% winrate! ({} correct out of {} asked)".format(
-                find_user_nickname_by_id(
-                    user_list, sorted_leaderboard[index]['discord_id']),
+            return "{}% winrate! ({} correct out of {} asked)".format(
                 (sorted_leaderboard[index]['all_correct'] /
                  sorted_leaderboard[index]['all_answered']) * 100,
                 sorted_leaderboard[index]['all_correct'],
@@ -206,12 +207,13 @@ class MongoDB():
 
         embed_leaderboard = discord.Embed(
             title='Trivia leaderboard',
-            description=get_leaderboard_blueprint(0),
+            description=get_leaderboard_blueprint_name(
+                0) + " " + get_leaderboard_blueprint(0),
             colour=discord.Color.green()
         )
         for x in range(1, len(sorted_leaderboard)):
             embed_leaderboard.add_field(
-                name='', value=get_leaderboard_blueprint(x))
+                name=get_leaderboard_blueprint_name(x), value=get_leaderboard_blueprint(x))
 
         return embed_leaderboard
 
