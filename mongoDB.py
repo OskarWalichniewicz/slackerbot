@@ -9,6 +9,13 @@ def find_user_nickname_by_id(user_list, user_id):
             return member.nick
 
 
+PLACE_DICT: {
+    0: '🏅',
+    1: '🥈',
+    2: '🥉'
+}
+
+
 class MongoDB():
     def __init__(self):
         self.username = str(os.environ['MONGO_USERNAME'])
@@ -208,6 +215,8 @@ class MongoDB():
         sorted_leaderboard = sorted(
             leaderboard, key=lambda k: k['all_correct'] / k['all_answered'], reverse=True)  # calculates winrate and sort (highest 1st)
 
+        sorted_leaderboard = sorted_leaderboard[:10]  # gets first 10 elements
+
         def get_leaderboard_blueprint_name(index):
             return "{}".format(sorted_leaderboard[index]['display_name'])
 
@@ -221,13 +230,16 @@ class MongoDB():
 
         embed_leaderboard = discord.Embed(
             title='Trivia leaderboard',
-            description=get_leaderboard_blueprint_name(
-                0) + " " + get_leaderboard_blueprint(0),
             colour=discord.Color.green()
         )
-        for x in range(1, len(sorted_leaderboard)):
+        for x in range(0, len(sorted_leaderboard)):
+            if x in PLACE_DICT:
+                name = "{} {}".format(
+                    PLACE_DICT[x], get_leaderboard_blueprint_name(x))
+            else:
+                name = "{}".format(get_leaderboard_blueprint_name(x))
             embed_leaderboard.add_field(
-                name=get_leaderboard_blueprint_name(x), value=get_leaderboard_blueprint(x))
+                name=name, value=get_leaderboard_blueprint(x), inline=False)
 
         return embed_leaderboard
 
