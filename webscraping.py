@@ -163,6 +163,7 @@ def webscrap_didyoumean(query, origin_language='auto', destination_language='en'
     url = 'http://translate.google.com/#{}|{}|{}'.format(
         origin_language, destination_language, query)
     driver.get(url)
+    time.sleep(1)
     try:
         didyoumean = driver.find_element_by_id("spelling-correction")
         didyoumean_text = didyoumean.text
