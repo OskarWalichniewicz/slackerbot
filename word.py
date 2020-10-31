@@ -20,17 +20,22 @@ translator = Translator()
 Calls webscrap_word() from webscraping and returns it.
 returns str
 """
+
+
 def get_random_word():
     english_word = webscrap_word()
     return english_word
+
 
 """
 Gets definition about given word from wiktionary using wordnikAPI (https://developer.wordnik.com/).
 params: word (string) - a word about which defition will be searched
 returns definition (string)
 """
+
+
 def get_definitions(word):
-    def_word = wordApi.getDefinitions(word, sourceDictionaries = 'wiktionary')
+    def_word = wordApi.getDefinitions(word, sourceDictionaries='wiktionary')
     definitions = {}
 
     for definition in def_word:
@@ -59,27 +64,33 @@ def get_definitions(word):
 
     return str_def
 
+
 """
 Gets synonyms about given word from wordnik using wordnikAPI (https://developer.wordnik.com/).
 params: word (string) - a word of which synonyms will be searched
 returns synonyms (string)
 """
+
+
 def get_synonyms(word):
     syn_string = ""
 
-    rel_word = wordApi.getRelatedWords(word, relationshipTypes = "synonym", limitPerRelationshipType = 100)
+    rel_word = wordApi.getRelatedWords(
+        word, relationshipTypes="synonym", limitPerRelationshipType=100)
     for word in rel_word:
         syn_list = word.words
 
     syn_len = len(syn_list) - 1
     for syn in syn_list:
         syn_string += syn
-        if not syn_list.index(syn) == syn_len: # Check if element is last in the list; if so it ends with '.', intead of ';\n'
+        # Check if element is last in the list; if so it ends with '.', intead of ';\n'
+        if not syn_list.index(syn) == syn_len:
             syn_string += ", "
         else:
             syn_string += "."
 
     return syn_string
+
 
 """
 Translate word to language using googletrans.
@@ -90,11 +101,15 @@ returns translated_word (string) or
         if serbian (lang == 'sr'):
             translated_word in cyrillic (string) and translated word in latin (string)
 """
-def translate_word(word, lang):
-    translated_word = translator.translate(word, dest = lang, src = 'en').text # src is code of language from which word is being translated (english)
 
-    if lang == 'sr': # if translating into serbian
-        translated_word_lat = cyrtranslit.to_latin(translated_word) # also adding latin version of word using cytranslit.
+
+def translate_word(word, lang, src='en'):
+    # src is code of language from which word is being translated (english)
+    translated_word = translator.translate(word, dest=lang, src='en').text
+
+    if lang == 'sr':  # if translating into serbian
+        # also adding latin version of word using cytranslit.
+        translated_word_lat = cyrtranslit.to_latin(translated_word)
         return translated_word, translated_word_lat
     else:
         return translated_word
