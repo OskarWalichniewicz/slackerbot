@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands
 from googletrans import Translator
 from webscraping import *
+from word import *
 import cyrtranslit
 
 
@@ -16,33 +17,32 @@ class Translate(commands.Cog):
 
     @commands.command(aliases=['rs', 'sr'])
     async def serbian(self, ctx, *, text):
-        outp_cyr = translator.translate(text, dest='sr').text
-        outp_lat = cyrtranslit.to_latin(outp_cyr)
-        await ctx.send(str(outp_cyr + "\n" + outp_lat))
+        translated_cyr, translated = translate_word(text, 'sr')
+        await ctx.send(str(translated_cyr + "\n" + translated))
 
     @commands.command(aliases=['en'])
     async def english(self, ctx, *, text):
-        outp = translator.translate(text, dest='en').text
+        outp = translate_word(text, 'en')
         await ctx.send(str(outp))
 
     @commands.command(aliases=['nl'])
     async def dutch(self, ctx, *, text):
-        outp = translator.translate(text, dest='nl').text
+        outp = translate_word(text, 'nl')
         await ctx.send(str(outp))
 
     @commands.command(aliases=['it'])
     async def italian(self, ctx, *, text):
-        outp = translator.translate(text, dest='it').text
+        outp = translate_word(text, 'it')
         await ctx.send(str(outp))
 
     @commands.command(aliases=['pl'])
     async def polish(self, ctx, *, text):
-        outp = translator.translate(text, dest='pl').text
+        outp = translate_word(text, dest='pl')
         await ctx.send(str(outp))
 
     @commands.command(aliases=['ro'])
     async def romanian(self, ctx, *, text):
-        outp = translator.translate(text, dest='ro').text
+        outp = translate_word(text, dest='ro')
         await ctx.send(str(outp))
 
     @commands.command(aliases=['dym'])
@@ -58,6 +58,3 @@ class Translate(commands.Cog):
 
 def setup(client):
     client.add_cog(Translate(client))
-
-
-translator = Translator()
