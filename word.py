@@ -104,8 +104,11 @@ returns translated_word (string) or
 
 
 def translate_word(word, lang, src='en'):
+    if src == 'auto':
+        translated_word = translator.translate(word, dest=lang).text
     # src is code of language from which word is being translated (english)
-    translated_word = translator.translate(word, dest=lang, src='en').text
+    else:
+        translated_word = translator.translate(word, dest=lang, src='en').text
 
     if lang == 'sr':  # if translating into serbian
         # also adding latin version of word using cytranslit.
