@@ -26,8 +26,29 @@ class Education(commands.Cog):
         print('[COG] Education ready.')
 
     @commands.command()
-    async def wiki(self, ctx):
+    async def rwiki(self, ctx):
         article_url, title, summary = webscrap_wikipedia()
+        embed_wiki = discord.Embed(
+            title=title, colour=discord.Color.green(), description=summary)
+        embed_wiki.set_footer(
+            text='Find out more here: {}'.format(article_url))
+        await ctx.send(embed=embed_wiki)
+
+    @commands.command()
+    async def wiki(self, ctx, *text):
+        options = None
+        try:
+            article_url, title, summary = webscrap_wikipedia(text)
+        except ValueError:
+            options = webscrap_wikipedia(text)
+
+        if options is not None:
+            str_options = ""
+            for option in options:
+                str_options += option
+                str_options += ", "
+            await ctx.send("Did you mean: {}".format(str_options[:-2]))
+            return 0
 
         embed_wiki = discord.Embed(
             title=title, colour=discord.Color.green(), description=summary)

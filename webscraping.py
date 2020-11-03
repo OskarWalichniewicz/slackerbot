@@ -264,15 +264,31 @@ def webscrap_wikipedia(article='random'):
     wikipedia.set_lang('en')
     if article == 'random':
         title = wikipedia.random()
+
+        try:
+            article = wikipedia.page(title)
+        except wikipedia.DisambiguationError as e:
+            article = wikipedia.page(e.options[0])
+
+        article_url = article.url
+        summary = article.summary
+
+        return article_url, title, summary
+
     else:
         title == article
+        options = None
+        try:
+            article = wikipedia.page(title)
+            article_url = article.url
+            summary = article.summary
+        except wikipedia.DisambiguationError as e:
+            number_of_options = len(e.options)
+            if number_of_options > 5:
+                number_of_options = 5
+            options = e.options[:5]
 
-    try:
-        article = wikipedia.page(title)
-    except wikipedia.DisambiguationError as e:
-        article = wikipedia.page(e.options[0])
-
-    article_url = article.url
-    summary = article.summary
-
-    return article_url, title, summary
+        if options is None:
+            return article_url, title, summary
+        else:
+            return options
