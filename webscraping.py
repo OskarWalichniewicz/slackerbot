@@ -4,6 +4,7 @@ import os
 from urllib import request as urlrequest, parse as urlparse
 import json
 import random
+import wikipedia
 
 """
 Creates options object and passes:
@@ -257,3 +258,21 @@ def webscrap_horoscope(sign):
         return horoscope_text.split(":")[1][1:]  # removes date and whitespace
     except:
         return ""
+
+
+def webscrap_wikipedia(article='random'):
+    wikipedia.set_lang('en')
+    if article == 'random':
+        title = wikipedia.random()
+    else:
+        title == article
+
+    try:
+        article = wikipedia.page(title)
+    except wikipedia.DisambiguationError as e:
+        article = wikipedia.page(e.options[0])
+
+    article_url = article.url
+    summary = article.summary
+
+    return article_url, title, summary

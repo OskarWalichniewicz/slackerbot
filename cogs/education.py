@@ -25,6 +25,16 @@ class Education(commands.Cog):
     async def on_ready(self):
         print('[COG] Education ready.')
 
+    @commands.command()
+    async def wiki(self, ctx):
+        article_url, title, summary = webscrap_wikipedia()
+
+        embed_wiki = discord.Embed(
+            title=title, colour=discord.Color.green(), description=summary)
+        embed_wiki.set_footer(
+            text='Find out more here: {}'.format(article_url))
+        await ctx.send(embed=embed_wiki)
+
     """
     When user calls word command with input (word),
     translates this word to all Slackers' languages (calling translate_word from word.py),
