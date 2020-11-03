@@ -276,7 +276,7 @@ def webscrap_wikipedia(article='random'):
         return article_url, title, summary
 
     else:
-        title == article
+        title = article
         options = None
         try:
             article = wikipedia.page(title)
