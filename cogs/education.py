@@ -50,6 +50,9 @@ class Education(commands.Cog):
             await ctx.send("Did you mean: {}".format(str_options[:-2]))
             return 0
 
+        if len(summary) > 2048:
+            summary = summary[:2044]
+            summary += "..."
         embed_wiki = discord.Embed(
             title=title, colour=discord.Color.green(), description=summary)
         embed_wiki.set_footer(
