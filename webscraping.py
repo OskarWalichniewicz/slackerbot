@@ -287,6 +287,11 @@ def webscrap_wikipedia(article='random'):
             if number_of_options > 5:
                 number_of_options = 5
             options = e.options[:number_of_options]
+        except KeyError:
+            title = title.replace("(", "")
+            article = wikipedia.page(title)
+            article_url = article.url
+            summary = article.summary
 
         if options is None:
             return article_url, title, summary
