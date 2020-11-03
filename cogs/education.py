@@ -35,7 +35,7 @@ class Education(commands.Cog):
         await ctx.send(embed=embed_wiki)
 
     @commands.command()
-    async def wiki(self, ctx, *text):
+    async def wiki(self, ctx, *, text):
         options = None
         try:
             article_url, title, summary = webscrap_wikipedia(text)
