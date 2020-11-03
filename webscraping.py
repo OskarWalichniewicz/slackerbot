@@ -286,7 +286,7 @@ def webscrap_wikipedia(article='random'):
             number_of_options = len(e.options)
             if number_of_options > 5:
                 number_of_options = 5
-            options = e.options[:5]
+            options = e.options[:number_of_options]
 
         if options is None:
             return article_url, title, summary
