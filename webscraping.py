@@ -260,6 +260,10 @@ def webscrap_horoscope(sign):
         return ""
 
 
+"""
+"""
+
+
 def webscrap_wikipedia(article='random'):
     wikipedia.set_lang('en')
     if article == 'random':
