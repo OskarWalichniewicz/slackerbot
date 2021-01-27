@@ -7,7 +7,7 @@ from datetime import time as t
 from reddit import *
 from Question import *
 from mongoDB import MongoDB
-from news import top_news_from_world
+from cogs.news import top_news_from_world
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
