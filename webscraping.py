@@ -166,7 +166,7 @@ def webscrap_didyoumean(query, origin_language='auto', destination_language='en'
     driver.get(url)
     time.sleep(1)
     try:
-        didyoumean = driver.find_element_by_id("spelling-correction")
+        didyoumean = driver.find_element_by_class_name("VhOj3e")
         didyoumean_text = didyoumean.text
         if "Showing translation for" in didyoumean_text:
             separator = 'for'
