@@ -14,7 +14,7 @@ class News(commands.Cog):
 
 
 def setup(client):
-    client.add_cog(Education(client))
+    client.add_cog(News(client))
 
 
 async def top_news_from_world(self, ctx):
