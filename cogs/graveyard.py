@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from datetime import date, datetime, timedelta, time
+from datetime import date, datetime, timedelta
 import urllib.request
 import contextlib
 from mongoDB import MongoDB
