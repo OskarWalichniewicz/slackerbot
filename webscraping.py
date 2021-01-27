@@ -303,6 +303,6 @@ def webscrap_wikipedia(article='random'):
             summary = article.summary
 
         if options is None:
-            return article_url, title, summary
+            return article_url, article.title, summary
         else:
             return options
