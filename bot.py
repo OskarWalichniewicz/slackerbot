@@ -41,7 +41,7 @@ def is_time_between(begin_time, end_time):
 
 
 def is_time_equal(time):
-    check_time = dt.utcnow.time()
+    check_time = dt.utcnow().time()
     return time == check_time
 
 
