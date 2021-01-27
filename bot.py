@@ -59,7 +59,7 @@ async def change_status(wait_time):
             for activity in ACTIVITY_LIST_MORNING:
                 await client.change_presence(activity=discord.Game(activity))
                 await asyncio.sleep(wait_time)
-        elif is_time_between(t(19, 00), t(24, 00)):  # from 19 to 24
+        elif is_time_between(t(19, 00), t(0, 00)):  # from 19 to 24
             for activity in ACTIVITY_LIST_EVENING:
                 await client.change_presence(activity=discord.Game(activity))
                 await asyncio.sleep(wait_time)
