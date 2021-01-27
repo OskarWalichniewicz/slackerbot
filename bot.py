@@ -10,9 +10,14 @@ from mongoDB import MongoDB
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
-ACTIVITY_LIST = ['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
-                 'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!']
-
+ACTIVITY_LIST_GENERAL = ['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
+                         'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!']
+ACTIVITY_LIST_MORNING = ['Good morning!', 'Have a nice day!',
+                         'Hope you slept well!', 'Don\'t slack!', 'New day, new beginnings!']
+ACTIVITY_LIST_EVENING = ['You deserve a rest!', 'Hope your day was good!',
+                         'It\'s time to relax now!', 'Was your dinner good?']
+ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
+                       'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
 
 """
 Checks if current time (UTC) is between given values.
@@ -49,9 +54,22 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 
 async def change_status(wait_time):
     while True:
-        for activity in ACTIVITY_LIST:
-            await client.change_presence(activity=discord.Game(activity))
-            await asyncio.sleep(wait_time)
+        if is_time_between((5, 00), (11, 00)):  # from 5 AM to 11 AM
+            for activity in ACTIVITY_LIST_MORNING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between((19, 00), (24, 00)):  # from 19 to 24
+            for activity in ACTIVITY_LIST_EVENING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between((0, 00), (5, 00)):  # from midnight to 5AM
+            for activity in ACTIVITY_LIST_NIGHT:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        else:
+            for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
 
 """
 'event' is a decorator that registers an event it listens to.
