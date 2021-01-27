@@ -12,6 +12,7 @@ from cogs.news import top_news_from_world
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
+
 ACTIVITY_LIST_GENERAL = ['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
                          'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!']
 ACTIVITY_LIST_MORNING = ['Good morning!', 'Have a nice day!',
@@ -20,6 +21,8 @@ ACTIVITY_LIST_EVENING = ['You deserve a rest!', 'Hope your day was good!',
                          'It\'s time to relax now!', 'Was your dinner good?']
 ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
                        'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
+
+SLACKERS_CHANNEL_ID = '364712407601512450'
 
 """
 Checks if current time (UTC) is between given values.
@@ -85,7 +88,9 @@ async def change_status(wait_time):
 async def send_news():
     while True:
         if is_time_equal(t(21, 00)):
-            top_news_from_world()
+            embed_news = top_news_from_world()
+            channel = bot.get_channel(SLACKERS_CHANNEL_ID)
+            await channel.send(embed_news)
 
 """
 'event' is a decorator that registers an event it listens to.
