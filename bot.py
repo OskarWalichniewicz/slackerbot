@@ -10,6 +10,9 @@ from mongoDB import MongoDB
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
+ACTIVITY_LIST = ['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
+                 'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!']
+
 
 """
 Checks if current time (UTC) is between given values.
@@ -44,53 +47,10 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 """
 
 
-async def status_task(wait_time):
+async def change_status(wait_time):
     while True:
-        await client.change_presence(activity=discord.Game('Smile often!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Az is dead!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Drink water!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Milica is a midget.'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Spread love!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Stay positive!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Cenelia is handsome!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('You are beautiful!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Believe in yourself!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Segment is a boomer!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Everything will be fine!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('You can do it!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Be good to others!'))
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game('Be good to yourself!'))
-        await asyncio.sleep(wait_time)
-        if is_time_between(datetime.time(4, 00), datetime.time(11, 00)):
-            await client.change_presence(activity=discord.Game('Good Morning!'))
-            await asyncio.sleep(wait_time)
-            await client.change_presence(activity=discord.Game('What an amazing day!'))
-            await asyncio.sleep(wait_time)
-        elif is_time_between(datetime.time(11, 00), datetime.time(17, 00)):
-            await client.change_presence(activity=discord.Game('Good Afternoon!'))
-            await asyncio.sleep(wait_time)
-            await client.change_presence(activity=discord.Game('Take a break!'))
-            await asyncio.sleep(wait_time)
-        elif is_time_between(datetime.time(17, 00), datetime.time(22, 00)):
-            await client.change_presence(activity=discord.Game('Good Evening!'))
-            await asyncio.sleep(wait_time)
-        else:
-            await client.change_presence(activity=discord.Game('Go to bed!'))
-            await asyncio.sleep(wait_time)
-            await client.change_presence(activity=discord.Game('Tomorrow will be good day!'))
+        for activity in ACTIVITY_LIST:
+            await client.change_presence(activity=discord.Game(activity))
             await asyncio.sleep(wait_time)
 
 """
@@ -101,7 +61,8 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
-    client.loop.create_task(status_task(60))  # loops status_task in background
+    # loops status_task in background
+    client.loop.create_task(change_status(30))
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
