@@ -2,7 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import os
 import asyncio
-from datetime import time
+from datetime import datetime, time
 from reddit import *
 from Question import *
 from mongoDB import MongoDB
