@@ -54,15 +54,15 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 
 async def change_status(wait_time):
     while True:
-        if is_time_between((5, 00), (11, 00)):  # from 5 AM to 11 AM
+        if is_time_between(time(5, 00), time(11, 00)):  # from 5 AM to 11 AM
             for activity in ACTIVITY_LIST_MORNING:
                 await client.change_presence(activity=discord.Game(activity))
                 await asyncio.sleep(wait_time)
-        elif is_time_between((19, 00), (24, 00)):  # from 19 to 24
+        elif is_time_between(time(19, 00), time(24, 00)):  # from 19 to 24
             for activity in ACTIVITY_LIST_EVENING:
                 await client.change_presence(activity=discord.Game(activity))
                 await asyncio.sleep(wait_time)
-        elif is_time_between((0, 00), (5, 00)):  # from midnight to 5AM
+        elif is_time_between(time(0, 00), time(5, 00)):  # from midnight to 5AM
             for activity in ACTIVITY_LIST_NIGHT:
                 await client.change_presence(activity=discord.Game(activity))
                 await asyncio.sleep(wait_time)
