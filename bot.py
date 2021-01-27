@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands, tasks
 import os
 import asyncio
-import datetime.datetime
-import datetime.time
+import datetime
+from datetime import datetime as dt
 from reddit import *
 from Question import *
 from mongoDB import MongoDB
@@ -29,7 +29,7 @@ returns: boolean
 
 
 def is_time_between(begin_time, end_time):
-    check_time = datetime.utcnow().time()
+    check_time = dt.utcnow().time()
     if begin_time < end_time:
         return check_time >= begin_time and check_time <= end_time
     else:                                                           # if crosses midnight
