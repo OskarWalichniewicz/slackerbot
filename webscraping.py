@@ -25,6 +25,9 @@ chrome_options.add_argument("--no-sandbox")
 driver = webdriver.Chrome(executable_path=os.environ.get(
     "CHROMEDRIVER_PATH"), chrome_options=chrome_options)
 
+COUNTRIES = ['gb', 'rs', 'it', 'nl', 'pl', 'ro']
+NEWSAPI_KEY = os.environ.get("NEWSAPI_KEY")
+
 """
 Opens randomwordgenerator.com site and gets the word from there.
 returns scrapped word (string)
@@ -306,3 +309,40 @@ def webscrap_wikipedia(article='random'):
             return article_url, article.title, summary
         else:
             return options
+
+
+def webscrap_top_news():
+
+    top_news_list = []
+
+    def get_top_news_country(country):
+        url = 'https://newsapi.org/v2/top-headlines?country={}&pageSize=1&apiKey={}'.format(country,
+                                                                                            API_KEY)
+        req = urlrequest.Request(url)
+        load_json = json.loads(urlrequest.urlopen(req).read())
+        top_news = load_json['articles'][0]
+        top_news_title = top_news['title']
+        top_news_url = top_news['url']
+        top_news_list.append([top_news_title, top_news_url])
+
+    for country_code in COUNTRIES:
+        get_top_news_country(country_code)
+
+    return top_news_list
+
+
+def webscrap_top_news_from_country(country):
+    url = 'https://newsapi.org/v2/top-headlines?country={}&pageSize=5&apiKey={}'.format(country,
+                                                                                        API_KEY)
+    req = urlrequest.Request(url)
+    load_json = json.loads(urlrequest.urlopen(req).read())
+    top_news = load_json['articles']
+
+    top_news_list = []
+
+    for article in top_news:
+        top_news_title = article['title']
+        top_news_url = article['url']
+        top_news_list.append([top_news_title, top_news_url])
+
+    return top_news_list

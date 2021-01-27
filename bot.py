@@ -7,6 +7,7 @@ from datetime import time as t
 from reddit import *
 from Question import *
 from mongoDB import MongoDB
+from news import top_news_from_world
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
@@ -34,6 +35,14 @@ def is_time_between(begin_time, end_time):
         return check_time >= begin_time and check_time <= end_time
     else:                                                           # if crosses midnight
         return check_time >= begin_time or check_time <= end_time
+
+    """Checks if current time (UTC) is equal to given parameter.
+    """
+
+
+def is_time_equal(time):
+    check_time = dt.utcnow.time()
+    return time == check_time
 
 
 """
@@ -72,6 +81,12 @@ async def change_status(wait_time):
                 await client.change_presence(activity=discord.Game(activity))
                 await asyncio.sleep(wait_time)
 
+
+async def send_news():
+    while True:
+        if is_time_equal(t(21, 00)):
+            top_news_from_world()
+
 """
 'event' is a decorator that registers an event it listens to.
 on_ready is called when client (bot) is done preparing the data received from Discord.
@@ -82,6 +97,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     # loops status_task in background
     client.loop.create_task(change_status(30))
+    client.loop.create_task(send_news())
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
