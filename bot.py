@@ -90,7 +90,7 @@ async def send_news():
         if is_time_equal(t(21, 00)):
             embed_news = top_news_from_world()
             channel = bot.get_channel(SLACKERS_CHANNEL_ID)
-            await channel.send(embed_news)
+            await channel.send(embed=embed_news)
 
 """
 'event' is a decorator that registers an event it listens to.
