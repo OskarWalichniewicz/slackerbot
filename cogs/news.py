@@ -20,14 +20,25 @@ class News(commands.Cog):
 
     @commands.command()
     async def news(self, ctx, *text):
-        text = text[0].lower()
-        if text == 'sr':
-            text = 'rs'
+        if len(text) > 1:  # if more than 1 word was typed after .news (e.g. .word bonobo bonobo)
+            await ctx.send("stupid bonobo, it's .news (country_code), e.g. .news nl")
+            return None
 
-        try:
-            if len(text) > 1:  # if more than 1 word was typed after .news (e.g. .word bonobo bonobo)
-                await ctx.send("stupid bonobo, it's .news (country_code), e.g. .news nl")
-                return None
+        text = text[0].lower()
+
+        if len(text) != 2:  # if it has more than 2 letters
+            await ctx.send("Dude that's not a country code I asked for.")
+            return None
+
+        # if its 2 letters but its not in dict
+        elif len(text) == 2 and text not in self.COUNTRIES_CODES_DICT:
+            await ctx.send("This country either doesn't exist, or we don't care, sorry.")
+            return None
+
+        else:  # is 2 letters and in dict
+            if text == 'sr':
+                text = 'rs'
+
             try:
                 top_news_list = webscrap_top_news_from_country(text)
 
@@ -45,8 +56,6 @@ class News(commands.Cog):
 
             except:
                 print('[.NEWS] Error -> .news {} used'.format(text))
-        except:
-            print('[.NEWS] Error')
 
 
 def setup(client):
