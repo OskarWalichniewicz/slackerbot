@@ -68,27 +68,26 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 
 async def main_loop(wait_time):
     while True:
-        if is_time_equal(t(18, 10)):
-            print("[LOOP] Sending top news.")
-            embed_news = await top_news_from_world()
-            await channel.send(embed=embed_news)
+        if is_time_between(t(5, 00), t(11, 00)):  # from 5 AM to 11 AM
+            for activity in ACTIVITY_LIST_MORNING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between(t(19, 00), t(0, 00)):  # from 19 to 24
+            for activity in ACTIVITY_LIST_EVENING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between(t(0, 00), t(5, 00)):  # from midnight to 5AM
+            for activity in ACTIVITY_LIST_NIGHT:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
         else:
-            if is_time_between(t(5, 00), t(11, 00)):  # from 5 AM to 11 AM
-                for activity in ACTIVITY_LIST_MORNING:
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
-            elif is_time_between(t(19, 00), t(0, 00)):  # from 19 to 24
-                for activity in ACTIVITY_LIST_EVENING:
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
-            elif is_time_between(t(0, 00), t(5, 00)):  # from midnight to 5AM
-                for activity in ACTIVITY_LIST_NIGHT:
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
-            else:
-                for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
+            for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
+                if is_time_equal(t(18, 15)):
+                    print("[LOOP] Sending top news.")
+                    embed_news = await top_news_from_world()
+                    await channel.send(embed=embed_news)
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
 
 
 """
