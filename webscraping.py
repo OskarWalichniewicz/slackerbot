@@ -317,7 +317,7 @@ def webscrap_top_news():
 
     def get_top_news_country(country):
         url = 'https://newsapi.org/v2/top-headlines?country={}&pageSize=1&apiKey={}'.format(country,
-                                                                                            API_KEY)
+                                                                                            NEWSAPI_KEY)
         req = urlrequest.Request(url)
         load_json = json.loads(urlrequest.urlopen(req).read())
         top_news = load_json['articles'][0]
@@ -333,7 +333,7 @@ def webscrap_top_news():
 
 def webscrap_top_news_from_country(country):
     url = 'https://newsapi.org/v2/top-headlines?country={}&pageSize=5&apiKey={}'.format(country,
-                                                                                        API_KEY)
+                                                                                        NEWSAPI_KEY)
     req = urlrequest.Request(url)
     load_json = json.loads(urlrequest.urlopen(req).read())
     top_news = load_json['articles']
