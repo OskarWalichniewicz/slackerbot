@@ -68,7 +68,6 @@ async def on_ready():
 
     client.loop.create_task(main_loop(slacker_channel))
 
-    change_status_loop.start()
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
 
