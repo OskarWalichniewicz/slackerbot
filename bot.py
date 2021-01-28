@@ -82,12 +82,16 @@ async def main_loop(wait_time):
                 await asyncio.sleep(wait_time)
         else:
             for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
-                if is_time_equal(t(18, 15)):
-                    print("[LOOP] Sending top news.")
-                    embed_news = await top_news_from_world()
-                    await channel.send(embed=embed_news)
                 await client.change_presence(activity=discord.Game(activity))
                 await asyncio.sleep(wait_time)
+
+
+async def news_loop():
+    while True:
+        if is_time_equal(t(18, 20)):
+            print("[LOOP] Sending top news.")
+            embed_news = await top_news_from_world()
+            await channel.send(embed=embed_news)
 
 
 """
@@ -100,6 +104,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     # loops status_task in background
     client.loop.create_task(main_loop(30))
+    client.loop.create_task(news_loop())
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
