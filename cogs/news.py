@@ -76,4 +76,7 @@ async def top_news_from_world():
         embed_news.add_field(
             name=embed_names[i], value=top_news_list[i][0] + "\n" + top_news_list[i][1], inline=False)
 
+        embed_news.set_footer(
+            text="For more news from your country, try .news (country_code)\nAvailable codes: rs, it, nl, pl, ro")
+
     return embed_news
