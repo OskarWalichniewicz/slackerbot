@@ -20,7 +20,7 @@ class News(commands.Cog):
 
     @commands.command()
     async def news(self, ctx, *text):
-        text = text.lower()
+        text = text[0].lower()
         if text == 'sr':
             text = 'rs'
 
