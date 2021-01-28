@@ -37,6 +37,13 @@ def is_time_between(begin_time, end_time=None):
             return check_time >= begin_time or check_time <= end_time
 
 
+async def main_loop(_channel):
+    while True:
+        if is_time_between(t(18, 00)):
+            print("[LOOP] Sending top news.")
+            embed_news = await top_news_from_world()
+            await _channel.send(embed=embed_news)
+
 """
 Adds Cogs functionality.
 Loop goes through 'cogs' folder;
@@ -48,24 +55,6 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
-"""
-Changes Bot status (activity)
-params: wait_time is a time that needs to pass before next activity loads (in seconds)
-"""
-
-
-@tasks.loop(seconds=60)
-async def change_status():
-    await client.change_presence(activity=discord.Game(next(ACTIVITY_LIST_GENERAL)))
-
-
-async def main_loop(_channel):
-    await client.wait_until_ready()
-    while True:
-        if is_time_between(t(19, 25)):
-            print("[LOOP] Sending top news.")
-            embed_news = await top_news_from_world()
-            await _channel.send(embed=embed_news)
 
 """
 'event' is a decorator that registers an event it listens to.
@@ -77,12 +66,25 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     SLACKERS_CHANNEL_ID = 364712407601512450
     slacker_channel = client.get_channel(SLACKERS_CHANNEL_ID)
-    # loops status_task in background
+
     client.loop.create_task(main_loop(slacker_channel))
-    change_status.start()
+
+    change_status_loop.start()
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
+
     print("[BOT] Client ready.")
+
+
+"""
+Changes Bot status (activity)
+params: wait_time is a time that needs to pass before next activity loads (in seconds)
+"""
+
+
+@tasks.loop(seconds=60)
+async def change_status_loop():
+    await client.change_presence(activity=discord.Game(next(ACTIVITY_LIST_GENERAL)))
 
 """
 Every 10 hours calls clean_removed_memes_loop() from reddit.py
