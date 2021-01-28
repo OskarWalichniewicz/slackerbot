@@ -62,7 +62,7 @@ async def change_status():
 async def main_loop(_channel):
     await client.wait_until_ready()
     while True:
-        if is_time_between(t(19, 20)):
+        if is_time_between(t(19, 25)):
             print("[LOOP] Sending top news.")
             embed_news = await top_news_from_world()
             await _channel.send(embed=embed_news)
