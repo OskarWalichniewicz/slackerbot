@@ -23,7 +23,7 @@ ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
                        'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
 
 SLACKERS_CHANNEL_ID = 364712407601512450
-channel = client.get_channel(SLACKERS_CHANNEL_ID)
+slacker_channel = client.get_channel(SLACKERS_CHANNEL_ID)
 
 """
 Checks if current time (UTC) is between given values.
@@ -91,7 +91,7 @@ async def news_loop():
         if is_time_equal(t(18, 20)):
             print("[LOOP] Sending top news.")
             embed_news = await top_news_from_world()
-            await channel.send(embed=embed_news)
+            await slacker_channel.send(embed=embed_news)
 
 
 """
