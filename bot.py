@@ -8,14 +8,13 @@ from reddit import *
 from Question import *
 from mongoDB import MongoDB
 from cogs.news import top_news_from_world
-from itertools import cycle
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
 
-ACTIVITY_LIST_GENERAL = cycle(['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
-                               'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!'])
+# ACTIVITY_LIST_GENERAL = cycle(['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
+#                                'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!'])
 
 
 """
@@ -75,16 +74,6 @@ async def on_ready():
 
     print("[BOT] Client ready.")
 
-
-"""
-Changes Bot status (activity)
-params: wait_time is a time that needs to pass before next activity loads (in seconds)
-"""
-
-
-@tasks.loop(seconds=60)
-async def change_status_loop():
-    await client.change_presence(activity=discord.Game(next(ACTIVITY_LIST_GENERAL)))
 
 """
 Every 10 hours calls clean_removed_memes_loop() from reddit.py
