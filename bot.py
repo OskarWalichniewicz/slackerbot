@@ -22,7 +22,8 @@ ACTIVITY_LIST_EVENING = ['You deserve a rest!', 'Hope your day was good!',
 ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
                        'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
 
-SLACKERS_CHANNEL_ID = 364712407601512450
+# SLACKERS_CHANNEL_ID = 364712407601512450
+SLACKERS_CHANNEL_ID = 804319570986664009
 
 """
 Checks if current time (UTC) is between given values.
