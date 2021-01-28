@@ -22,7 +22,7 @@ ACTIVITY_LIST_EVENING = ['You deserve a rest!', 'Hope your day was good!',
 ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
                        'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
 
-SLACKERS_CHANNEL_ID = '364712407601512450'
+SLACKERS_CHANNEL_ID = 364712407601512450
 
 """
 Checks if current time (UTC) is between given values.
@@ -67,7 +67,7 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 
 async def main_loop(wait_time):
     while True:
-        if is_time_equal(t(21, 00)):
+        if is_time_equal(t(18, 00)):
             embed_news = top_news_from_world()
             channel = bot.get_channel(SLACKERS_CHANNEL_ID)
             await channel.send(embed=embed_news)
