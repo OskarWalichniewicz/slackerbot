@@ -79,4 +79,6 @@ async def top_news_from_world():
     embed_news.set_footer(
         text="For more news from your country, try .news (country_code)\nAvailable codes: rs, it, nl, pl, ro")
 
+    print("[NEWS] Prepared top news from the world.")
+
     return embed_news
