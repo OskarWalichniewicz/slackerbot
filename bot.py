@@ -160,7 +160,7 @@ async def on_message(message):
 
 @client.command()
 async def testnews(ctx):
-    embed_news = top_news_from_world()
+    embed_news = await top_news_from_world()
     channel = bot.get_channel(SLACKERS_CHANNEL_ID)
     await channel.send(embed=embed_news)
 
