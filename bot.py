@@ -156,5 +156,12 @@ async def on_message(message):
     # this is necessary part of on_message().
     await client.process_commands(message)
 
+
+@client.command()
+async def testnews():
+    embed_news = top_news_from_world()
+    channel = bot.get_channel(SLACKERS_CHANNEL_ID)
+    await channel.send(embed=embed_news)
+
 # connects this file with Bot created at Discord Developer Portal by given token.
 client.run(os.environ['DISCORD_TOKEN'])
