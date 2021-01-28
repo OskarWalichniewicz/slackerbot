@@ -33,20 +33,15 @@ returns: boolean
 """
 
 
-def is_time_between(begin_time, end_time):
+def is_time_between(begin_time, end_time=None):
     check_time = dt.utcnow().time()
-    if begin_time < end_time:
-        return check_time >= begin_time and check_time <= end_time
-    else:                                                           # if crosses midnight
-        return check_time >= begin_time or check_time <= end_time
-
-    """Checks if current time (UTC) is equal to given parameter.
-    """
-
-
-def is_time_equal(time):
-    check_time = dt.utcnow().time()
-    return time == check_time
+    if end_time is None:
+        return check_time == begin_time
+    else:
+        if begin_time < end_time:
+            return check_time >= begin_time and check_time <= end_time
+        else:                                                           # if crosses midnight
+            return check_time >= begin_time or check_time <= end_time
 
 
 """
@@ -68,7 +63,7 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 
 async def main_loop(wait_time):
     while True:
-        if is_time_equal(t(18, 35)):
+        if is_time_between(t(18, 45)):
             print("[LOOP] Sending top news.")
             embed_news = await top_news_from_world()
             await slacker_channel.send(embed=embed_news)
