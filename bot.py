@@ -13,9 +13,17 @@ from cogs.news import top_news_from_world
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
 
-# ACTIVITY_LIST_GENERAL = cycle(['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
-#                                'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!'])
+ACTIVITY_LIST_GENERAL = ['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
+                         'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!']
+ACTIVITY_LIST_MORNING = ['Good morning!', 'Have a nice day!',
+                         'Hope you slept well!', 'Don\'t slack!', 'New day, new beginnings!']
+ACTIVITY_LIST_EVENING = ['You deserve a rest!', 'Hope your day was good!',
+                         'It\'s time to relax now!', 'Was your dinner good?']
+ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
+                       'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
 
+SLACKERS_CHANNEL_ID = 364712407601512450
+CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
 
 """
 Checks if current time (UTC) is between given values.
@@ -25,23 +33,21 @@ returns: boolean
 """
 
 
-def is_time_between(begin_time, end_time=None):
+def is_time_between(begin_time, end_time):
     check_time = dt.utcnow().time()
-    if end_time is None:
-        return check_time == begin_time
-    else:
-        if begin_time < end_time:
-            return check_time >= begin_time and check_time <= end_time
-        else:                                                           # if crosses midnight
-            return check_time >= begin_time or check_time <= end_time
+    if begin_time < end_time:
+        return check_time >= begin_time and check_time <= end_time
+    else:                                                           # if crosses midnight
+        return check_time >= begin_time or check_time <= end_time
+
+    """Checks if current time (UTC) is equal to given parameter.
+    """
 
 
-async def main_loop(_channel):
-    while True:
-        if is_time_between(t(18, 00)):
-            print("[LOOP] Sending top news.")
-            embed_news = await top_news_from_world()
-            await _channel.send(embed=embed_news)
+def is_time_equal(time):
+    check_time = dt.utcnow().time()
+    return time == check_time
+
 
 """
 Adds Cogs functionality.
@@ -54,6 +60,35 @@ for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
 
+"""
+Changes Bot status (activity)
+params: wait_time is a time that needs to pass before next activity loads (in seconds)
+"""
+
+
+async def main_loop(wait_time):
+    while True:
+        if is_time_equal(t(18, 00)):
+            embed_news = await top_news_from_world()
+            await CHANNEL.send(embed=embed_news)
+        else:
+            if is_time_between(t(5, 00), t(11, 00)):  # from 5 AM to 11 AM
+                for activity in ACTIVITY_LIST_MORNING:
+                    await client.change_presence(activity=discord.Game(activity))
+                    await asyncio.sleep(wait_time)
+            elif is_time_between(t(19, 00), t(0, 00)):  # from 19 to 24
+                for activity in ACTIVITY_LIST_EVENING:
+                    await client.change_presence(activity=discord.Game(activity))
+                    await asyncio.sleep(wait_time)
+            elif is_time_between(t(0, 00), t(5, 00)):  # from midnight to 5AM
+                for activity in ACTIVITY_LIST_NIGHT:
+                    await client.change_presence(activity=discord.Game(activity))
+                    await asyncio.sleep(wait_time)
+            else:
+                for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
+                    await client.change_presence(activity=discord.Game(activity))
+                    await asyncio.sleep(wait_time)
+
 
 """
 'event' is a decorator that registers an event it listens to.
@@ -63,16 +98,11 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
-    SLACKERS_CHANNEL_ID = 364712407601512450
-    slacker_channel = client.get_channel(SLACKERS_CHANNEL_ID)
-
-    client.loop.create_task(main_loop(slacker_channel))
-
+    # loops status_task in background
+    client.loop.create_task(main_loop(30))
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
-
     print("[BOT] Client ready.")
-
 
 """
 Every 10 hours calls clean_removed_memes_loop() from reddit.py
