@@ -17,8 +17,6 @@ mongoDB = MongoDB()
 ACTIVITY_LIST_GENERAL = cycle(['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
                                'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!'])
 
-SLACKERS_CHANNEL_ID = 364712407601512450
-slacker_channel = client.get_channel(SLACKERS_CHANNEL_ID)
 
 """
 Checks if current time (UTC) is between given values.
@@ -61,13 +59,13 @@ async def change_status():
     await client.change_presence(activity=discord.Game(next(ACTIVITY_LIST_GENERAL)))
 
 
-async def main_loop():
+async def main_loop(_channel):
     await client.wait_until_ready()
     while True:
         if is_time_between(t(19, 20)):
             print("[LOOP] Sending top news.")
             embed_news = await top_news_from_world()
-            await slacker_channel.send(embed=embed_news)
+            await _channel.send(embed=embed_news)
 
 """
 'event' is a decorator that registers an event it listens to.
@@ -77,8 +75,10 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
+    SLACKERS_CHANNEL_ID = 364712407601512450
+    slacker_channel = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
-    client.loop.create_task(main_loop())
+    client.loop.create_task(main_loop(slacker_channel))
     change_status.start()
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
