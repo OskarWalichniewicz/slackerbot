@@ -24,7 +24,7 @@ async def top_news_from_world():
         colour=discord.Color.orange()
     )
 
-    embed_names = [':flag_gb: Great Britain :flag_gb:', ':flag_rs: Serbia :flag_rs:', ':flag_it: Italy :flag_it:',
+    embed_names = [':flag_rs: Serbia :flag_rs:', ':flag_it: Italy :flag_it:',
                    ':flag_nl: Netherlands :flag_nl:', ':flag_pl: Poland :flag_pl:', ':flag_ro: Romania :flag_ro:']
 
     for i in range(len(embed_names)):
