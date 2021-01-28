@@ -88,7 +88,7 @@ async def main_loop(wait_time):
 
 async def news_loop():
     while True:
-        if is_time_equal(t(18, 20)):
+        if is_time_equal(t(18, 30)):
             print("[LOOP] Sending top news.")
             embed_news = await top_news_from_world()
             await slacker_channel.send(embed=embed_news)
