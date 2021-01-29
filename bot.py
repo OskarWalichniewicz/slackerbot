@@ -98,17 +98,18 @@ async def time_check(wait_time):
                 await asyncio.sleep(wait_time)
 
 
-async def news_loop():
+def news_loop():
     await client.wait_until_ready()
     print("[LOOP] [NEWS] Initiated.")
 
-    threading.Timer(1, await news_loop).start()
+    threading.Timer(1, news_loop).start()
     now = dt.utcnow().time()
     print("It's {}".format(now))
 
-    if is_time_equal(t(19, 15), now):
+    if is_time_equal(t(19, 20), now):
         embed_news = await top_news_from_world()
         await CHANNEL.send(embed=embed_news)
+
 
 """
 Adds Cogs functionality.
@@ -133,7 +134,7 @@ async def on_ready():
     CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
     client.loop.create_task(time_check(30))
-    await news_loop()
+    news_loop()
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
