@@ -92,6 +92,7 @@ async def time_check(wait_time):
             elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
                 for activity in ACTIVITY_LIST_EVENING:
                     await client.change_presence(activity=discord.Game(activity))
+                    print("It's {} now -> inside if".format(now))
                     await asyncio.sleep(wait_time)
             elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
                 for activity in ACTIVITY_LIST_NIGHT:
