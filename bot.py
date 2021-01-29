@@ -33,22 +33,43 @@ returns: boolean
 """
 
 
-def is_time_between(begin_time, end_time):
-    check_time = dt.utcnow().time()
+def is_time_between(begin_time, end_time, current_time):
     if begin_time < end_time:
-        return check_time >= begin_time and check_time <= end_time
+        return current_time >= begin_time and current_time <= end_time
     else:                                                           # if crosses midnight
-        return check_time >= begin_time or check_time <= end_time
-
-    """Checks if current time (UTC) is equal to given parameter.
-    """
+        return current_time >= begin_time or current_time <= end_time
 
 
-def is_time_equal(time):
-    check_time = dt.utcnow().time()
-    return time == check_time
+def is_time_equal(target_time, current_time):
+    return target_time == current_time
 
 
+async def time_check(wait_time):
+    await client.wait_until_ready()
+
+    while not client.is_closed():
+        now = dt.utcnow().time()
+
+        if is_time_equal(t(18, 00), now):
+            embed_news = await top_news_from_world()
+            await CHANNEL.send(embed=embed_news)
+
+        if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
+            for activity in ACTIVITY_LIST_MORNING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
+            for activity in ACTIVITY_LIST_EVENING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
+            for activity in ACTIVITY_LIST_NIGHT:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        else:
+            for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
 """
 Adds Cogs functionality.
 Loop goes through 'cogs' folder;
@@ -66,32 +87,6 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 """
 
 
-async def main_loop(wait_time):
-    while True:
-        if is_time_between(t(5, 00), t(11, 00)):  # from 5 AM to 11 AM
-            for activity in ACTIVITY_LIST_MORNING:
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
-        elif is_time_between(t(19, 00), t(0, 00)):  # from 19 to 24
-            for activity in ACTIVITY_LIST_EVENING:
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
-        elif is_time_between(t(0, 00), t(5, 00)):  # from midnight to 5AM
-            for activity in ACTIVITY_LIST_NIGHT:
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
-        else:
-            for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
-
-
-async def news_loop():
-    while True:
-        if is_time_equal(t(18, 00)):
-            embed_news = await top_news_from_world()
-            await CHANNEL.send(embed=embed_news)
-
 """
 'event' is a decorator that registers an event it listens to.
 on_ready is called when client (bot) is done preparing the data received from Discord.
@@ -101,8 +96,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 @client.event
 async def on_ready():
     # loops status_task in background
-    client.loop.create_task(main_loop(30))
-    client.loop.create_task(news_loop())
+    client.loop.create_task(time_check(30))
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
