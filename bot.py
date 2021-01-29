@@ -104,7 +104,7 @@ async def news_loop():
     while not client.is_closed():
         now = dt.utcnow().time()
 
-        if is_time_equal(t(18, 20), now):
+        if is_time_equal(t(18, 25), now):
             embed_news = await top_news_from_world()
             await CHANNEL.send(embed=embed_news)
 
