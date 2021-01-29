@@ -88,14 +88,12 @@ async def time_check(wait_time):
 
     while not client.is_closed():  # if bot is running
         now = dt.utcnow().time()  # current time
-        print('Its {}'.format(now))
 
         if is_time_equal(t(18, 00), now):
             embed_news = await top_news_from_world()
             await CHANNEL.send(embed=embed_news)
 
         else:
-            print('Its {} -> else'.format(now))
             if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
                 activity = next_activity(activity_list_morning_cycle)
             elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
