@@ -102,7 +102,7 @@ async def news_loop():
     await client.wait_until_ready()
     print("[LOOP] [NEWS] Initiated.")
 
-    threading.Timer(1, news_loop).start()
+    threading.Timer(1, await news_loop).start()
     now = dt.utcnow().time()
     print("It's {}".format(now))
 
