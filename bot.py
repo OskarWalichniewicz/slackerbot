@@ -99,14 +99,13 @@ async def time_check(wait_time):
 
 
 def news_loop():
-    await client.wait_until_ready()
     print("[LOOP] [NEWS] Initiated.")
 
     threading.Timer(1, news_loop).start()
     now = dt.utcnow().time()
     print("It's {}".format(now))
 
-    if is_time_equal(t(19, 20), now):
+    if is_time_equal(t(19, 25), now):
         embed_news = await top_news_from_world()
         await CHANNEL.send(embed=embed_news)
 
