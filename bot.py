@@ -8,7 +8,6 @@ from reddit import *
 from Question import *
 from mongoDB import MongoDB
 from cogs.news import top_news_from_world
-import threading
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
@@ -98,17 +97,15 @@ async def time_check(wait_time):
                 await asyncio.sleep(wait_time)
 
 
-def news_loop():
-    print("[LOOP] [NEWS] Initiated.")
+async def news_loop():
+    await client.wait_until_ready()
 
-    threading.Timer(1, news_loop).start()
-    now = dt.utcnow().time()
-    print("It's {}".format(now))
+    while not client.is_closed():
+        now = dt.utcnow().time()
 
-    if is_time_equal(t(19, 25), now):
-        embed_news = top_news_from_world()
-        await CHANNEL.send(embed=embed_news)
-
+        if is_time_equal(t(18, 15), now):
+            embed_news = await top_news_from_world()
+            await CHANNEL.send(embed=embed_news)
 
 """
 Adds Cogs functionality.
@@ -133,7 +130,7 @@ async def on_ready():
     CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
     client.loop.create_task(time_check(30))
-    news_loop()
+    client.loop.create_task(news_loop())
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")

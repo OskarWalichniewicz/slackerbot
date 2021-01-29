@@ -62,7 +62,7 @@ def setup(client):
     client.add_cog(News(client))
 
 
-def top_news_from_world():
+async def top_news_from_world():
     top_news_list = webscrap_top_news()
     embed_news = discord.Embed(
         title='Top news from around the world!',
