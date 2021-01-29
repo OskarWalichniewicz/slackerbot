@@ -8,6 +8,7 @@ from reddit import *
 from Question import *
 from mongoDB import MongoDB
 from cogs.news import top_news_from_world
+from threading
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
@@ -99,14 +100,13 @@ async def time_check(wait_time):
 
 async def news_loop():
     await client.wait_until_ready()
-    CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
 
-    while not client.is_closed():
-        now = dt.utcnow().time()
+    threading.Timer(1, newsLoop).start()
+    now = dt.utcnow().time()
 
-        if is_time_equal(t(18, 25), now):
-            embed_news = await top_news_from_world()
-            await CHANNEL.send(embed=embed_news)
+    if is_time_equal(t(19, 00), now):
+        embed_news = await top_news_from_world()
+        await CHANNEL.send(embed=embed_news)
 
 """
 Adds Cogs functionality.
@@ -128,9 +128,10 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
+    CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
     client.loop.create_task(time_check(30))
-    client.loop.create_task(news_loop())
+    news_loop()
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
