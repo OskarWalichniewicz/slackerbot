@@ -78,8 +78,9 @@ async def time_check(wait_time):
 
     while not client.is_closed():  # if bot is running
         now = dt.utcnow().time()  # current time
+        print("It's {} now".format(now))
 
-        if is_time_equal(t(19, 37), now):
+        if is_time_equal(t(19, 42), now):
             embed_news = await top_news_from_world()
             await CHANNEL.send(embed=embed_news)
 
