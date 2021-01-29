@@ -106,7 +106,7 @@ def news_loop():
     print("It's {}".format(now))
 
     if is_time_equal(t(19, 25), now):
-        embed_news = await top_news_from_world()
+        embed_news = top_news_from_world()
         await CHANNEL.send(embed=embed_news)
 
 
