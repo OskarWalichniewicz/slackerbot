@@ -33,7 +33,6 @@ ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
 Main channel of bembem server, used for sending daily summary of news.
 """
 SLACKERS_CHANNEL_ID = 364712407601512450
-CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
 
 """
 Checks if current_time is between given values.
@@ -128,6 +127,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
+    CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
     client.loop.create_task(time_check(30))
     client.loop.create_task(news_loop())
