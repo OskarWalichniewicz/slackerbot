@@ -13,6 +13,13 @@ from cogs.news import top_news_from_world
 client = commands.Bot(command_prefix='.')
 mongoDB = MongoDB()
 
+"""
+Lists of statuses (activities) that bot will have, depending on time of the day (all times in UTC, 24h format).
+ACTIVITY_LIST_MORNING - 5 to 11
+ACTIVITY_LIST_GENERAL - 11 to
+ACTIVITY_LIST_EVENING - 19 to 24
+ACTIVITY_LIST_NIGHT - 24 to 5
+"""
 ACTIVITY_LIST_GENERAL = ['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
                          'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!']
 ACTIVITY_LIST_MORNING = ['Good morning!', 'Have a nice day!',
@@ -22,13 +29,17 @@ ACTIVITY_LIST_EVENING = ['You deserve a rest!', 'Hope your day was good!',
 ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
                        'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
 
+"""
+Main channel of bembem server, used for sending daily summary of news.
+"""
 SLACKERS_CHANNEL_ID = 364712407601512450
 CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
 
 """
-Checks if current time (UTC) is between given values.
-params: begin_time and end_time are both in datetime format; therefore they should be initiated as ones
-        e.g. is_time_between(time(4, 00), time(10,00)) (hh, mm)
+Checks if current_time is between given values.
+params: begin_time - current time is later than this
+        end_time - current time is earlier than this
+        current_time - all in datetime.datetime format -> (hh, mm)
 returns: boolean
 """
 
@@ -40,15 +51,34 @@ def is_time_between(begin_time, end_time, current_time):
         return current_time >= begin_time or current_time <= end_time
 
 
+"""
+Checks if current_time is equal to target_time
+params: target_time - target time is equal to this
+        current_time - all in datetime.datetime format -> (hh, mm)
+returns: boolean
+"""
+
+
 def is_time_equal(target_time, current_time):
     return target_time == current_time
 
 
-async def time_check(wait_time):
-    await client.wait_until_ready()
+"""
+Checks what time is it currently, and based on that makes actions.
+1. If time is equal to 18 UTC - it sends message to bembem's main channel with summary of news (top_news_from_world())
+2. It changes bot presence (activity) based on current time. (see ACTIVITY_LIST)
 
-    while not client.is_closed():
-        now = dt.utcnow().time()
+Calls: is_time_equal()
+            top_news_from_world()
+       is_time_between()
+"""
+
+
+async def time_check(wait_time):
+    await client.wait_until_ready()  # runs only if bot (client) is ready
+
+    while not client.is_closed():  # if bot is running
+        now = dt.utcnow().time()  # current time
 
         if is_time_equal(t(18, 00), now):
             embed_news = await top_news_from_world()
@@ -80,11 +110,6 @@ If file is in .py format it loads it, naming it same as file's name.
 for filename in os.listdir('./cogs'):
     if filename.endswith('.py'):
         client.load_extension(f'cogs.{filename[:-3]}')
-
-"""
-Changes Bot status (activity)
-params: wait_time is a time that needs to pass before next activity loads (in seconds)
-"""
 
 
 """

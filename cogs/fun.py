@@ -16,7 +16,7 @@ class Fun(commands.Cog):
     """
     When meme command is called,
     it calles get_meme command (from reddit.py)
-    returns embed with meme title and an image.
+    returns embed with meme title, an image and footer with number of upvotes.
     """
     @commands.command()
     async def meme(self, ctx):
