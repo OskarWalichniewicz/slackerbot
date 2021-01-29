@@ -68,27 +68,29 @@ params: wait_time is a time that needs to pass before next activity loads (in se
 
 async def main_loop(wait_time):
     while True:
+        if is_time_between(t(5, 00), t(11, 00)):  # from 5 AM to 11 AM
+            for activity in ACTIVITY_LIST_MORNING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between(t(19, 00), t(0, 00)):  # from 19 to 24
+            for activity in ACTIVITY_LIST_EVENING:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        elif is_time_between(t(0, 00), t(5, 00)):  # from midnight to 5AM
+            for activity in ACTIVITY_LIST_NIGHT:
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+        else:
+            for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
+                await client.change_presence(activity=discord.Game(activity))
+                await asyncio.sleep(wait_time)
+
+
+async def news_loop():
+    while True:
         if is_time_equal(t(18, 00)):
             embed_news = await top_news_from_world()
             await CHANNEL.send(embed=embed_news)
-        else:
-            if is_time_between(t(5, 00), t(11, 00)):  # from 5 AM to 11 AM
-                for activity in ACTIVITY_LIST_MORNING:
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
-            elif is_time_between(t(19, 00), t(0, 00)):  # from 19 to 24
-                for activity in ACTIVITY_LIST_EVENING:
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
-            elif is_time_between(t(0, 00), t(5, 00)):  # from midnight to 5AM
-                for activity in ACTIVITY_LIST_NIGHT:
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
-            else:
-                for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
-                    await client.change_presence(activity=discord.Game(activity))
-                    await asyncio.sleep(wait_time)
-
 
 """
 'event' is a decorator that registers an event it listens to.
@@ -100,6 +102,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     # loops status_task in background
     client.loop.create_task(main_loop(30))
+    client.loop.create_task(news_loop())
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
