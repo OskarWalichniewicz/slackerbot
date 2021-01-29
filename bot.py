@@ -106,7 +106,7 @@ async def news_loop():
     now = dt.utcnow().time()
     print("It's {}".format(now))
 
-    if is_time_equal(t(19, 00), now):
+    if is_time_equal(t(19, 10), now):
         embed_news = await top_news_from_world()
         await CHANNEL.send(embed=embed_news)
 
