@@ -99,6 +99,7 @@ async def time_check(wait_time):
 
 async def news_loop():
     await client.wait_until_ready()
+    CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
 
     while not client.is_closed():
         now = dt.utcnow().time()
@@ -127,7 +128,6 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
-    CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
     client.loop.create_task(time_check(30))
     client.loop.create_task(news_loop())
