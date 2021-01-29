@@ -8,6 +8,7 @@ from reddit import *
 from Question import *
 from mongoDB import MongoDB
 from cogs.news import top_news_from_world
+from itertools import cycle
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
@@ -22,12 +23,21 @@ ACTIVITY_LIST_NIGHT - 24 to 5
 """
 ACTIVITY_LIST_GENERAL = ['Smile often!', 'Az is dead!', 'Drink water!', 'Milica is a midget.',
                          'Spread love!', 'Stay positive!', 'Cenelia is handsome!', 'You are beautiful!', 'Believe in yourself!', 'Segment is a boomer!', 'Everything will be fine!', 'You can do it!', 'Be good to others!', 'Be good to yourself!']
+activity_list_general_cycle = cycle(ACTIVITY_LIST_GENERAL)
 ACTIVITY_LIST_MORNING = ['Good morning!', 'Have a nice day!',
                          'Hope you slept well!', 'Don\'t slack!', 'New day, new beginnings!']
+activity_list_morning_cycle = cycle(ACTIVITY_LIST_MORNING)
 ACTIVITY_LIST_EVENING = ['You deserve a rest!', 'Hope your day was good!',
                          'It\'s time to relax now!', 'Was your dinner good?']
+activity_list_evening_cycle = cycle(ACTIVITY_LIST_EVENING)
 ACTIVITY_LIST_NIGHT = ['Good night!', 'Why aren\'t you sleeping yet?',
                        'It\'s bed time!', 'Don\'t stay too long!', 'See you tomorrow!', 'Sleep tight!']
+activity_list_night_cycle = cycle(ACTIVITY_LIST_NIGHT)
+
+
+def next_activity(cycle):
+    return next(cycle)
+
 
 """
 Main channel of bembem server, used for sending daily summary of news.
@@ -78,37 +88,26 @@ async def time_check(wait_time):
 
     while not client.is_closed():  # if bot is running
         now = dt.utcnow().time()  # current time
+        print('Its {}'.format(now))
 
-        if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
-            for activity in ACTIVITY_LIST_MORNING:
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
-        elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
-            for activity in ACTIVITY_LIST_EVENING:
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
-        elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
-            for activity in ACTIVITY_LIST_NIGHT:
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
+        if is_time_equal(t(18, 00), now):
+            embed_news = await top_news_from_world()
+            await CHANNEL.send(embed=embed_news)
+
         else:
-            for activity in ACTIVITY_LIST_GENERAL:  # from 11 AM to 19
-                await client.change_presence(activity=discord.Game(activity))
-                await asyncio.sleep(wait_time)
+            print('Its {} -> else'.format(now))
+            if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
+                activity = next_activity(activity_list_morning_cycle)
+            elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
+                activity = next_activity(activity_list_evening_cycle)
+            elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
+                activity = next_activity(activity_list_night_cycle)
+            else:
+                activity = next_activity(activity_list_general_cycle)
 
+            asyncio.sleep(wait_time)
+            await client.change_presence(activity=discord.Game(activity))
 
-async def news_loop():
-    while True:
-        now = dt.utcnow().time()
-        if now.time() < t(20, 00):
-            date = now.date()
-        else:
-            date = now.date() + datetime.timedelta(days=1)
-        then = datetime.datetime.combine(date, time_for_thing_to_happen)
-        await sleep_until(then)
-        await asyncio.sleep(1)
-        embed_news = await top_news_from_world()
-        await CHANNEL.send(embed=embed_news)
 
 """
 Adds Cogs functionality.
@@ -133,7 +132,6 @@ async def on_ready():
     CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
     client.loop.create_task(time_check(30))
-    client.loop.create_task(news_loop())
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
