@@ -8,7 +8,7 @@ from reddit import *
 from Question import *
 from mongoDB import MongoDB
 from cogs.news import top_news_from_world
-from threading
+import threading
 
 # initiates Bot with prefix ('.')
 client = commands.Bot(command_prefix='.')
