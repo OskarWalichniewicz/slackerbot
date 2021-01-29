@@ -68,9 +68,9 @@ Checks what time is it currently, and based on that makes actions.
 1. If time is equal to 18 UTC - it sends message to bembem's main channel with summary of news (top_news_from_world())
 2. It changes bot presence (activity) based on current time. (see ACTIVITY_LIST)
 
-Calls: is_time_equal()
+Uses: is_time_equal()
             top_news_from_world()
-       is_time_between()
+      is_time_between()
 """
 
 
@@ -152,8 +152,18 @@ async def refresh_list_loop():
 
 """
 on_message is called when message is sent.
-Case 1) If Azhanim wrote something it saves the time at which message was sent to github slackerbot_misc repository
-        (calling save_to_github from github_intergration.py) in format (year\nmonth\nday\nhour\nminute\nsecond)
+Case 1) If Azhanim (checks by ID) wrote something it queries the document with Az's ID and
+        updates this document's time with time at which message was sent to mongoDB database.
+        Document format:
+            {'discord_id': [str],
+             'year': [int],
+             'month': [int],
+             'day': [int],
+             'hour': [int],
+             'minute': [int],
+             'second': [int]}
+        Uses: update_data()
+                  open_last_message() from mongoDB class.
 """
 
 
