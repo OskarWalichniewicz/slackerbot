@@ -133,7 +133,7 @@ async def on_ready():
     CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
     client.loop.create_task(time_check(30))
-    news_loop()
+    await news_loop()
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
