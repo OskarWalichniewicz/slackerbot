@@ -152,7 +152,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     time_difference = await calculate_time_difference(t(18, 00))
 
-    client.loop.create_task(main_loop(time_difference, SLACKERS_CHANNEL_ID))
+    # client.loop.create_task(main_loop(time_difference, SLACKERS_CHANNEL_ID))
 
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
