@@ -2,6 +2,7 @@ import discord
 from discord.ext import commands, tasks
 import os
 import asyncio
+import datetime
 from datetime import time as t
 from datetime import timedelta
 from reddit import *
