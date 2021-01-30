@@ -116,8 +116,8 @@ async def calculate_time_difference(message_time):
 
 async def daily_news(time_delta, channel_id):
     channel_slackers = client.get_channel(channel_id)
-    asyncio.sleep(time_delta)
     print("[LOOP] [DAILY_NEWS] {} seconds to message".format(time_delta))
+    asyncio.sleep(time_delta)
     while True:
         embed_news = await top_news_from_world()
         await channel_slackers.send(embed=embed_news)
