@@ -99,18 +99,23 @@ async def change_activity(wait_time):
     await client.change_presence(activity=discord.Game(activity))
 
 
-async def daily_news():
-    now = dt.utcnow().time()
-
-    if is_time_equal(t(18, 00), now):
+async def daily_news(bot_start_time, message_time):
+    start_time = datetime.timedelta(
+        hours=bot_start_time.hour, minutes=bot_start_time.minute, seconds=bot_start_time.second)
+    schedule_delta = datetime.timedelta(
+        hours=message_time.hour, minutes=message_time.minute, seconds=message_time.second)
+    difference_delta = schedule_delta - now_delta
+    asyncio.sleep(difference_delta.seconds)
+    while True:
         embed_news = await top_news_from_world()
         await CHANNEL.send(embed=embed_news)
+        asyncio.sleep(86400)
 
 
-async def main_loop():
+async def main_loop(bot_start_time):
     while True:
         await change_activity(30)
-        await daily_news()
+        await daily_news(bot_start_time, t(18, 00))
 
 """
 Adds Cogs functionality.
@@ -133,8 +138,11 @@ on_ready is called when client (bot) is done preparing the data received from Di
 @client.event
 async def on_ready():
     CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
-    # loops status_task in background
-    client.loop.create_task(main_loop())
+
+    start_time = dt.utcnow().time()
+
+    client.loop.create_task(main_loop(start_time))
+
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
