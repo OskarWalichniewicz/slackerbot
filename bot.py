@@ -41,11 +41,6 @@ def next_activity(cycle):
 
 
 """
-Main channel of bembem server, used for sending daily summary of news.
-"""
-SLACKERS_CHANNEL_ID = 364712407601512450
-
-"""
 Checks if current_time is between given values.
 params: begin_time - current time is later than this
         end_time - current time is earlier than this
@@ -150,7 +145,11 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
-    time_difference = await calculate_time_difference(t(18, 00))
+
+    # Main channel of bembem server, used for sending daily summary of news.
+    SLACKERS_CHANNEL_ID = 364712407601512450
+
+    time_difference = await calculate_time_difference(t(18, 15))
 
     client.loop.create_task(main_loop(time_difference, SLACKERS_CHANNEL_ID))
 
