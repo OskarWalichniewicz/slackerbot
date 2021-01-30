@@ -110,7 +110,7 @@ async def calculate_time_difference(message_time):
     schedule_delta = datetime.timedelta(
         hours=message_time.hour, minutes=message_time.minute, seconds=message_time.second)
 
-    difference_delta = schedule_delta - now_delta
+    difference_delta = schedule_delta - start_time_delta
     return difference_delta.seconds
 
 
