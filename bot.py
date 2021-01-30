@@ -43,7 +43,8 @@ def next_activity(cycle):
 """
 Main channel of bembem server, used for sending daily summary of news.
 """
-SLACKERS_CHANNEL_ID = 364712407601512450
+# SLACKERS_CHANNEL_ID = 364712407601512450
+SLACKERS_CHANNEL_ID = 804793991152271380
 
 """
 Checks if current_time is between given values.
@@ -96,7 +97,7 @@ async def change_activity(wait_time):
     else:
         activity = next_activity(activity_list_general_cycle)
 
-    asyncio.sleep(wait_time)
+    await asyncio.sleep(wait_time)
     await client.change_presence(activity=discord.Game(activity))
 
 
@@ -121,14 +122,14 @@ async def daily_news(time_delta, channel_id):
     while True:
         embed_news = await top_news_from_world()
         await channel_slackers.send(embed=embed_news)
-        asyncio.sleep(86400)
+        await asyncio.sleep(86400)
         print("[LOOP] [DAILY_NEWS] 86400 seconds to message")
 
 
 async def main_loop(time_delta, channel_id):
     while True:
         await change_activity(30)
-        # await daily_news(time_delta, channel_id)
+        await daily_news(time_delta, channel_id)
 
 """
 Adds Cogs functionality.
@@ -152,7 +153,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     time_difference = await calculate_time_difference(t(18, 00))
 
-    # client.loop.create_task(main_loop(time_difference, SLACKERS_CHANNEL_ID))
+    client.loop.create_task(main_loop(time_difference, SLACKERS_CHANNEL_ID))
 
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
