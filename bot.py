@@ -83,29 +83,34 @@ Uses: is_time_equal()
 """
 
 
-async def time_check(wait_time):
-    await client.wait_until_ready()  # runs only if bot (client) is ready
+async def change_activity(wait_time):
+    now = dt.utcnow().time()  # current time
 
-    while not client.is_closed():  # if bot is running
-        now = dt.utcnow().time()  # current time
+    if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
+        activity = next_activity(activity_list_morning_cycle)
+    elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
+        activity = next_activity(activity_list_evening_cycle)
+    elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
+        activity = next_activity(activity_list_night_cycle)
+    else:
+        activity = next_activity(activity_list_general_cycle)
 
-        if is_time_equal(t(18, 00), now):
-            embed_news = await top_news_from_world()
-            await CHANNEL.send(embed=embed_news)
+    asyncio.sleep(wait_time)
+    await client.change_presence(activity=discord.Game(activity))
 
-        else:
-            if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
-                activity = next_activity(activity_list_morning_cycle)
-            elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
-                activity = next_activity(activity_list_evening_cycle)
-            elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
-                activity = next_activity(activity_list_night_cycle)
-            else:
-                activity = next_activity(activity_list_general_cycle)
 
-            asyncio.sleep(wait_time)
-            await client.change_presence(activity=discord.Game(activity))
+async def daily_news():
+    now = dt.utcnow().time()
 
+    if is_time_equal(t(18, 00), now):
+        embed_news = await top_news_from_world()
+        await CHANNEL.send(embed=embed_news)
+
+
+async def main_loop():
+    while True:
+        await change_activity(30)
+        await daily_news()
 
 """
 Adds Cogs functionality.
@@ -129,7 +134,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
     # loops status_task in background
-    client.loop.create_task(time_check(30))
+    client.loop.create_task(main_loop())
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
     print("[BOT] Client ready.")
