@@ -4,6 +4,7 @@ import os
 import asyncio
 from datetime import datetime as dt
 from datetime import time as t
+from datetime import timedelta
 from reddit import *
 from Question import *
 from mongoDB import MongoDB
@@ -99,23 +100,32 @@ async def change_activity(wait_time):
     await client.change_presence(activity=discord.Game(activity))
 
 
-async def daily_news(bot_start_time, message_time):
-    start_time = datetime.timedelta(
-        hours=bot_start_time.hour, minutes=bot_start_time.minute, seconds=bot_start_time.second)
+async def calculate_time_difference(message_time):
+
+    start_time = dt.utcnow().time()
+
+    start_time_delta = datetime.timedelta(
+        hours=start_time.hour, minutes=start_time.minute, seconds=start_time.second)
+
     schedule_delta = datetime.timedelta(
         hours=message_time.hour, minutes=message_time.minute, seconds=message_time.second)
+
     difference_delta = schedule_delta - now_delta
-    asyncio.sleep(difference_delta.seconds)
+    return difference_delta.seconds
+
+
+async def daily_news(time_delta):
+    asyncio.sleep(time_delta.seconds)
     while True:
         embed_news = await top_news_from_world()
         await CHANNEL.send(embed=embed_news)
         asyncio.sleep(86400)
 
 
-async def main_loop(bot_start_time):
+async def main_loop(time_delta):
     while True:
         await change_activity(30)
-        await daily_news(bot_start_time, t(18, 00))
+        await daily_news(time_delta)
 
 """
 Adds Cogs functionality.
@@ -139,9 +149,9 @@ on_ready is called when client (bot) is done preparing the data received from Di
 async def on_ready():
     CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
 
-    start_time = dt.utcnow().time()
+    time_difference = calculate_time_difference(t(18, 00))
 
-    client.loop.create_task(main_loop(start_time))
+    client.loop.create_task(main_loop(time_difference))
 
     clean_removed_memes_loop.start()
     refresh_list_loop.start()
