@@ -121,8 +121,8 @@ async def daily_news(time_delta, channel_id):
     while True:
         embed_news = await top_news_from_world()
         await channel_slackers.send(embed=embed_news)
-        await asyncio.sleep(86400)
         print("[LOOP] [DAILY_NEWS] 86400 seconds to message")
+        await asyncio.sleep(86400)
 
 
 async def main_loop(time_delta, channel_id):
