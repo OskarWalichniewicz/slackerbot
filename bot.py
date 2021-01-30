@@ -115,7 +115,7 @@ async def calculate_time_difference(message_time):
 
 
 async def daily_news(time_delta, channel_id):
-    channel_slackers = client.get_channel(SLACKERS_CHANNEL_ID)
+    channel_slackers = client.get_channel(channel_id)
     asyncio.sleep(time_delta)
     print("[LOOP] [DAILY_NEWS] {} seconds to message".format(time_delta))
     while True:
@@ -128,7 +128,7 @@ async def daily_news(time_delta, channel_id):
 async def main_loop(time_delta, channel_id):
     while True:
         await change_activity(30)
-        await daily_news(time_delta)
+        await daily_news(time_delta, channel_id)
 
 """
 Adds Cogs functionality.
@@ -150,7 +150,7 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
-    time_difference = calculate_time_difference(t(18, 00))
+    time_difference = await calculate_time_difference(t(18, 00))
 
     client.loop.create_task(main_loop(time_difference, SLACKERS_CHANNEL_ID))
 
