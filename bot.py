@@ -43,8 +43,7 @@ def next_activity(cycle):
 """
 Main channel of bembem server, used for sending daily summary of news.
 """
-# SLACKERS_CHANNEL_ID = 364712407601512450
-SLACKERS_CHANNEL_ID = 804793991152271380
+SLACKERS_CHANNEL_ID = 364712407601512450
 
 """
 Checks if current_time is between given values.
