@@ -114,11 +114,13 @@ async def calculate_time_difference(message_time):
     return difference_delta.seconds
 
 
-async def daily_news(time_delta):
+async def daily_news(time_delta, channel_id):
+    channel_slackers = client.get_channel(SLACKERS_CHANNEL_ID)
     asyncio.sleep(time_delta)
+    print("[LOOP] [DAILY_NEWS] {} seconds to message".format(time_delta))
     while True:
         embed_news = await top_news_from_world()
-        await CHANNEL.send(embed=embed_news)
+        await channel_slackers.send(embed=embed_news)
         asyncio.sleep(86400)
 
 
@@ -147,8 +149,6 @@ on_ready is called when client (bot) is done preparing the data received from Di
 
 @client.event
 async def on_ready():
-    CHANNEL = client.get_channel(SLACKERS_CHANNEL_ID)
-
     time_difference = calculate_time_difference(t(18, 00))
 
     client.loop.create_task(main_loop(time_difference))
