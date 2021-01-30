@@ -115,7 +115,7 @@ async def calculate_time_difference(message_time):
 
 
 async def daily_news(time_delta):
-    asyncio.sleep(time_delta.seconds)
+    asyncio.sleep(time_delta)
     while True:
         embed_news = await top_news_from_world()
         await CHANNEL.send(embed=embed_news)
