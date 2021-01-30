@@ -128,7 +128,7 @@ async def daily_news(time_delta, channel_id):
 async def main_loop(time_delta, channel_id):
     while True:
         await change_activity(30)
-        await daily_news(time_delta, channel_id)
+        # await daily_news(time_delta, channel_id)
 
 """
 Adds Cogs functionality.
