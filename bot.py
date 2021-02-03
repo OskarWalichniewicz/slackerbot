@@ -113,10 +113,11 @@ async def daily_news(time_delta, channel_id):
     channel_slackers = client.get_channel(channel_id)
     print("[LOOP] [DAILY_NEWS] {} seconds to message".format(time_delta))
     await asyncio.sleep(time_delta)
-    embed_news = await top_news_from_world()
-    await channel_slackers.send(embed=embed_news)
-    print("[LOOP] [DAILY_NEWS] 86400 seconds to message")
-    await asyncio.sleep(86400)
+    while True:
+        embed_news = await top_news_from_world()
+        await channel_slackers.send(embed=embed_news)
+        print("[LOOP] [DAILY_NEWS] 86400 seconds to message")
+        await asyncio.sleep(86400)
 
 
 async def main_loop(time_delta, channel_id):
