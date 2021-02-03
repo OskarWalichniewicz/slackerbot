@@ -80,20 +80,19 @@ Uses: is_time_equal()
 
 
 async def change_activity(wait_time):
-    while True:
-        now = dt.utcnow().time()  # current time
+    now = dt.utcnow().time()  # current time
 
-        if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
-            activity = next_activity(activity_list_morning_cycle)
-        elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
-            activity = next_activity(activity_list_evening_cycle)
-        elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
-            activity = next_activity(activity_list_night_cycle)
-        else:
-            activity = next_activity(activity_list_general_cycle)
+    if is_time_between(t(5, 00), t(11, 00), now):  # from 5 AM to 11 AM
+        activity = next_activity(activity_list_morning_cycle)
+    elif is_time_between(t(19, 00), t(0, 00), now):  # from 19 to 24
+        activity = next_activity(activity_list_evening_cycle)
+    elif is_time_between(t(0, 00), t(5, 00), now):  # from midnight to 5AM
+        activity = next_activity(activity_list_night_cycle)
+    else:
+        activity = next_activity(activity_list_general_cycle)
 
-        await asyncio.sleep(wait_time)
-        await client.change_presence(activity=discord.Game(activity))
+    await asyncio.sleep(wait_time)
+    await client.change_presence(activity=discord.Game(activity))
 
 
 async def calculate_time_difference(message_time):
@@ -114,11 +113,10 @@ async def daily_news(time_delta, channel_id):
     channel_slackers = client.get_channel(channel_id)
     print("[LOOP] [DAILY_NEWS] {} seconds to message".format(time_delta))
     await asyncio.sleep(time_delta)
-    while True:
-        embed_news = await top_news_from_world()
-        await channel_slackers.send(embed=embed_news)
-        print("[LOOP] [DAILY_NEWS] 86400 seconds to message")
-        await asyncio.sleep(86400)
+    embed_news = await top_news_from_world()
+    await channel_slackers.send(embed=embed_news)
+    print("[LOOP] [DAILY_NEWS] 86400 seconds to message")
+    await asyncio.sleep(86400)
 
 
 async def main_loop(time_delta, channel_id):
