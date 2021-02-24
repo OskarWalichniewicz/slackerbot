@@ -256,14 +256,14 @@ def webscrap_horoscope(sign):
     driver.get(url)
     try:
         horoscope = driver.find_element_by_xpath(
-            "/html/body/section/section/div[2]/main/p[1]")
+            "/html/body/main/div/div[2]/main/div[3]/div[3]/p")
         horoscope_text = horoscope.text
 
-        date = horoscope_text.split(":")[0]
-        if date in horoscope_text:
-            horoscope_text = horoscope_text.replace(date, '')
+        # date = horoscope_text.split(":")[0]
+        # if date in horoscope_text:
+        #     horoscope_text = horoscope_text.replace(date, '')
 
-        return horoscope_text[2:]  # removes date and whitespace
+        return horoscope_text
     except:
         return ""
 
